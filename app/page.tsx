@@ -6,9 +6,8 @@ export default function Home() {
     <section className="home-hero">
       <div className="hero-grid" aria-hidden="true" />
       <div className="hero-copy"><p className="eyebrow"><span /> Facultad de Ingeniería · UBA</p><h1>Ingeniería<br />en <em>armonía.</em></h1><p>Un espacio donde las voces, la música y la comunidad universitaria se encuentran.</p><div className="hero-actions"><a className="button button-gold" href="/sumate">Quiero participar <span>→</span></a><a className="text-link" href="/el-coro">Conocé al coro <span>↗</span></a></div></div>
-      <div className="hero-visual">
-        <div className="hero-photo-main"><img src="/choir/hero-architecture.webp" alt="El Coro FIUBA cantando en la sede Paseo Colón" /></div>
-        <div className="hero-photo-inset"><img src="/choir/hero-performance.webp" alt="El Coro FIUBA durante una presentación en la Facultad" /></div>
+      <div className="hero-visual hero-visual--single">
+        <div className="hero-photo-main"><img src="/choir/hero-architecture.webp" alt="El Coro FIUBA cantando en la sede Las Heras" /></div>
         <div className="hero-logo-seal"><img src="/logo-fiuba.png" alt="" /><span>Una voz colectiva</span></div>
       </div>
       <div className="hero-foot"><span>Buenos Aires, Argentina</span><div className="sound-wave" aria-hidden="true">{Array.from({ length: 18 }, (_, i) => <i key={i} style={{ height: `${10 + ((i * 13) % 26)}px` }} />)}</div><span>Cultura · Comunidad · Música</span></div>
