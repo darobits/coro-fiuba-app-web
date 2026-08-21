@@ -6,11 +6,17 @@ export default function Home() {
     <section className="home-hero">
       <div className="hero-grid" aria-hidden="true" />
       <div className="hero-copy"><p className="eyebrow"><span /> Facultad de Ingeniería · UBA</p><h1>Ingeniería<br />en <em>armonía.</em></h1><p>Un espacio donde las voces, la música y la comunidad universitaria se encuentran.</p><div className="hero-actions"><a className="button button-gold" href="/sumate">Quiero participar <span>→</span></a><a className="text-link" href="/el-coro">Conocé al coro <span>↗</span></a></div></div>
-      <div className="hero-symbol"><div className="arch" aria-hidden="true" /><img src="/logo-fiuba.png" alt="Logo del Coro de la Facultad de Ingeniería de la UBA" /><p><span>Desde la facultad</span><strong>Una voz colectiva</strong></p></div>
+      <div className="hero-visual">
+        <div className="hero-photo-main"><img src="/choir/hero-architecture.webp" alt="El Coro FIUBA cantando en la sede Paseo Colón" /></div>
+        <div className="hero-photo-inset"><img src="/choir/hero-performance.webp" alt="El Coro FIUBA durante una presentación en la Facultad" /></div>
+        <div className="hero-logo-seal"><img src="/logo-fiuba.png" alt="" /><span>Una voz colectiva</span></div>
+      </div>
       <div className="hero-foot"><span>Buenos Aires, Argentina</span><div className="sound-wave" aria-hidden="true">{Array.from({ length: 18 }, (_, i) => <i key={i} style={{ height: `${10 + ((i * 13) % 26)}px` }} />)}</div><span>Cultura · Comunidad · Música</span></div>
     </section>
 
     <section className="home-intro"><p className="section-index">Una comunidad coral</p><div><p className="eyebrow dark"><span /> Muchas voces, una obra</p><h2>Respirar juntos.<br /><em>Construir sonido.</em></h2></div><p>El Coro FIUBA reúne música, aprendizaje y vida universitaria en un proyecto colectivo abierto a la comunidad.</p></section>
+
+    <section className="home-photo-band"><figure><img src="/choir/concert-close.webp" alt="El Coro FIUBA cantando bajo la dirección de Carolina Abbamonte" /></figure><div><p className="section-index">El coro en acción</p><h2>La música habita<br /><em>la Facultad.</em></h2><p>Ensayos, conciertos y encuentros transforman la arquitectura universitaria en un espacio vivo de escucha y comunidad.</p><a className="text-link dark-link" href="/archivo">Explorar el archivo <span>↗</span></a></div></section>
 
     <section className="portal-grid" aria-label="Explorar el sitio">
       <a href="/el-coro"><span>01</span><div><small>Identidad</small><h3>El coro</h3><p>Quiénes somos y qué nos reúne alrededor de la música.</p></div><b>↗</b></a>

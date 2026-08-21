@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const base = new URL(`${protocol}://${host}`);
   const title = "Coro FIUBA — Ingeniería en armonía";
   const description = "Coro de la Facultad de Ingeniería de la Universidad de Buenos Aires. Conocé nuestra actividad y sumate a cantar.";
-  return { metadataBase: base, title, description, icons: { icon: "/logo-fiuba.png" }, openGraph: { title, description, images: [new URL("/og.png", base).toString()], type: "website" }, twitter: { card: "summary_large_image", title, description, images: [new URL("/og.png", base).toString()] } };
+  return { metadataBase: base, title, description, icons: { icon: "/logo-fiuba.png" }, openGraph: { title, description, images: [new URL("/og-2026.png", base).toString()], type: "website" }, twitter: { card: "summary_large_image", title, description, images: [new URL("/og-2026.png", base).toString()] } };
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
