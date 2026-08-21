@@ -37,5 +37,6 @@ test("renderiza la portada institucional del Coro FIUBA", async () => {
   assert.match(html, /Agenda/i);
   assert.match(html, /Archivo/i);
   assert.match(html, /Contacto/i);
+  assert.match(html, /rel="(?:shortcut )?icon"[^>]*href="\/favicon-32x32\.png\?v=2"/i);
   assert.doesNotMatch(html, /codex-preview|vinext-starter|Starter Project/i);
 });
