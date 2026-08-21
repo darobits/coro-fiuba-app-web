@@ -40,3 +40,13 @@ test("renderiza la portada institucional del Coro FIUBA", async () => {
   assert.match(html, /rel="(?:shortcut )?icon"[^>]*href="\/favicon-32x32\.png\?v=2"/i);
   assert.doesNotMatch(html, /codex-preview|vinext-starter|Starter Project/i);
 });
+
+test("la ruta del panel informa que estará disponible próximamente", async () => {
+  const response = await render("/login");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(html, /Panel en preparación/i);
+  assert.match(html, /próxima versión/i);
+  assert.doesNotMatch(html, /404|This page could not be found/i);
+});
