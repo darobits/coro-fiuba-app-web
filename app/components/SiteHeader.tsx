@@ -20,7 +20,10 @@ export default function SiteHeader() {
     <div className="header-shell">
       <a className="brand" href="/" aria-label="Coro FIUBA, inicio">
         <img src="/logo-fiuba.png" alt="" />
-        <span><strong>Coro FIUBA</strong><small>Facultad de Ingeniería · UBA</small></span>
+        <span className="brand-copy">
+          <strong><span>Coro</span><em>FIUBA</em></strong>
+          <small>Facultad de Ingeniería · UBA</small>
+        </span>
       </a>
       <nav className={open ? "open" : ""} aria-label="Navegación principal">
         {links.map(([href, label]) => <a key={href} href={href} className={path === href || (path === "/sumate" && href === "/contacto") ? "active" : ""} onClick={() => setOpen(false)}>{label}</a>)}
