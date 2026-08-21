@@ -276,8 +276,11 @@ h1 em, h2 em { color: var(--gold); font-weight: 400; }
 .archive-mosaic .media-card:nth-child(even) .media-image { transform:rotate(.85deg); }
 .archive-mosaic .media-card:nth-child(3n) .media-image { transform:rotate(-1.15deg); }
 .archive-mosaic .media-card:hover .media-image { transform:rotate(0) translateY(-7px) scale(1.012); box-shadow:0 25px 48px rgba(1,14,36,.25); }
+.archive-mosaic .media-caption { display:block; margin:13px 7px 0; color:#5f696d; font-family:var(--font-display); font-size:16px; line-height:1.35; }
 .collection-night .media-image { border-color:rgba(233,226,210,.88); }
-.collection-life .archive-mosaic { columns:2 360px; max-width:1120px; margin-inline:auto; }
+.collection-night .archive-mosaic { columns:2 360px; max-width:1040px; margin-inline:auto; }
+.collection-night .media-caption { color:#c3cfdb; }
+.collection-life .archive-mosaic { columns:3 280px; max-width:1280px; margin-inline:auto; }
 .collection-life .archive-mosaic .media-card:nth-child(2) { padding:6% 2% 0 8%; }
 .collection-life .archive-mosaic .media-card:nth-child(3) { padding:0 9% 0 1%; }
 .collection-life { padding-bottom:54px; }
@@ -287,6 +290,7 @@ h1 em, h2 em { color: var(--gold); font-weight: 400; }
   .announcement-list article { grid-template-columns:46px minmax(0,1fr) minmax(170px,.4fr); }
   .archive-mosaic { columns:2 245px; }
   .collection-life .archive-mosaic { columns:2 260px; }
+  .collection-night .archive-mosaic { columns:2 245px; }
 }
 
 @media (max-width:620px) {
@@ -299,6 +303,7 @@ h1 em, h2 em { color: var(--gold); font-weight: 400; }
   .announcement-place > strong { font-size:25px; }
   .agenda-aside { padding:30px 24px; }
   .archive-mosaic,.collection-life .archive-mosaic { columns:1; }
+  .collection-night .archive-mosaic { columns:1; }
   .archive-mosaic .media-card,.archive-mosaic .media-card:nth-child(3n+2),.archive-mosaic .media-card:nth-child(4n),.archive-mosaic .media-card:nth-child(5n),.collection-life .archive-mosaic .media-card:nth-child(2),.collection-life .archive-mosaic .media-card:nth-child(3) { margin-bottom:34px; padding:0; }
   .archive-mosaic .media-card:nth-child(even) { width:94%; margin-left:auto; }
   .archive-mosaic .media-card:nth-child(3n) { width:91%; }
