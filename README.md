@@ -33,7 +33,7 @@ npm run db:generate  # generación de migraciones
 ---
 ## Autor
 
-**Darío Villar**
+**Darío Villar** |
 **Analista de Sistemas**
 
 Proyecto desarrollado para el Coro de la Facultad de Ingeniería de la Universidad de Buenos Aires.
