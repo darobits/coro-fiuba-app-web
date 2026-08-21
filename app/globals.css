@@ -423,6 +423,20 @@ h1 em, h2 em { color: var(--gold); font-weight: 400; }
   .profile-facts > span:last-child { border-bottom:0; }
 }
 
+/* Interacción del calendario del Ciclo */
+.date-grid article { position:relative; isolation:isolate; overflow:hidden; transition:transform .32s cubic-bezier(.2,.75,.25,1),background .32s ease,box-shadow .32s ease; }
+.date-grid article::before { content:""; position:absolute; z-index:-1; inset:-35%; background:radial-gradient(circle at 28% 30%,rgba(27,92,153,.48),transparent 42%),linear-gradient(135deg,rgba(255,255,255,.07),transparent 65%); opacity:0; transform:scale(.82); transition:opacity .35s ease,transform .45s cubic-bezier(.2,.75,.25,1); }
+.date-grid article::after { content:""; position:absolute; left:28px; right:28px; bottom:0; height:2px; background:linear-gradient(90deg,var(--gold),#f0d99f,transparent); transform:scaleX(0); transform-origin:left; transition:transform .38s cubic-bezier(.2,.75,.25,1); }
+.date-grid article > span,.date-grid article > strong,.date-grid article > small { position:relative; z-index:1; transition:color .28s ease,transform .32s ease,letter-spacing .32s ease,text-shadow .32s ease; }
+@media (hover:hover) and (pointer:fine) {
+  .date-grid article:hover { z-index:2; transform:translateY(-7px) scale(1.012); background:rgba(255,255,255,.055); box-shadow:0 22px 42px rgba(0,0,0,.22); }
+  .date-grid article:hover::before { opacity:1; transform:scale(1); }
+  .date-grid article:hover::after { transform:scaleX(1); }
+  .date-grid article:hover > span { color:#f1d18c; letter-spacing:.2em; }
+  .date-grid article:hover > strong { color:#fffdf7; transform:translateY(-4px); text-shadow:0 8px 22px rgba(0,0,0,.28); }
+  .date-grid article:hover > small { color:#d3dfec; transform:translateX(4px); }
+}
+
 .button-submit { justify-content:center; }
 .locations-section { padding:110px clamp(24px,7vw,110px); background:linear-gradient(135deg,#d9d2c4,#eee9dd); }
 .locations-section > header { display:grid; grid-template-columns:.42fr 1fr .8fr; gap:5vw; align-items:start; margin-bottom:64px; }
