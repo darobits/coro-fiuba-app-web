@@ -304,6 +304,77 @@ h1 em, h2 em { color: var(--gold); font-weight: 400; }
   .archive-mosaic .media-card:nth-child(3n) { width:91%; }
 }
 
+/* Historia ampliada del Coro */
+.director-timeline article { grid-template-columns:130px 118px minmax(0,1fr); align-items:center; gap:24px; }
+.director-timeline article figure { width:130px; height:148px; margin:0; overflow:hidden; border:6px solid rgba(248,244,235,.9); background:#07162d; box-shadow:0 12px 25px rgba(4,24,47,.14); transform:rotate(-.7deg); }
+.director-timeline article:nth-child(even) figure { transform:rotate(.65deg); }
+.director-timeline article figure img { display:block; width:100%; height:100%; object-fit:contain; }
+.director-timeline article.current figure { border-color:rgba(240,229,209,.86); box-shadow:0 15px 30px rgba(0,0,0,.28); }
+.director-timeline article.current { padding-block:26px; }
+.leadership-feature figure img { object-position:48% center; }
+
+.luthiers-legacy { position:relative; display:grid; grid-template-columns:.55fr 1fr 1.05fr; gap:clamp(32px,5vw,78px); padding:120px clamp(24px,7vw,110px); overflow:hidden; background:radial-gradient(circle at 8% 12%,rgba(29,89,130,.32),transparent 32%),linear-gradient(125deg,#010b1d,#03244e 70%,#073b62); color:white; }
+.luthiers-legacy::after { content:""; position:absolute; inset:0; pointer-events:none; background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px); background-size:64px 64px; mask-image:linear-gradient(90deg,#000,transparent 85%); }
+.luthiers-number { position:relative; z-index:1; align-self:start; color:rgba(216,182,111,.18); font-family:var(--font-display); font-size:clamp(120px,15vw,230px); line-height:.7; letter-spacing:-.08em; }
+.luthiers-heading,.luthiers-copy { position:relative; z-index:1; }
+.luthiers-heading h2 { color:white; font-size:clamp(54px,5.3vw,82px); line-height:.91; }
+.luthiers-copy { align-self:center; }
+.luthiers-copy > p { color:#b7c6d6; font-size:15px; line-height:1.85; }
+.luthiers-copy > p strong { color:#f4ead8; font-weight:650; }
+.luthiers-copy aside { margin-top:30px; padding:24px 26px; border-left:2px solid var(--gold); background:rgba(255,255,255,.055); color:#d8e0e9; font-family:var(--font-display); font-size:21px; line-height:1.45; }
+.luthiers-copy aside em { color:var(--gold); }
+
+.concert-memory { padding:120px clamp(24px,7vw,110px); background:linear-gradient(145deg,#d4ccbd,#eee9de 55%,#d8d0c1); }
+.concert-memory > header { display:grid; grid-template-columns:.4fr 1fr .7fr; gap:5vw; align-items:start; margin-bottom:64px; padding-bottom:45px; border-bottom:1px solid rgba(3,29,63,.16); }
+.concert-memory > header h2 { color:var(--navy); font-size:clamp(54px,5.5vw,82px); line-height:.91; }
+.concert-memory > header > p:last-child { margin:4px 0 0; color:var(--muted); line-height:1.75; }
+.concert-memory-wall { columns:4 250px; column-gap:clamp(17px,2.2vw,32px); }
+.concert-memory-wall figure { display:inline-block; width:100%; margin:0 0 clamp(18px,2.5vw,34px); padding:6px; break-inside:avoid; background:#f5f0e5; box-shadow:0 13px 28px rgba(2,22,48,.18); transform:rotate(-.55deg); transition:transform .35s ease,box-shadow .35s ease; content-visibility:auto; contain-intrinsic-size:320px 240px; }
+.concert-memory-wall figure:nth-child(2n) { transform:rotate(.7deg); }
+.concert-memory-wall figure:nth-child(3n) { width:91%; margin-left:5%; transform:rotate(-1deg); }
+.concert-memory-wall figure:nth-child(5n) { width:95%; margin-left:1%; transform:rotate(.35deg); }
+.concert-memory-wall figure:hover { position:relative; z-index:2; transform:rotate(0) translateY(-7px) scale(1.015); box-shadow:0 24px 48px rgba(2,22,48,.24); }
+.concert-memory-wall img { display:block; width:100%; height:auto; }
+
+@media (max-width:1000px) {
+  .director-timeline article { grid-template-columns:112px 108px minmax(0,1fr); gap:18px; }
+  .director-timeline article figure { width:112px; height:132px; }
+  .luthiers-legacy { grid-template-columns:.35fr 1fr 1fr; }
+  .concert-memory-wall { columns:3 220px; }
+}
+
+@media (max-width:850px) {
+  .director-timeline article { grid-template-columns:125px 120px minmax(0,1fr); }
+  .director-timeline article figure { width:125px; height:145px; }
+  .luthiers-legacy { grid-template-columns:1fr 1.7fr; padding:90px 42px; }
+  .luthiers-number { grid-row:1/3; }
+  .luthiers-copy { grid-column:2; }
+  .concert-memory { padding:90px 42px; }
+  .concert-memory > header { grid-template-columns:1fr; gap:20px; }
+  .concert-memory-wall { columns:2 240px; }
+}
+
+@media (max-width:560px) {
+  .director-timeline article,.director-timeline article.current { grid-template-columns:92px 1fr; gap:10px 16px; padding:24px 0; }
+  .director-timeline article.current { padding-inline:18px; }
+  .director-timeline article figure { grid-row:1/3; width:92px; height:112px; }
+  .director-timeline article > span,.director-timeline article > div { grid-column:2; }
+  .director-timeline article > span { align-self:end; font-size:17px; }
+  .director-timeline article > div { align-self:start; }
+  .director-timeline article h3 { font-size:27px; }
+  .director-timeline article p { font-size:13px; }
+  .luthiers-legacy { grid-template-columns:1fr; gap:28px; padding:75px 22px; }
+  .luthiers-number { position:absolute; top:42px; right:22px; font-size:120px; }
+  .luthiers-heading,.luthiers-copy { grid-column:1; }
+  .luthiers-heading h2 { font-size:52px; }
+  .luthiers-copy > p { font-size:14px; }
+  .luthiers-copy aside { padding:21px; font-size:19px; }
+  .concert-memory { padding:75px 22px; }
+  .concert-memory > header h2 { font-size:52px; }
+  .concert-memory-wall { columns:2 135px; column-gap:13px; }
+  .concert-memory-wall figure,.concert-memory-wall figure:nth-child(3n),.concert-memory-wall figure:nth-child(5n) { width:100%; margin:0 0 14px; padding:4px; }
+}
+
 .button-submit { justify-content:center; }
 .locations-section { padding:110px clamp(24px,7vw,110px); background:linear-gradient(135deg,#d9d2c4,#eee9dd); }
 .locations-section > header { display:grid; grid-template-columns:.42fr 1fr .8fr; gap:5vw; align-items:start; margin-bottom:64px; }
