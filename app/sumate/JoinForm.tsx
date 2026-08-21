@@ -8,7 +8,7 @@ function validate(values: Record<string,string>) {
   const errors: Errors = {};
   if (values.fullName.trim().length < 3) errors.fullName = "Ingresá tu nombre y apellido.";
   if (!isValidEmail(values.email || "")) errors.email = "Ingresá una dirección de correo válida.";
-  const phone = values.phone.replace(/[\s()\-]/g, "");
+  const phone = values.phone.replace(/[\s()-]/g, "");
   if (!/^\+?\d{8,15}$/.test(phone) || /^(\+?)(\d)\2{7,}$/.test(phone)) errors.phone = "Ingresá un celular válido, con código de área.";
   const age = Number(values.age);
   if (!Number.isInteger(age) || age < 16 || age > 99) errors.age = "Por favor, ingresá una edad correcta.";

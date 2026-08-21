@@ -1,6 +1,7 @@
 {
-  "name": "site-creator-vinext-starter",
-  "version": "0.1.0",
+  "name": "coro-fiuba-app-web",
+  "version": "1.0.0",
+  "description": "Sitio oficial del Coro de la Facultad de Ingeniería de la Universidad de Buenos Aires.",
   "private": true,
   "engines": {
     "node": ">=22.13.0"
@@ -10,7 +11,7 @@
     "build": "vinext build",
     "start": "vinext start",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
-    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
+    "lint": "eslint app db lib worker tests *.ts *.mjs",
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useCallback, useEffect, useState } from "react";
 
 type Content = { announcements: Array<Record<string, string | number>>; media: Array<Record<string, string | number>>; applications: Array<Record<string, string | number>> };
@@ -8,7 +9,14 @@ export default function AdminPanel({ userName, signOut }: { userName: string; si
   const [data, setData] = useState<Content>({ announcements: [], media: [], applications: [] });
   const [tab, setTab] = useState("announcements"), [busy, setBusy] = useState(false), [notice, setNotice] = useState("");
   const load = useCallback(async () => { const response = await fetch("/api/admin/content"); if (response.ok) setData(await response.json()); }, []);
-  useEffect(() => { void load(); }, [load]);
+  useEffect(() => {
+    const controller = new AbortController();
+    void fetch("/api/admin/content", { signal: controller.signal })
+      .then((response) => response.ok ? response.json() : null)
+      .then((content) => { if (content) setData(content); })
+      .catch(() => {});
+    return () => controller.abort();
+  }, []);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); setBusy(true); setNotice(""); const form = new FormData(event.currentTarget); const payload = Object.fromEntries(form.entries());
@@ -23,9 +31,9 @@ export default function AdminPanel({ userName, signOut }: { userName: string; si
 
   return <main className="dashboard">
     <aside className="dash-sidebar">
-      <a className="brand" href="/"><img src="/logo-fiuba.png" alt="" /><span><strong>Coro FIUBA</strong><small>Panel editorial</small></span></a>
+      <Link className="brand" href="/"><img src="/logo-fiuba.png" alt="" /><span><strong>Coro FIUBA</strong><small>Panel editorial</small></span></Link>
       <nav>{[["announcements","Anuncios"],["media","Fotos y videos"],["applications","Postulaciones"]].map(([key,label]) => <button key={key} className={tab === key ? "active" : ""} onClick={() => setTab(key)}>{label}<span>{data[key as keyof Content].length}</span></button>)}</nav>
-      <a className="back-site" href="/">← Ver sitio público</a>
+      <Link className="back-site" href="/">← Ver sitio público</Link>
     </aside>
     <section className="dash-main">
       <header><div><p>Administración</p><h1>{tab === "announcements" ? "Anuncios" : tab === "media" ? "Archivo multimedia" : "Postulaciones"}</h1></div><div className="user-chip"><span>{userName.charAt(0).toUpperCase()}</span><div><strong>{userName}</strong><a href={signOut}>Cerrar sesión</a></div></div></header>

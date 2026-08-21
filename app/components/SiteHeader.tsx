@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { useState } from "react";
 import { FiLogIn } from "react-icons/fi";
 
@@ -18,19 +19,19 @@ export default function SiteHeader() {
 
   return <header className="site-header">
     <div className="header-shell">
-      <a className="brand" href="/" aria-label="Coro FIUBA, inicio">
+      <Link className="brand" href="/" aria-label="Coro FIUBA, inicio">
         <img src="/logo-fiuba.png" alt="" />
         <span className="brand-copy">
           <strong>Coro FIUBA</strong>
           <small>Facultad de Ingeniería · UBA</small>
         </span>
-      </a>
+      </Link>
       <nav className={open ? "open" : ""} aria-label="Navegación principal">
-        {links.map(([href, label]) => <a key={href} href={href} className={path === href || (path === "/sumate" && href === "/contacto") ? "active" : ""} onClick={() => setOpen(false)}>{label}</a>)}
-        <a className="mobile-login" href="/login" onClick={() => setOpen(false)}><FiLogIn aria-hidden="true" /> Ingresar</a>
+        {links.map(([href, label]) => <Link key={href} href={href} className={path === href || (path === "/sumate" && href === "/contacto") ? "active" : ""} onClick={() => setOpen(false)}>{label}</Link>)}
+        <Link className="mobile-login" href="/login" onClick={() => setOpen(false)}><FiLogIn aria-hidden="true" /> Ingresar</Link>
       </nav>
       <div className="header-actions">
-        <a className="login-link" href="/login" aria-label="Ingresar al panel de administración" title="Ingresar al panel de administración"><FiLogIn aria-hidden="true" /><span>Ingresar</span></a>
+        <Link className="login-link" href="/login" aria-label="Ingresar al panel de administración" title="Ingresar al panel de administración"><FiLogIn aria-hidden="true" /><span>Ingresar</span></Link>
         <button className="menu-button" onClick={() => setOpen(!open)} aria-label={open ? "Cerrar menú" : "Abrir menú"} aria-expanded={open}><i /><i /></button>
       </div>
     </div>

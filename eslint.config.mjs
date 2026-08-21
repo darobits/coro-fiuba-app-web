@@ -10,9 +10,13 @@ import tseslint from "typescript-eslint";
 const eslintConfig = defineConfig([
   globalIgnores([
     ".next/**",
+    ".vinext/**",
+    ".wrangler/**",
     "dist/**",
     "out/**",
+    "outputs/**",
     "build/**",
+    "work/**",
     "next-env.d.ts",
   ]),
   eslint.configs.recommended,
@@ -23,6 +27,12 @@ const eslintConfig = defineConfig([
   jsxA11y.flatConfigs.recommended,
   next.configs["core-web-vitals"],
   {
+    rules: {
+      // The archive preserves original photo dimensions and accepts editorial
+      // video uploads whose optional caption tracks are managed externally.
+      "@next/next/no-img-element": "off",
+      "jsx-a11y/media-has-caption": "off",
+    },
     languageOptions: {
       globals: {
         ...globals.browser,

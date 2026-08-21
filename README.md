@@ -1,100 +1,98 @@
-# vinext-starter
+# Coro FIUBA — Sitio web oficial
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+Sitio institucional del **Coro de la Facultad de Ingeniería de la Universidad de Buenos Aires**. Reúne su historia, el Ciclo de Conciertos Corales, la agenda, el archivo fotográfico y el formulario para participar.
 
-## Prerequisites
+## Funcionalidades
 
-- Node.js `>=22.13.0`
+- Páginas institucionales para el coro, el ciclo, la agenda y el archivo.
+- Archivo visual responsive con fotografías históricas y actuales.
+- Formulario de contacto y convocatoria con validación de datos.
+- Registro opcional de formularios mediante Google Apps Script.
+- Notificaciones y respuestas automáticas mediante EmailJS.
+- Panel editorial preparado para administrar anuncios y contenidos.
+- Carga de imágenes en almacenamiento R2 y datos persistentes en D1.
+- Metadatos sociales, favicons y Web App Manifest.
 
-## Quick Start
+## Tecnologías
+
+- React 19
+- TypeScript
+- vinext y Vite
+- Cloudflare Workers, D1 y R2
+- Drizzle ORM
+- OpenAI Sites
+
+## Requisitos
+
+- Node.js `22.13.0` o posterior
+- npm
+
+## Desarrollo local
 
 ```bash
 npm install
+cp .env.example .env.local
 npm run dev
-npm run build
 ```
 
-This starter does not use `wrangler.jsonc`.
+La aplicación estará disponible en la dirección indicada por la terminal, normalmente `http://localhost:3000`.
 
-## Included Shape
+## Variables de entorno
 
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
+Copiá `.env.example` como `.env.local` y completá únicamente los servicios que vayas a utilizar:
 
-## Workspace Auth Headers
+| Variable | Uso |
+| --- | --- |
+| `ADMIN_EMAILS` | Correos autorizados para acceder al panel, separados por comas. |
+| `APPS_SCRIPT_URL` | URL pública del Web App de Google Apps Script que registra las postulaciones. |
+| `EMAILJS_SERVICE_ID` | Identificador del servicio de EmailJS. |
+| `EMAILJS_PUBLIC_KEY` | Clave pública de EmailJS. |
+| `EMAILJS_PRIVATE_KEY` | Clave privada de EmailJS, solo del lado servidor. |
+| `EMAILJS_REPLY_TEMPLATE_ID` | Plantilla de respuesta automática para quien completa el formulario. |
+| `EMAILJS_NOTICE_TEMPLATE_ID` | Plantilla de aviso interno por una nueva postulación. |
 
-Signed-in visitors receive both `oai-authenticated-user-id` and `oai-authenticated-user-email`. Private Sites require every visitor to sign in; public Sites may also have anonymous visitors, for whom neither header is present.
+Los archivos `.env*` están excluidos del repositorio. Nunca publiques credenciales reales.
 
-The user ID is stable for the same user on the same Site and different across Sites. Email and name are intended for display or contact purposes.
+## Comandos
 
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const userId = requestHeaders.get("oai-authenticated-user-id");
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
+```bash
+npm run dev          # servidor de desarrollo
+npm run build        # compilación de producción
+npm run lint         # análisis estático
+npm test             # compilación y prueba del HTML renderizado
+npm run db:generate  # genera migraciones de Drizzle
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+## Estructura principal
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+```text
+app/                 páginas, componentes y endpoints
+db/                  esquema y acceso a D1
+drizzle/             migraciones versionadas
+lib/                 datos, metadatos y validaciones compartidas
+public/              imágenes, identidad visual e iconos
+tests/               pruebas automatizadas
+worker/              entrada del Cloudflare Worker
+.openai/hosting.json recursos administrados por Sites
+```
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
+## Rutas
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
+- `/` — inicio
+- `/el-coro` — identidad, historia y dirección artística
+- `/ciclo` — Ciclo de Conciertos Corales
+- `/agenda` — próximos conciertos y presentaciones
+- `/archivo` — memoria fotográfica
+- `/contacto` — convocatoria, formulario y sedes
+- `/login` — ingreso al panel editorial
+- `/admin` — gestión de anuncios y contenidos
 
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
+## Datos y publicación
 
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
+La configuración de `.openai/hosting.json` declara los recursos lógicos `DB` y `MEDIA`. La plataforma de Sites administra sus equivalentes reales durante la publicación. Las migraciones de D1 se conservan en `drizzle/` y los archivos cargados desde el panel se almacenan en R2.
 
-## Useful Commands
+Antes de publicar, verificá que la compilación y las pruebas finalicen correctamente y configurá las variables de entorno en el servicio de alojamiento.
 
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
+## Autoría
 
-## Learn More
-
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+Proyecto desarrollado para el Coro de la Facultad de Ingeniería de la Universidad de Buenos Aires.

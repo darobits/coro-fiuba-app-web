@@ -6,7 +6,7 @@ const safe = (value: unknown) => typeof value === "string" ? value.trim().slice(
 export async function POST(request: Request) {
   const body = await request.json() as Record<string, unknown>;
   const fullName = safe(body.fullName), email = safe(body.email).toLowerCase(), phone = safe(body.phone), age = safe(body.age), voice = safe(body.voice), experience = safe(body.experience);
-  const normalizedPhone = phone.replace(/[\s()\-]/g, "");
+  const normalizedPhone = phone.replace(/[\s()-]/g, "");
   const numericAge = Number(age);
   if (fullName.length < 3) return Response.json({ error: "Ingresá tu nombre y apellido." }, { status: 400 });
   if (!isValidEmail(email)) return Response.json({ error: "Ingresá una dirección de correo válida." }, { status: 400 });

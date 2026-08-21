@@ -20,7 +20,10 @@
 
 # misc
 .DS_Store
+Thumbs.db
+Desktop.ini
 *.pem
+*.log
 
 # debug
 npm-debug.log*
@@ -38,3 +41,8 @@ yarn-error.log*
 /.wrangler/
 /outputs/
 /work/
+
+# local editor settings
+.vscode/
+.idea/
+*.code-workspace
