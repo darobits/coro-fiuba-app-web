@@ -21,7 +21,7 @@ export default function SiteHeader() {
       <a className="brand" href="/" aria-label="Coro FIUBA, inicio">
         <img src="/logo-fiuba.png" alt="" />
         <span className="brand-copy">
-          <strong><span>Coro</span><em>FIUBA</em></strong>
+          <strong>Coro FIUBA</strong>
           <small>Facultad de Ingeniería · UBA</small>
         </span>
       </a>
