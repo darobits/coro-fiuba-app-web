@@ -2,11 +2,11 @@
 
 Sitio web del Coro de la Facultad de Ingeniería de la Universidad de Buenos Aires.
 
-Incluye información institucional, historia del coro, agenda de conciertos, archivo fotográfico y un formulario para quienes quieran participar. También cuenta con un panel de administración para gestionar anuncios y contenido multimedia.
+Incluye información institucional, historia del coro, agenda de conciertos, archivo fotográfico y un formulario para quienes quieran participar. La base del panel editorial queda preparada para una próxima versión.
 
 ## Tecnologías
 
-React, TypeScript, vinext, Vite, Drizzle ORM, Cloudflare D1 y R2.
+Next.js, React, TypeScript, Tailwind CSS y Drizzle ORM.
 
 ## Instalación
 
@@ -18,7 +18,7 @@ cp .env.example .env.local
 npm run dev
 ```
 
-Las integraciones con Google Apps Script y EmailJS se configuran en `.env.local`. Las variables disponibles están documentadas en `.env.example`.
+Las integraciones con Google Apps Script y EmailJS se configuran en `.env.local`. Para producción también se recomienda definir `NEXT_PUBLIC_SITE_URL`. Las variables disponibles están documentadas en `.env.example`.
 
 ## Comandos
 
