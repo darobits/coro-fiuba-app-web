@@ -9,6 +9,7 @@ const links = [
   ["/ciclo", "Ciclo de conciertos"],
   ["/agenda", "Agenda"],
   ["/archivo", "Archivo"],
+  ["/contacto", "Contacto"],
 ];
 
 export default function SiteHeader() {
@@ -22,7 +23,7 @@ export default function SiteHeader() {
         <span><strong>Coro FIUBA</strong><small>Facultad de Ingeniería · UBA</small></span>
       </a>
       <nav className={open ? "open" : ""} aria-label="Navegación principal">
-        {links.map(([href, label]) => <a key={href} href={href} className={path === href ? "active" : ""} onClick={() => setOpen(false)}>{label}</a>)}
+        {links.map(([href, label]) => <a key={href} href={href} className={path === href || (path === "/sumate" && href === "/contacto") ? "active" : ""} onClick={() => setOpen(false)}>{label}</a>)}
         <a className="mobile-login" href="/login" onClick={() => setOpen(false)}><FiLogIn aria-hidden="true" /> Ingresar</a>
       </nav>
       <div className="header-actions">

@@ -1,14 +1,15 @@
 import { ensureSchema } from "@/lib/data";
+import { isValidEmail } from "@/lib/validation";
 
 const safe = (value: unknown) => typeof value === "string" ? value.trim().slice(0, 2000) : "";
 
 export async function POST(request: Request) {
   const body = await request.json() as Record<string, unknown>;
-  const fullName = safe(body.fullName), email = safe(body.email), phone = safe(body.phone), age = safe(body.age), voice = safe(body.voice), experience = safe(body.experience);
+  const fullName = safe(body.fullName), email = safe(body.email).toLowerCase(), phone = safe(body.phone), age = safe(body.age), voice = safe(body.voice), experience = safe(body.experience);
   const normalizedPhone = phone.replace(/[\s()\-]/g, "");
   const numericAge = Number(age);
   if (fullName.length < 3) return Response.json({ error: "Ingresá tu nombre y apellido." }, { status: 400 });
-  if (!/^\S+@\S+\.\S+$/.test(email)) return Response.json({ error: "Ingresá un email válido." }, { status: 400 });
+  if (!isValidEmail(email)) return Response.json({ error: "Ingresá una dirección de correo válida." }, { status: 400 });
   if (!/^\+?\d{8,15}$/.test(normalizedPhone) || /^(\+?)(\d)\2{7,}$/.test(normalizedPhone)) return Response.json({ error: "Ingresá un celular válido, con código de área." }, { status: 400 });
   if (!Number.isInteger(numericAge) || numericAge < 16 || numericAge > 99) return Response.json({ error: "Por favor, ingresá una edad correcta." }, { status: 400 });
   if (!voice || !experience) return Response.json({ error: "Completá el registro de voz y la experiencia previa." }, { status: 400 });

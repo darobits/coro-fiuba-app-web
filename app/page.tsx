@@ -5,7 +5,7 @@ export default function Home() {
   return <main><SiteHeader />
     <section className="home-hero">
       <div className="hero-grid" aria-hidden="true" />
-      <div className="hero-copy"><p className="eyebrow"><span /> Facultad de Ingeniería · UBA</p><h1>Ingeniería<br />en <em>armonía.</em></h1><p>Un espacio donde las voces, la música y la comunidad universitaria se encuentran.</p><div className="hero-actions"><a className="button button-gold button-hero-primary" href="/sumate">Quiero participar <span className="button-wave" aria-hidden="true"><i /><i /><i /><i /></span></a><a className="button button-hero-secondary" href="/el-coro">Conocé al coro</a></div></div>
+      <div className="hero-copy"><p className="eyebrow"><span /> Facultad de Ingeniería · UBA</p><h1>Ingeniería<br />en <em>armonía.</em></h1><p>Un espacio donde las voces, la música y la comunidad universitaria se encuentran.</p><div className="hero-actions"><a className="button button-gold button-hero-primary" href="/contacto">Quiero participar <span className="button-wave" aria-hidden="true"><i /><i /><i /><i /></span></a><a className="button button-hero-secondary" href="/el-coro">Conocé al coro</a></div></div>
       <div className="hero-visual hero-visual--single">
         <div className="hero-photo-main"><img src="/choir/hero-architecture.webp" alt="El Coro FIUBA cantando en la sede Las Heras" /></div>
       </div>
@@ -23,7 +23,7 @@ export default function Home() {
       <a href="/archivo"><span>04</span><div><small>Memoria viva</small><h3>Archivo</h3><p>Fotos, videos y momentos del Coro FIUBA.</p></div></a>
     </section>
 
-    <section className="home-cta"><div><p className="eyebrow"><span /> Ensayos todos los viernes</p><h2>Tu voz puede ser<br />parte de la obra.</h2></div><div><p>Nos encontramos de 19:30 a 22:00 h en la sede Paseo Colón de la Facultad de Ingeniería.</p><a className="button button-gold button-choir" href="/sumate">Sumate al coro <span className="button-wave" aria-hidden="true"><i /><i /><i /><i /></span></a></div></section>
+    <section className="home-cta"><div><p className="eyebrow"><span /> Ensayos todos los viernes</p><h2>Tu voz puede ser<br />parte de la obra.</h2></div><div><p>Nos encontramos de 19:30 a 22:00 h en la sede Paseo Colón de la Facultad de Ingeniería.</p><a className="button button-gold button-choir" href="/contacto">Sumate al coro <span className="button-wave" aria-hidden="true"><i /><i /><i /><i /></span></a></div></section>
     <SiteFooter />
   </main>;
 }
