@@ -30,6 +30,10 @@ npm test             # compilación y pruebas
 npm run db:generate  # generación de migraciones
 ```
 
+---
 ## Autor
 
-Desarrollado por **Darío Villar**, Analista de Sistemas, para el Coro de la Facultad de Ingeniería de la Universidad de Buenos Aires.
+**Darío Villar**
+**Analista de Sistemas**
+
+Proyecto desarrollado para el Coro de la Facultad de Ingeniería de la Universidad de Buenos Aires.
