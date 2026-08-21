@@ -48,8 +48,13 @@ export const metadata: Metadata = {
   },
   appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "Coro FIUBA" },
   formatDetection: { telephone: false },
-  openGraph: { title, description, images: ["/og-2026.png"], type: "website" },
-  twitter: { card: "summary_large_image", title, description, images: ["/og-2026.png"] },
+  openGraph: {
+    title,
+    description,
+    images: [{ url: "/logo-fiuba.png", width: 1254, height: 1254, alt: "Logo del Coro FIUBA" }],
+    type: "website",
+  },
+  twitter: { card: "summary", title, description, images: ["/logo-fiuba.png"] },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
