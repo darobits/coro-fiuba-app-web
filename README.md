@@ -32,4 +32,4 @@ npm run db:generate  # generación de migraciones
 
 ## Autor
 
-**Darío Villar**
+Desarrollado por **Darío Villar**, Analista de Sistemas, para el Coro de la Facultad de Ingeniería de la Universidad de Buenos Aires.
