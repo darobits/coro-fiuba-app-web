@@ -473,7 +473,7 @@ h1 em, h2 em { color: var(--gold); font-weight: 400; }
 .collection-rehearsals .archive-mosaic,.collection-generations .archive-mosaic,.collection-stages .archive-mosaic { display:grid; columns:auto; column-gap:0; gap:clamp(24px,3vw,42px); align-items:start; }
 .collection-rehearsals .archive-mosaic { grid-template-columns:repeat(3,minmax(0,1fr)); }
 .collection-generations .archive-mosaic,.collection-stages .archive-mosaic { grid-template-columns:repeat(2,minmax(0,1fr)); }
-.collection-rehearsals .archive-mosaic .media-card,.collection-generations .archive-mosaic .media-card,.collection-stages .archive-mosaic .media-card,.collection-rehearsals .archive-mosaic .media-card:nth-child(n),.collection-generations .archive-mosaic .media-card:nth-child(n),.collection-stages .archive-mosaic .media-card:nth-child(n) { width:100%; margin:0; padding:0; }
+.collection-rehearsals .archive-mosaic .media-card,.collection-generations .archive-mosaic .media-card,.collection-stages .archive-mosaic .media-card,.collection-rehearsals .archive-mosaic .media-card:nth-child(n),.collection-generations .archive-mosaic .media-card:nth-child(n),.collection-stages .archive-mosaic .media-card:nth-child(n) { grid-column:auto; grid-row:auto; justify-self:stretch; width:100%; min-width:0; max-width:none; margin:0; padding:0; }
 
 @media (max-width:640px) {
   .collection-rehearsals .archive-mosaic,.collection-generations .archive-mosaic,.collection-stages .archive-mosaic { grid-template-columns:1fr; gap:34px; }
