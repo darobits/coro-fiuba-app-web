@@ -3,13 +3,31 @@ import SiteHeader from "@/app/components/SiteHeader";
 
 export default function Home() {
   return <main><SiteHeader />
-    <section className="home-hero">
-      <div className="hero-grid" aria-hidden="true" />
-      <div className="hero-copy"><p className="eyebrow"><span /> Facultad de Ingeniería · UBA</p><h1>Ingeniería<br />en <em>armonía.</em></h1><p>Un espacio donde las voces, la música y la comunidad universitaria se encuentran.</p><div className="hero-actions"><a className="button button-gold button-hero-primary" href="/contacto">Quiero participar <span className="button-wave" aria-hidden="true"><i /><i /><i /><i /></span></a><a className="button button-hero-secondary" href="/el-coro">Conocé al coro</a></div></div>
-      <div className="hero-visual hero-visual--single">
-        <div className="hero-photo-main"><img src="/choir/hero-architecture.webp" alt="El Coro FIUBA cantando en la sede Las Heras" /></div>
+    <section className="fiuba-home-hero">
+      <div className="fiuba-hero-copy">
+        <p className="fiuba-overline"><span>Extensión universitaria</span> Cultura FIUBA</p>
+        <h1><span>Coro</span> FIUBA</h1>
+        <p className="fiuba-hero-motto">Ingeniería en armonía.</p>
+        <p className="fiuba-hero-lead">Una comunidad abierta que transforma la arquitectura de la Facultad en un espacio de música, escucha y encuentro.</p>
+        <div className="hero-actions">
+          <a className="button button-hero-primary" href="/contacto">Quiero participar</a>
+          <a className="button button-hero-secondary" href="/el-coro">Conocé al coro</a>
+        </div>
       </div>
-      <div className="hero-foot"><span>Buenos Aires, Argentina</span><div className="sound-wave" aria-hidden="true">{Array.from({ length: 18 }, (_, i) => <i key={i} style={{ height: `${10 + ((i * 13) % 26)}px` }} />)}</div><span>Cultura · Comunidad · Música</span></div>
+      <figure className="fiuba-hero-image">
+        <img src="/choir/hero-architecture.webp" alt="El Coro FIUBA cantando en la sede Las Heras" />
+        <figcaption>Sede Las Heras · Música y arquitectura universitaria</figcaption>
+      </figure>
+      <aside className="fiuba-hero-facts" aria-label="Datos principales del Coro FIUBA">
+        <article><small>Ensayos</small><strong>Viernes · 19:30 a 22:00</strong><span>Sede Paseo Colón</span></article>
+        <article><small>Ciclo coral</small><strong>Una tradición desde 1995</strong><span>Sede Las Heras</span></article>
+      </aside>
+    </section>
+
+    <section className="fiuba-home-strip" aria-label="Características del Coro FIUBA">
+      <article><span>01</span><div><strong>Comunidad abierta</strong><p>Estudiantes, docentes, graduados y personas de toda la comunidad.</p></div></article>
+      <article><span>02</span><div><strong>Repertorio diverso</strong><p>Música coral clásica, popular y contemporánea.</p></div></article>
+      <article><span>03</span><div><strong>Memoria viva</strong><p>Más de seis décadas de historia y actividad coral.</p></div></article>
     </section>
 
     <section className="home-intro"><p className="section-index">Una comunidad coral</p><div><p className="eyebrow dark"><span /> Muchas voces, una obra</p><h2>Respirar juntos.<br /><em>Construir sonido.</em></h2></div><p>El Coro FIUBA reúne música, aprendizaje y vida universitaria en un proyecto colectivo abierto a la comunidad.</p></section>
@@ -17,13 +35,14 @@ export default function Home() {
     <section className="home-photo-band"><figure><img src="/choir/concert-close.webp" alt="El Coro FIUBA cantando bajo la dirección de Carolina Abbamonte" /></figure><div><p className="section-index">El coro en acción</p><h2>La música habita<br /><em>la Facultad.</em></h2><p>Ensayos, conciertos y encuentros transforman la arquitectura universitaria en un espacio vivo de escucha y comunidad.</p><a className="text-link dark-link archive-link" href="/archivo">Explorar el archivo</a></div></section>
 
     <section className="portal-grid" aria-label="Explorar el sitio">
+      <header><p className="eyebrow dark"><span /> Conocé el proyecto</p><h2>El Coro FIUBA,<br /><em>por dentro.</em></h2></header>
       <a href="/el-coro"><span>01</span><div><small>Identidad</small><h3>El coro</h3><p>Quiénes somos y qué nos reúne alrededor de la música.</p></div></a>
-      <a href="/ciclo"><span>02</span><div><small>Desde los años 90</small><h3>Ciclo de conciertos</h3><p>Una tradición de encuentros corales en la Facultad.</p></div></a>
-      <a href="/agenda"><span>03</span><div><small>Actualidad</small><h3>Agenda</h3><p>Anuncios, conciertos y novedades de nuestra actividad.</p></div></a>
-      <a href="/archivo"><span>04</span><div><small>Memoria viva</small><h3>Archivo</h3><p>Fotos, videos y momentos del Coro FIUBA.</p></div></a>
+      <a href="/ciclo"><span>02</span><div><small>Desde 1995</small><h3>Ciclo de conciertos</h3><p>Una tradición de encuentros corales en la Facultad.</p></div></a>
+      <a href="/agenda"><span>03</span><div><small>Actualidad</small><h3>Agenda</h3><p>Conciertos, presentaciones y novedades de la temporada.</p></div></a>
+      <a href="/archivo"><span>04</span><div><small>Memoria visual</small><h3>Archivo</h3><p>Fotografías y momentos de distintas generaciones del Coro.</p></div></a>
     </section>
 
-    <section className="home-cta"><div><p className="eyebrow"><span /> Ensayos todos los viernes</p><h2>Tu voz puede ser<br />parte de la obra.</h2></div><div><p>Nos encontramos de 19:30 a 22:00 h en la sede Paseo Colón de la Facultad de Ingeniería.</p><a className="button button-gold button-choir" href="/contacto">Sumate al coro <span className="button-wave" aria-hidden="true"><i /><i /><i /><i /></span></a></div></section>
+    <section className="home-cta"><div><p className="eyebrow"><span /> Ensayos todos los viernes</p><h2>Tu voz puede ser<br />parte de la obra.</h2></div><div><p>Nos encontramos de 19:30 a 22:00 h en la sede Paseo Colón de la Facultad de Ingeniería.</p><a className="button button-choir" href="/contacto">Sumate al coro</a></div></section>
     <SiteFooter />
   </main>;
 }

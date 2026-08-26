@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiLogIn } from "react-icons/fi";
 import DashboardNotice from "@/app/components/DashboardNotice";
 
@@ -15,23 +15,31 @@ const links = [
 ];
 
 export default function SiteHeader() {
+  const [scrolled, setScrolled] = useState(false);
   const path = usePathname();
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const updateHeader = () => setScrolled(window.scrollY > 18);
+    updateHeader();
+    window.addEventListener("scroll", updateHeader, { passive: true });
+    return () => window.removeEventListener("scroll", updateHeader);
+  }, []);
   const [showDashboardNotice, setShowDashboardNotice] = useState(false);
   const announceDashboard = () => { setOpen(false); setShowDashboardNotice(true); };
 
   return <>
-    <header className="site-header">
+    <header className={`site-header${scrolled ? " is-scrolled" : ""}`}>
       <div className="header-shell">
         <Link className="brand" href="/" aria-label="Coro FIUBA, inicio">
           <img src="/logo-fiuba.png" alt="" />
           <span className="brand-copy">
             <strong>Coro FIUBA</strong>
-            <small>Facultad de Ingeniería · UBA</small>
+            <small>Facultad de Ingeniería · Universidad de Buenos Aires</small>
           </span>
         </Link>
         <nav className={open ? "open" : ""} aria-label="Navegación principal">
-          {links.map(([href, label]) => <Link key={href} href={href} className={path === href || (path === "/sumate" && href === "/contacto") ? "active" : ""} onClick={() => setOpen(false)}>{label}</Link>)}
+          {links.map(([href, label]) => <Link key={href} href={href} className={path === href ? "active" : ""} onClick={() => setOpen(false)}>{label}</Link>)}
           <button className="mobile-login" type="button" onClick={announceDashboard}><FiLogIn aria-hidden="true" /> Ingresar</button>
         </nav>
         <div className="header-actions">

@@ -496,3 +496,1501 @@ h1 em, h2 em { color: var(--gold); font-weight: 400; }
 }
 
 @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition-duration:.01ms !important; animation-duration:.01ms !important; }.archive-mosaic .media-card { opacity:1; transform:none; } }
+/* --------------------------------------------------------------------------
+   Versión institucional FIUBA
+   Adaptación propia del lenguaje visual de la Facultad para el Coro.
+   -------------------------------------------------------------------------- */
+body.fiuba-edition {
+  --navy:#1a2b5e;
+  --blue:#164f83;
+  --blue-bright:#0095db;
+  --ink:#17233e;
+  --paper:#ffffff;
+  --paper-deep:#eef4f7;
+  --gold:#e89218;
+  --cream:#fff7e8;
+  --mist:#dcebf1;
+  --muted:#5d6b78;
+  --line:rgba(26,43,94,.16);
+  --white-line:rgba(255,255,255,.22);
+  --shadow:0 18px 45px rgba(26,43,94,.12);
+  background:#fff;
+  color:var(--ink);
+  color-scheme:light;
+}
+
+.fiuba-edition ::selection { background:#cbeafa; color:#102555; }
+.fiuba-edition :focus-visible { outline:3px solid rgba(0,149,219,.34); outline-offset:3px; }
+.fiuba-edition .section-index { color:#65788b; }
+.fiuba-edition .eyebrow { color:#d9e8f3; }
+.fiuba-edition .eyebrow span { background:#f7a600; }
+.fiuba-edition .eyebrow.dark { color:#536a7d; }
+.fiuba-edition h1 em,
+.fiuba-edition h2 em { color:#0095db; }
+
+/* Encabezado */
+.fiuba-edition .site-header {
+  height:118px;
+  color:var(--navy);
+  background:#fff;
+  border-bottom:3px solid #0095db;
+  box-shadow:0 8px 28px rgba(26,43,94,.1);
+  backdrop-filter:none;
+}
+.fiuba-edition .site-header::after { display:none; }
+.fiuba-edition .institutional-ribbon {
+  height:30px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  padding:0 clamp(22px,5vw,76px);
+  background:var(--navy);
+  color:#fff;
+  font-size:7px;
+  font-weight:700;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+}
+.fiuba-edition .institutional-ribbon-context { color:#bfe8f8; }
+.fiuba-edition .header-shell {
+  height:85px;
+  padding:0 clamp(22px,5vw,76px);
+  gap:clamp(22px,3vw,52px);
+}
+.fiuba-edition .brand { gap:15px; }
+.fiuba-edition .brand img { width:59px; height:59px; }
+.fiuba-edition .brand:hover img { filter:drop-shadow(0 6px 12px rgba(26,43,94,.18)); }
+.fiuba-edition .brand-copy strong {
+  color:var(--navy);
+  font-family:var(--font-display);
+  font-size:35px;
+  font-weight:600;
+  letter-spacing:.005em;
+}
+.fiuba-edition .brand-copy small {
+  margin-top:6px;
+  color:#5b6d80;
+  font-size:7.5px;
+  letter-spacing:.17em;
+}
+.fiuba-edition .brand-copy small::before { background:#0095db; box-shadow:none; }
+.fiuba-edition .site-header nav {
+  gap:3px;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+.fiuba-edition .site-header nav > :is(a,button) {
+  min-height:46px;
+  padding:0 15px;
+  border-radius:0;
+  color:#3b4d67;
+  font-size:8px;
+  letter-spacing:.11em;
+}
+.fiuba-edition .site-header nav > :is(a,button)::before {
+  position:absolute;
+  left:15px;
+  right:15px;
+  bottom:1px;
+  width:auto;
+  height:2px;
+  margin:0;
+  border-radius:0;
+  background:#0095db;
+  transform:scaleX(0);
+  transform-origin:left;
+}
+.fiuba-edition .site-header nav > :is(a,button):hover {
+  color:#007ebc;
+  background:#f0f8fc;
+  transform:none;
+}
+.fiuba-edition .site-header nav > :is(a,button):hover::before,
+.fiuba-edition .site-header nav > :is(a,button).active::before {
+  opacity:1;
+  margin:0;
+  transform:scaleX(1);
+}
+.fiuba-edition .site-header nav > :is(a,button).active {
+  color:var(--navy);
+  background:#e5f4fb;
+  box-shadow:none;
+}
+.fiuba-edition .login-link {
+  min-height:46px;
+  padding:0 18px;
+  border:1px solid #0095db;
+  border-radius:2px;
+  color:var(--navy);
+  background:#fff;
+}
+.fiuba-edition .login-link svg { color:#0095db; }
+.fiuba-edition .login-link:hover {
+  color:#fff;
+  background:var(--navy);
+  border-color:var(--navy);
+  box-shadow:0 10px 24px rgba(26,43,94,.18);
+}
+.fiuba-edition .login-link:hover svg { color:#7fd3f4; }
+.fiuba-edition .menu-button {
+  border-color:rgba(26,43,94,.24);
+  border-radius:2px;
+  background:#fff;
+}
+.fiuba-edition .menu-button i { background:var(--navy); }
+
+/* Acciones */
+.fiuba-edition .button {
+  min-height:52px;
+  border-radius:1px;
+  justify-content:center;
+  padding-inline:24px;
+}
+.fiuba-edition .button-hero-primary,
+.fiuba-edition .button-choir {
+  border-color:#0095db;
+  background:#0095db;
+  color:#fff;
+  box-shadow:0 12px 28px rgba(0,149,219,.18);
+}
+.fiuba-edition .button-hero-primary::before,
+.fiuba-edition .button-choir::before { background:var(--navy); }
+.fiuba-edition .button-hero-primary:hover,
+.fiuba-edition .button-choir:hover { color:#fff; }
+.fiuba-edition .button-hero-secondary {
+  border:1px solid rgba(26,43,94,.3);
+  background:#fff;
+  color:var(--navy);
+}
+.fiuba-edition .button-hero-secondary::before { background:#e8f5fb; }
+.fiuba-edition .button-hero-secondary::after { display:none; }
+.fiuba-edition .archive-link { color:var(--navy); }
+.fiuba-edition .archive-link::before { background:#0095db; }
+.fiuba-edition .archive-link::after { background:#e89218; }
+
+/* Portada */
+.fiuba-edition .fiuba-home-hero {
+  position:relative;
+  min-height:650px;
+  display:grid;
+  grid-template-columns:minmax(0,.9fr) minmax(480px,1.1fr);
+  grid-template-rows:1fr auto;
+  gap:0 clamp(42px,6vw,92px);
+  align-items:center;
+  overflow:hidden;
+  padding:72px clamp(24px,7vw,110px) 86px;
+  background:
+    linear-gradient(90deg,rgba(220,235,241,.42) 1px,transparent 1px) 0 0/84px 84px,
+    linear-gradient(rgba(220,235,241,.42) 1px,transparent 1px) 0 0/84px 84px,
+    #fff;
+}
+.fiuba-edition .fiuba-home-hero::before {
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  width:36%;
+  height:100%;
+  background:linear-gradient(140deg,#e7f4f9 0%,#d5ebf3 100%);
+  clip-path:polygon(18% 0,100% 0,100% 100%,0 100%);
+}
+.fiuba-edition .fiuba-home-hero::after {
+  content:"";
+  position:absolute;
+  left:clamp(24px,7vw,110px);
+  top:54px;
+  width:54px;
+  height:4px;
+  background:#f7a600;
+}
+.fiuba-edition .fiuba-hero-copy {
+  position:relative;
+  z-index:2;
+  grid-column:1;
+  grid-row:1 / 3;
+  align-self:center;
+}
+.fiuba-edition .fiuba-overline {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:0 0 30px;
+  color:#587084;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.fiuba-edition .fiuba-overline span { color:#007db8; }
+.fiuba-edition .fiuba-overline::before {
+  content:"";
+  width:28px;
+  height:2px;
+  background:#e89218;
+}
+.fiuba-edition .fiuba-hero-copy h1 {
+  color:var(--navy);
+  font-size:clamp(82px,8vw,126px);
+  font-weight:500;
+  line-height:.78;
+  letter-spacing:-.055em;
+}
+.fiuba-edition .fiuba-hero-copy h1 span {
+  display:block;
+  margin:0 0 17px 5px;
+  color:#0095db;
+  font-family:var(--font-sans);
+  font-size:13px;
+  font-weight:800;
+  line-height:1;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+}
+.fiuba-edition .fiuba-hero-motto {
+  margin:28px 0 0;
+  color:#164f83;
+  font-family:var(--font-display);
+  font-size:clamp(30px,3.2vw,48px);
+  line-height:1;
+}
+.fiuba-edition .fiuba-hero-lead {
+  max-width:570px;
+  margin:26px 0 0;
+  color:#56697b;
+  font-size:15px;
+  line-height:1.85;
+}
+.fiuba-edition .hero-actions { gap:12px; margin-top:34px; }
+.fiuba-edition .fiuba-hero-image {
+  position:relative;
+  z-index:1;
+  grid-column:2;
+  grid-row:1;
+  min-width:0;
+  margin:0;
+  aspect-ratio:16/10;
+  background:#c8dce5;
+  box-shadow:18px 18px 0 #0095db;
+}
+.fiuba-edition .fiuba-hero-image::before {
+  content:"";
+  position:absolute;
+  z-index:2;
+  top:-14px;
+  right:-14px;
+  width:88px;
+  height:88px;
+  border-top:5px solid #e89218;
+  border-right:5px solid #e89218;
+}
+.fiuba-edition .fiuba-hero-image img {
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center 46%;
+  filter:saturate(.9) contrast(1.02);
+}
+.fiuba-edition .fiuba-hero-image figcaption {
+  position:absolute;
+  left:0;
+  bottom:0;
+  padding:12px 16px;
+  background:rgba(26,43,94,.92);
+  color:#fff;
+  font-size:7px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.fiuba-edition .fiuba-hero-facts {
+  position:relative;
+  z-index:3;
+  grid-column:2;
+  grid-row:2;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  margin:-42px 22px 0 54px;
+  border-top:4px solid #e89218;
+  background:#fff;
+  box-shadow:0 20px 42px rgba(26,43,94,.16);
+}
+.fiuba-edition .fiuba-hero-facts article {
+  min-width:0;
+  display:grid;
+  gap:6px;
+  padding:22px 24px;
+  border-right:1px solid var(--line);
+}
+.fiuba-edition .fiuba-hero-facts article:last-child { border-right:0; }
+.fiuba-edition .fiuba-hero-facts small {
+  color:#007fb9;
+  font-size:7px;
+  font-weight:800;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+}
+.fiuba-edition .fiuba-hero-facts strong {
+  color:var(--navy);
+  font-family:var(--font-display);
+  font-size:20px;
+  font-weight:600;
+}
+.fiuba-edition .fiuba-hero-facts span { color:#647687; font-size:10px; }
+
+.fiuba-edition .fiuba-home-strip {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  background:var(--navy);
+  color:#fff;
+}
+.fiuba-edition .fiuba-home-strip article {
+  min-width:0;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:20px;
+  padding:30px clamp(24px,4vw,58px);
+  border-right:1px solid rgba(255,255,255,.18);
+}
+.fiuba-edition .fiuba-home-strip article:nth-child(2) { background:#164f83; }
+.fiuba-edition .fiuba-home-strip article:nth-child(3) { background:#007eb8; }
+.fiuba-edition .fiuba-home-strip article:last-child { border-right:0; }
+.fiuba-edition .fiuba-home-strip > article > span {
+  color:#f7a600;
+  font-family:var(--font-display);
+  font-size:26px;
+}
+.fiuba-edition .fiuba-home-strip strong {
+  display:block;
+  font-family:var(--font-display);
+  font-size:24px;
+  font-weight:600;
+}
+.fiuba-edition .fiuba-home-strip p {
+  margin:6px 0 0;
+  color:#d9e8f3;
+  font-size:11px;
+  line-height:1.65;
+}
+
+.fiuba-edition .home-intro {
+  background:#fff;
+  border-bottom:1px solid var(--line);
+}
+.fiuba-edition .home-intro h2 { color:var(--navy); }
+.fiuba-edition .home-intro h2 em { color:#0095db; }
+.fiuba-edition .home-photo-band {
+  display:grid;
+  grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr);
+  align-items:stretch;
+  background:#eef5f8;
+}
+.fiuba-edition .home-photo-band figure {
+  min-height:570px;
+  margin:0;
+  overflow:hidden;
+}
+.fiuba-edition .home-photo-band figure img {
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center;
+}
+.fiuba-edition .home-photo-band > div {
+  align-self:center;
+  padding:70px clamp(36px,7vw,105px);
+}
+.fiuba-edition .home-photo-band h2 {
+  margin:18px 0 26px;
+  color:var(--navy);
+  font-size:clamp(52px,5.4vw,82px);
+  line-height:.9;
+}
+.fiuba-edition .home-photo-band > div > p:not(.section-index) {
+  color:#5b6d7d;
+  line-height:1.85;
+}
+
+.fiuba-edition .portal-grid {
+  grid-template-columns:repeat(2,1fr);
+  background:#fff;
+  border-top:0;
+}
+.fiuba-edition .portal-grid > header {
+  grid-column:1 / -1;
+  display:grid;
+  grid-template-columns:.6fr 1fr;
+  gap:5vw;
+  align-items:end;
+  padding:85px clamp(24px,7vw,110px) 55px;
+  border-bottom:1px solid var(--line);
+}
+.fiuba-edition .portal-grid > header h2 {
+  color:var(--navy);
+  font-size:clamp(50px,5vw,76px);
+  line-height:.92;
+}
+.fiuba-edition .portal-grid > a {
+  min-height:250px;
+  background:#fff;
+  border-color:var(--line);
+}
+.fiuba-edition .portal-grid > a::after { background:#0095db; }
+.fiuba-edition .portal-grid > a > span { color:#0095db; }
+.fiuba-edition .portal-grid small { color:#607489; }
+.fiuba-edition .portal-grid h3 { color:var(--navy); }
+.fiuba-edition .portal-grid p { color:#687785; }
+.fiuba-edition .portal-grid > a:hover { background:var(--navy); }
+.fiuba-edition .portal-grid > a:hover > span { color:#f7a600; }
+.fiuba-edition .home-cta,
+.fiuba-edition .page-cta {
+  background:linear-gradient(110deg,#1a2b5e 0%,#164f83 100%);
+  border-top:4px solid #0095db;
+}
+.fiuba-edition .home-cta > div:last-child p { color:#d4e3ee; }
+
+/* Páginas internas */
+.fiuba-edition .page-hero {
+  min-height:455px;
+  align-items:center;
+  padding-top:82px;
+  padding-bottom:82px;
+  background:
+    linear-gradient(90deg,rgba(26,43,94,.045) 1px,transparent 1px) 0 0/76px 76px,
+    linear-gradient(rgba(26,43,94,.045) 1px,transparent 1px) 0 0/76px 76px,
+    #f7fafb;
+  color:var(--navy);
+  border-bottom:4px solid #0095db;
+}
+.fiuba-edition .page-hero::after {
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  width:19%;
+  height:100%;
+  background:linear-gradient(145deg,#dcebf1,#cbe7f3);
+  clip-path:polygon(34% 0,100% 0,100% 100%,0 100%);
+}
+.fiuba-edition .page-hero-grid {
+  opacity:.55;
+  background-image:
+    linear-gradient(rgba(26,43,94,.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(26,43,94,.07) 1px,transparent 1px);
+}
+.fiuba-edition .page-hero .section-index { color:#007fb9; }
+.fiuba-edition .page-hero .eyebrow { color:#536a7d; }
+.fiuba-edition .page-hero h1 {
+  color:var(--navy);
+  font-size:clamp(62px,7vw,106px);
+}
+.fiuba-edition .page-hero h1 em { color:#0095db; }
+.fiuba-edition .page-intro { color:#526879; }
+.fiuba-edition .editorial-split,
+.fiuba-edition .history-section,
+.fiuba-edition .agenda-page { background:#fff; }
+.fiuba-edition .editorial-split h2,
+.fiuba-edition .history-section h2,
+.fiuba-edition .announcement-list h2,
+.fiuba-edition .empty-feature h2 { color:var(--navy); }
+.fiuba-edition .large-number { color:#cfe4ed; }
+.fiuba-edition .values-band,
+.fiuba-edition .cycle-calendar,
+.fiuba-edition .choir-profile,
+.fiuba-edition .luthiers-legacy,
+.fiuba-edition .leadership-feature,
+.fiuba-edition .legacy-section {
+  background:linear-gradient(125deg,#172858,#1a4775 72%,#087aaa);
+}
+.fiuba-edition .values-band span,
+.fiuba-edition .date-grid span,
+.fiuba-edition .leadership-roles b { color:#f7a600; }
+.fiuba-edition .venue-card,
+.fiuba-edition .profile-copy,
+.fiuba-edition .legacy-content article {
+  border-left-color:#f7a600;
+}
+.fiuba-edition .agenda-aside {
+  top:132px;
+  border-top-color:#0095db;
+  background:var(--navy);
+}
+.fiuba-edition .announcement-list article { border-color:var(--line); }
+.fiuba-edition .announcement-list article > span,
+.fiuba-edition .empty-feature > span { color:#e89218; }
+.fiuba-edition .announcement-place { color:#007fb9; }
+.fiuba-edition .archive-page,
+.fiuba-edition .concert-memory,
+.fiuba-edition .locations-section { background:#eef2f4; }
+.fiuba-edition .archive-heading h2,
+.fiuba-edition .concert-memory > header h2,
+.fiuba-edition .locations-section > header h2 { color:var(--navy); }
+.fiuba-edition .archive-mosaic .media-image,
+.fiuba-edition .concert-memory-wall figure {
+  border-color:#fff;
+  background:#fff;
+  box-shadow:0 14px 30px rgba(26,43,94,.15);
+}
+.fiuba-edition .archive-mosaic .media-caption { color:#536575; }
+.fiuba-edition .join-page-hero {
+  background:linear-gradient(120deg,#1a2b5e,#164f83 72%,#007eb8);
+}
+.fiuba-edition .form-section { background:#eef5f8; }
+.fiuba-edition .join-form.modern,
+.fiuba-edition .locations-grid article {
+  background:#fff;
+  box-shadow:0 18px 45px rgba(26,43,94,.11);
+}
+.fiuba-edition .join-form.modern { border-top-color:#0095db; }
+.fiuba-edition .location-copy > span { color:#e89218; }
+.fiuba-edition .location-copy small { color:#007fb9; }
+.fiuba-edition .location-copy h3 { color:var(--navy); }
+
+/* Modal de panel */
+.fiuba-edition .dashboard-notice-backdrop { background:rgba(17,37,74,.78); }
+.fiuba-edition .dashboard-notice {
+  border:0;
+  border-top:5px solid #0095db;
+  background:#fff;
+  box-shadow:0 35px 90px rgba(10,25,58,.34);
+}
+.fiuba-edition .dashboard-notice-kicker { color:#007fb9; }
+.fiuba-edition .dashboard-notice-mark i { background:#e89218; }
+.fiuba-edition .dashboard-notice h2 { color:var(--navy); }
+.fiuba-edition .dashboard-notice h2 em { color:#0095db; }
+.fiuba-edition .dashboard-notice-progress { background:#0095db; }
+
+/* Pie institucional */
+.fiuba-edition .site-footer {
+  background:linear-gradient(105deg,#142551 0%,#1a2b5e 50%,#164f83 100%);
+  border-top:5px solid #0095db;
+  color:#fff;
+}
+.fiuba-edition .footer-identity h2 {
+  color:#fff;
+  font-family:var(--font-display);
+  font-weight:600;
+}
+.fiuba-edition .footer-identity p,
+.fiuba-edition .copyright { color:#b9d0df; }
+.fiuba-edition .footer-links small { color:#72cff3; }
+.fiuba-edition .footer-links a { color:#eef7fb; }
+.fiuba-edition .footer-links a:hover { color:#f7a600; }
+.fiuba-edition .footer-social svg { color:#f7a600; }
+.fiuba-edition .footer-divider { background:rgba(255,255,255,.22); }
+
+/* Tabletas */
+@media (max-width:980px) {
+  .fiuba-edition .site-header { height:102px; }
+  .fiuba-edition .institutional-ribbon { height:28px; padding-inline:24px; }
+  .fiuba-edition .header-shell { height:71px; padding-inline:24px; }
+  .fiuba-edition .brand img { width:46px; height:46px; }
+  .fiuba-edition .brand-copy strong { font-size:29px; }
+  .fiuba-edition .site-header nav {
+    top:100%;
+    padding:10px 24px 20px;
+    border-top:1px solid var(--line);
+    border-bottom:3px solid #0095db;
+    border-radius:0;
+    background:#fff;
+    box-shadow:0 20px 35px rgba(26,43,94,.16);
+  }
+  .fiuba-edition .site-header nav > :is(a,button) {
+    color:#3b4d67;
+    border-bottom:1px solid var(--line);
+  }
+  .fiuba-edition .site-header nav > :is(a,button):hover,
+  .fiuba-edition .site-header nav > :is(a,button).active {
+    color:#007fb9;
+    background:#eef7fb;
+  }
+  .fiuba-edition .site-header nav > :is(a,button).active {
+    padding-left:14px;
+    border-left:3px solid #0095db;
+  }
+  .fiuba-edition .mobile-login { color:var(--navy) !important; }
+  .fiuba-edition .fiuba-home-hero {
+    min-height:auto;
+    grid-template-columns:1fr;
+    grid-template-rows:auto;
+    gap:48px;
+    padding:72px 42px 88px;
+  }
+  .fiuba-edition .fiuba-home-hero::before { width:58%; opacity:.7; }
+  .fiuba-edition .fiuba-hero-copy,
+  .fiuba-edition .fiuba-hero-image,
+  .fiuba-edition .fiuba-hero-facts { grid-column:1; grid-row:auto; }
+  .fiuba-edition .fiuba-hero-image { width:100%; max-width:850px; }
+  .fiuba-edition .fiuba-hero-facts { margin:-75px 30px 0; }
+  .fiuba-edition .fiuba-home-strip { grid-template-columns:1fr; }
+  .fiuba-edition .fiuba-home-strip article { border-right:0; border-bottom:1px solid rgba(255,255,255,.18); }
+  .fiuba-edition .home-photo-band { grid-template-columns:1fr; }
+  .fiuba-edition .home-photo-band figure { min-height:470px; }
+  .fiuba-edition .portal-grid > header { grid-template-columns:1fr; gap:20px; padding-inline:42px; }
+  .fiuba-edition .page-hero { min-height:440px; padding-top:70px; padding-bottom:70px; }
+  .fiuba-edition .agenda-aside { top:auto; }
+}
+
+/* Móviles */
+@media (max-width:560px) {
+  .fiuba-edition .site-header { height:93px; }
+  .fiuba-edition .institutional-ribbon {
+    height:25px;
+    justify-content:center;
+    padding-inline:15px;
+    font-size:6px;
+    letter-spacing:.1em;
+    text-align:center;
+  }
+  .fiuba-edition .institutional-ribbon-context { display:none; }
+  .fiuba-edition .header-shell { height:65px; padding-inline:17px; }
+  .fiuba-edition .brand { gap:10px; }
+  .fiuba-edition .brand img { width:41px; height:41px; }
+  .fiuba-edition .brand-copy strong { font-size:26px; }
+  .fiuba-edition .site-header nav { padding-inline:18px; }
+  .fiuba-edition .fiuba-home-hero {
+    gap:34px;
+    padding:62px 20px 68px;
+  }
+  .fiuba-edition .fiuba-home-hero::after { left:20px; top:38px; width:42px; }
+  .fiuba-edition .fiuba-home-hero::before { width:80%; }
+  .fiuba-edition .fiuba-overline { align-items:flex-start; flex-direction:column; gap:7px; font-size:7px; }
+  .fiuba-edition .fiuba-overline::before { order:-1; }
+  .fiuba-edition .fiuba-hero-copy h1 { font-size:clamp(74px,24vw,102px); }
+  .fiuba-edition .fiuba-hero-motto { margin-top:22px; font-size:34px; }
+  .fiuba-edition .fiuba-hero-lead { font-size:14px; line-height:1.75; }
+  .fiuba-edition .hero-actions { align-items:stretch; flex-direction:column; }
+  .fiuba-edition .hero-actions .button { width:100%; }
+  .fiuba-edition .fiuba-hero-image {
+    aspect-ratio:4/3;
+    box-shadow:9px 9px 0 #0095db;
+  }
+  .fiuba-edition .fiuba-hero-image::before { top:-8px; right:-8px; width:55px; height:55px; }
+  .fiuba-edition .fiuba-hero-image figcaption { position:static; background:var(--navy); line-height:1.5; }
+  .fiuba-edition .fiuba-hero-facts {
+    grid-template-columns:1fr;
+    margin:-52px 12px 0;
+  }
+  .fiuba-edition .fiuba-hero-facts article { padding:19px 20px; border-right:0; border-bottom:1px solid var(--line); }
+  .fiuba-edition .fiuba-hero-facts article:last-child { border-bottom:0; }
+  .fiuba-edition .fiuba-home-strip article { padding:25px 22px; }
+  .fiuba-edition .home-intro { padding:72px 22px; }
+  .fiuba-edition .home-photo-band figure { min-height:330px; }
+  .fiuba-edition .home-photo-band > div { padding:58px 22px; }
+  .fiuba-edition .home-photo-band h2 { font-size:54px; }
+  .fiuba-edition .portal-grid { grid-template-columns:1fr; }
+  .fiuba-edition .portal-grid > header { padding:65px 22px 38px; }
+  .fiuba-edition .portal-grid > header h2 { font-size:52px; }
+  .fiuba-edition .page-hero {
+    min-height:460px;
+    padding:60px 22px;
+  }
+  .fiuba-edition .page-hero::after { width:36%; opacity:.7; }
+  .fiuba-edition .page-hero h1 { font-size:clamp(58px,17vw,78px); }
+  .fiuba-edition .site-footer { border-top-width:4px; }
+}
+
+@media (max-width:980px) {
+  .fiuba-edition .menu-button { display:block; }
+}
+/* Ajustes de contraste y respiración de la versión institucional */
+body.fiuba-edition {
+  --paper:#f1f3f2;
+  --paper-deep:#e4eaed;
+  background:#edf1f2;
+}
+
+.fiuba-edition .site-header {
+  background:linear-gradient(105deg,#e4eaed 0%,#edf1f2 52%,#dce6ea 100%);
+  border-bottom-color:#008fcf;
+}
+
+.fiuba-edition .login-link,
+.fiuba-edition .menu-button {
+  background:#edf1f2;
+}
+
+.fiuba-edition .fiuba-home-hero {
+  background:
+    linear-gradient(90deg,rgba(26,43,94,.055) 1px,transparent 1px) 0 0/84px 84px,
+    linear-gradient(rgba(26,43,94,.055) 1px,transparent 1px) 0 0/84px 84px,
+    #f1f3f2;
+}
+
+.fiuba-edition .fiuba-hero-facts {
+  margin:20px 22px 0 54px;
+  background:#edf1f2;
+}
+
+.fiuba-edition .home-intro,
+.fiuba-edition .portal-grid,
+.fiuba-edition .portal-grid > a,
+.fiuba-edition .editorial-split,
+.fiuba-edition .history-section,
+.fiuba-edition .agenda-page {
+  background:#f1f3f2;
+}
+
+.fiuba-edition .page-cta.light {
+  background:linear-gradient(115deg,#dce8ed 0%,#c9e0e8 100%);
+  color:var(--navy);
+  border-top-color:#0095db;
+}
+
+.fiuba-edition .page-cta.light h2 {
+  color:var(--navy);
+}
+
+.fiuba-edition .page-cta.light .eyebrow.dark {
+  color:#506779;
+}
+
+@media (max-width:980px) {
+  .fiuba-edition .site-header nav { background:#e7edef; }
+  .fiuba-edition .fiuba-hero-facts { margin:18px 30px 0; }
+}
+
+@media (max-width:560px) {
+  .fiuba-edition .fiuba-hero-facts { margin:14px 8px 0; }
+}
+/* Header institucional unificado, sin franja superior */
+.fiuba-edition .site-header {
+  height:88px;
+  background:linear-gradient(105deg,#172858 0%,#1a2b5e 55%,#164f83 100%);
+  border-bottom:3px solid #0095db;
+  color:#fff;
+}
+
+.fiuba-edition .institutional-ribbon { display:none; }
+.fiuba-edition .header-shell { height:85px; }
+.fiuba-edition .brand-copy strong { color:#fff; }
+.fiuba-edition .brand-copy small {
+  display:flex;
+  color:#c5d8e7;
+}
+.fiuba-edition .brand-copy small::before { background:#f7a600; }
+
+.fiuba-edition .site-header nav > :is(a,button) { color:#c7d8e7; }
+.fiuba-edition .site-header nav > :is(a,button):hover {
+  color:#fff;
+  background:rgba(255,255,255,.08);
+}
+.fiuba-edition .site-header nav > :is(a,button).active {
+  color:#fff;
+  background:rgba(0,149,219,.22);
+}
+.fiuba-edition .site-header nav > :is(a,button)::before { background:#f7a600; }
+
+.fiuba-edition .login-link {
+  color:#fff;
+  border-color:rgba(255,255,255,.55);
+  background:rgba(255,255,255,.04);
+}
+.fiuba-edition .login-link svg { color:#70d2f6; }
+.fiuba-edition .login-link:hover {
+  color:var(--navy);
+  background:#fff;
+  border-color:#fff;
+}
+.fiuba-edition .login-link:hover svg { color:#0095db; }
+
+.fiuba-edition .menu-button {
+  border-color:rgba(255,255,255,.55);
+  background:rgba(255,255,255,.04);
+}
+.fiuba-edition .menu-button i { background:#fff; }
+
+@media (max-width:980px) {
+  .fiuba-edition .site-header { height:76px; }
+  .fiuba-edition .header-shell { height:73px; }
+  .fiuba-edition .brand-copy small {
+    display:flex;
+    color:#c5d8e7;
+    font-size:6px;
+    letter-spacing:.12em;
+  }
+  .fiuba-edition .site-header nav {
+    top:100%;
+    background:linear-gradient(120deg,#172858,#1a2b5e);
+    border-top-color:rgba(255,255,255,.16);
+  }
+  .fiuba-edition .site-header nav > :is(a,button) {
+    color:#d5e2ec;
+    border-bottom-color:rgba(255,255,255,.14);
+  }
+  .fiuba-edition .site-header nav > :is(a,button):hover,
+  .fiuba-edition .site-header nav > :is(a,button).active {
+    color:#fff;
+    background:rgba(0,149,219,.18);
+  }
+  .fiuba-edition .mobile-login { color:#fff !important; }
+}
+
+@media (max-width:560px) {
+  .fiuba-edition .site-header { height:74px; }
+  .fiuba-edition .header-shell { height:71px; }
+  .fiuba-edition .brand-copy strong { font-size:24px; }
+  .fiuba-edition .brand-copy small {
+    max-width:225px;
+    margin-top:5px;
+    font-size:5.5px;
+    letter-spacing:.09em;
+  }
+}
+
+.fiuba-edition .fiuba-overline { display:none; }
+/* Ajustes de interacción y legibilidad */
+.fiuba-edition .site-header {
+  transition:background .28s ease,box-shadow .28s ease,border-color .28s ease,backdrop-filter .28s ease;
+}
+.fiuba-edition .site-header.is-scrolled {
+  background:linear-gradient(105deg,rgba(23,40,88,.9) 0%,rgba(26,43,94,.88) 55%,rgba(22,79,131,.86) 100%);
+  border-bottom-color:rgba(0,159,233,.72);
+  box-shadow:0 12px 32px rgba(11,28,62,.2);
+  backdrop-filter:blur(13px) saturate(1.12);
+  -webkit-backdrop-filter:blur(13px) saturate(1.12);
+}
+
+.fiuba-edition .venue-card .button-light {
+  border-color:#f7a600;
+  background:#f7a600;
+  color:var(--navy);
+  box-shadow:0 12px 26px rgba(0,0,0,.16);
+}
+.fiuba-edition .venue-card .button-light::before { background:#ffd16f; }
+.fiuba-edition .venue-card .button-light:hover {
+  color:var(--navy);
+  border-color:#ffd16f;
+}
+.fiuba-edition .venue-card .button-light:focus-visible {
+  outline-color:rgba(247,166,0,.5);
+}
+
+.fiuba-edition .director-timeline article > div { min-width:0; }
+.fiuba-edition .director-timeline article h3 { overflow-wrap:anywhere; }
+.fiuba-edition .director-timeline article.current small,
+.fiuba-edition .director-timeline article.current p { color:#d5e3ee; }
+
+@media (max-width:1000px) {
+  .fiuba-edition .director-timeline article,
+  .fiuba-edition .director-timeline article.current {
+    grid-template-columns:112px minmax(0,1fr);
+    gap:8px 20px;
+    align-items:start;
+  }
+  .fiuba-edition .director-timeline article figure {
+    grid-row:1 / 3;
+    width:112px;
+    height:132px;
+  }
+  .fiuba-edition .director-timeline article > span,
+  .fiuba-edition .director-timeline article > div { grid-column:2; }
+  .fiuba-edition .director-timeline article > span {
+    align-self:end;
+    padding-top:3px;
+  }
+  .fiuba-edition .director-timeline article.current { padding:26px 24px; }
+  .fiuba-edition .director-timeline article h3 {
+    font-size:clamp(27px,4vw,31px);
+    line-height:1.02;
+  }
+}
+
+@media (max-width:560px) {
+  .fiuba-edition .director-timeline article,
+  .fiuba-edition .director-timeline article.current {
+    grid-template-columns:86px minmax(0,1fr);
+    gap:7px 15px;
+  }
+  .fiuba-edition .director-timeline article figure {
+    width:86px;
+    height:106px;
+  }
+  .fiuba-edition .director-timeline article.current { padding:22px 16px; }
+  .fiuba-edition .director-timeline article h3 { font-size:25px; }
+  .fiuba-edition .director-timeline article p {
+    font-size:12.5px;
+    line-height:1.62;
+  }
+}
+
+.fiuba-edition .site-header.is-scrolled {
+  background:linear-gradient(105deg,rgba(23,40,88,.97) 0%,rgba(26,43,94,.96) 55%,rgba(22,79,131,.95) 100%);
+  box-shadow:0 12px 32px rgba(11,28,62,.24);
+}
+/* Refinamientos de Archivo, mapas y superficies institucionales */
+.fiuba-edition .fiuba-home-hero {
+  background:
+    radial-gradient(ellipse at 7% 108%, transparent 0 31%, rgba(0, 149, 219, .12) 31.15% 31.45%, transparent 31.6% 43%, rgba(26, 43, 94, .07) 43.15% 43.4%, transparent 43.55%),
+    linear-gradient(90deg, rgba(26, 43, 94, .07) 1px, transparent 1px) 0 0 / 84px 84px,
+    linear-gradient(rgba(26, 43, 94, .07) 1px, transparent 1px) 0 0 / 84px 84px,
+    linear-gradient(125deg, #ecefef 0%, #f2f4f3 56%, #deedf2 100%);
+}
+
+.fiuba-edition .page-hero.archive-hero {
+  background:
+    linear-gradient(90deg, rgba(8, 28, 67, .96) 0%, rgba(12, 42, 85, .8) 52%, rgba(12, 42, 85, .38) 100%),
+    url('/choir/hall-overhead.webp') center 42% / cover no-repeat;
+  color: #fff;
+  border-bottom-color: #0095db;
+}
+
+.fiuba-edition .page-hero.archive-hero::after {
+  width: 100%;
+  background: linear-gradient(90deg, rgba(0, 149, 219, .14), transparent 58%);
+  clip-path: none;
+}
+
+.fiuba-edition .page-hero.archive-hero .page-hero-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .075) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .075) 1px, transparent 1px);
+}
+
+.fiuba-edition .page-hero.archive-hero h1 {
+  color: #fff;
+  text-shadow: 0 3px 24px rgba(0, 0, 0, .34);
+}
+
+.fiuba-edition .page-hero.archive-hero h1 em { color: #66d1f7; }
+.fiuba-edition .page-hero.archive-hero .section-index,
+.fiuba-edition .page-hero.archive-hero .eyebrow { color: #d9ebf4; }
+.fiuba-edition .page-hero.archive-hero .page-intro {
+  color: #f0f7fa;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, .35);
+}
+
+.fiuba-edition .archive-mosaic .media-caption {
+  color: #344d62;
+  font-weight: 500;
+}
+
+.fiuba-edition .collection-night .archive-mosaic .media-caption {
+  color: #e4eef5;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .38);
+}
+
+.fiuba-edition .venue-card .button-light::before { background: var(--navy); }
+.fiuba-edition .venue-card .button-light > span {
+  transition: transform .25s ease, color .25s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fiuba-edition .venue-card .button-light:hover {
+    color: #fff;
+    border-color: var(--navy);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px rgba(1, 14, 36, .24);
+  }
+
+  .fiuba-edition .venue-card .button-light:hover > span {
+    color: #70d5f8;
+    transform: translate(4px, -3px);
+  }
+}
+
+@media (max-width: 700px) {
+  .fiuba-edition .fiuba-home-hero {
+    background:
+      radial-gradient(ellipse at -12% 106%, transparent 0 28%, rgba(0, 149, 219, .12) 28.2% 28.7%, transparent 28.9% 41%, rgba(26, 43, 94, .07) 41.2% 41.6%, transparent 41.8%),
+      linear-gradient(90deg, rgba(26, 43, 94, .065) 1px, transparent 1px) 0 0 / 64px 64px,
+      linear-gradient(rgba(26, 43, 94, .065) 1px, transparent 1px) 0 0 / 64px 64px,
+      linear-gradient(135deg, #ecefef 0%, #f3f5f4 58%, #deedf2 100%);
+  }
+
+  .fiuba-edition .page-hero.archive-hero {
+    background:
+      linear-gradient(180deg, rgba(8, 28, 67, .93) 0%, rgba(8, 28, 67, .72) 100%),
+      url('/choir/hall-overhead.webp') center / cover no-repeat;
+  }
+}
+/* Portada fotográfica del Ciclo de Conciertos */
+.fiuba-edition main:has(.cycle-calendar) > .page-hero {
+  background:
+    linear-gradient(90deg, rgba(8, 28, 67, .96) 0%, rgba(12, 42, 85, .82) 52%, rgba(12, 42, 85, .42) 100%),
+    url('/choir/concerts/concert-38.webp') center 44% / cover no-repeat;
+  color: #fff;
+  border-bottom-color: #0095db;
+}
+
+.fiuba-edition main:has(.cycle-calendar) > .page-hero::after {
+  width: 100%;
+  background: linear-gradient(90deg, rgba(0, 149, 219, .13), transparent 60%);
+  clip-path: none;
+}
+
+.fiuba-edition main:has(.cycle-calendar) > .page-hero .page-hero-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .075) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .075) 1px, transparent 1px);
+}
+
+.fiuba-edition main:has(.cycle-calendar) > .page-hero h1 {
+  color: #fff;
+  text-shadow: 0 3px 24px rgba(0, 0, 0, .38);
+}
+
+.fiuba-edition main:has(.cycle-calendar) > .page-hero h1 em { color: #66d1f7; }
+.fiuba-edition main:has(.cycle-calendar) > .page-hero .section-index,
+.fiuba-edition main:has(.cycle-calendar) > .page-hero .eyebrow { color: #d9ebf4; }
+.fiuba-edition main:has(.cycle-calendar) > .page-hero .page-intro {
+  color: #f0f7fa;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, .38);
+}
+
+@media (max-width: 700px) {
+  .fiuba-edition main:has(.cycle-calendar) > .page-hero {
+    background:
+      linear-gradient(180deg, rgba(8, 28, 67, .93) 0%, rgba(8, 28, 67, .74) 100%),
+      url('/choir/concerts/concert-38.webp') center / cover no-repeat;
+  }
+}
+@media (max-width: 700px) {
+  .fiuba-edition main:has(.cycle-calendar) > .page-hero > *:not(.page-hero-grid) {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .fiuba-edition main:has(.cycle-calendar) > .page-hero h1 {
+    max-width: 100%;
+    font-size: clamp(48px, 14vw, 62px);
+    line-height: .9;
+  }
+
+  .fiuba-edition main:has(.cycle-calendar) > .page-hero h1 em {
+    font-size: .88em;
+  }
+
+  .fiuba-edition main:has(.cycle-calendar) > .page-hero .page-intro {
+    width: 100%;
+    max-width: 100%;
+    font-size: 18px;
+  }
+}
+/* Portada fotográfica de Agenda */
+.fiuba-edition main:has(.agenda-page) > .page-hero {
+  background:
+    linear-gradient(90deg, rgba(8, 28, 67, .96) 0%, rgba(12, 42, 85, .82) 52%, rgba(12, 42, 85, .42) 100%),
+    url('/choir/concerts/concert-19.webp') center 42% / cover no-repeat;
+  color: #fff;
+  border-bottom-color: #0095db;
+}
+
+.fiuba-edition main:has(.agenda-page) > .page-hero::after {
+  width: 100%;
+  background: linear-gradient(90deg, rgba(0, 149, 219, .13), transparent 60%);
+  clip-path: none;
+}
+
+.fiuba-edition main:has(.agenda-page) > .page-hero .page-hero-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .075) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .075) 1px, transparent 1px);
+}
+
+.fiuba-edition main:has(.agenda-page) > .page-hero h1 {
+  color: #fff;
+  text-shadow: 0 3px 24px rgba(0, 0, 0, .38);
+}
+
+.fiuba-edition main:has(.agenda-page) > .page-hero h1 em { color: #66d1f7; }
+.fiuba-edition main:has(.agenda-page) > .page-hero .section-index,
+.fiuba-edition main:has(.agenda-page) > .page-hero .eyebrow { color: #d9ebf4; }
+.fiuba-edition main:has(.agenda-page) > .page-hero .page-intro {
+  color: #f0f7fa;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, .38);
+}
+
+@media (max-width: 700px) {
+  .fiuba-edition main:has(.agenda-page) > .page-hero {
+    background:
+      linear-gradient(180deg, rgba(8, 28, 67, .93) 0%, rgba(8, 28, 67, .74) 100%),
+      url('/choir/concerts/concert-19.webp') center / cover no-repeat;
+  }
+
+  .fiuba-edition main:has(.agenda-page) > .page-hero > *:not(.page-hero-grid) {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .fiuba-edition main:has(.agenda-page) > .page-hero h1 {
+    max-width: 100%;
+    font-size: clamp(48px, 14vw, 62px);
+    line-height: .9;
+  }
+
+  .fiuba-edition main:has(.agenda-page) > .page-hero .page-intro {
+    width: 100%;
+    max-width: 100%;
+    font-size: 18px;
+  }
+}
+/* Estado activo del acceso al panel */
+.fiuba-edition .login-link:hover,
+.fiuba-edition .login-link:focus-visible {
+  color: #fff;
+  background: linear-gradient(115deg, #0095db 0%, #087bbb 58%, #145f9e 100%);
+  border-color: #69d2f7;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 149, 219, .3), inset 0 0 0 1px rgba(255, 255, 255, .08);
+}
+
+.fiuba-edition .login-link:hover svg,
+.fiuba-edition .login-link:focus-visible svg {
+  color: #ffd166;
+  transform: translateX(3px);
+}
+/* Portada fotográfica de El Coro */
+.fiuba-edition main:has(.editorial-split) > .page-hero {
+  background:
+    linear-gradient(90deg, rgba(8, 28, 67, .96) 0%, rgba(12, 42, 85, .82) 52%, rgba(12, 42, 85, .42) 100%),
+    url('/choir/concerts/concert-28.webp') center 42% / cover no-repeat;
+  color: #fff;
+  border-bottom-color: #0095db;
+}
+
+.fiuba-edition main:has(.editorial-split) > .page-hero::after {
+  width: 100%;
+  background: linear-gradient(90deg, rgba(0, 149, 219, .13), transparent 60%);
+  clip-path: none;
+}
+
+.fiuba-edition main:has(.editorial-split) > .page-hero .page-hero-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .075) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .075) 1px, transparent 1px);
+}
+
+.fiuba-edition main:has(.editorial-split) > .page-hero h1 {
+  color: #fff;
+  text-shadow: 0 3px 24px rgba(0, 0, 0, .38);
+}
+
+.fiuba-edition main:has(.editorial-split) > .page-hero h1 em { color: #66d1f7; }
+.fiuba-edition main:has(.editorial-split) > .page-hero .section-index,
+.fiuba-edition main:has(.editorial-split) > .page-hero .eyebrow { color: #d9ebf4; }
+.fiuba-edition main:has(.editorial-split) > .page-hero .page-intro {
+  color: #f0f7fa;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, .38);
+}
+
+@media (max-width: 700px) {
+  .fiuba-edition main:has(.editorial-split) > .page-hero {
+    background:
+      linear-gradient(180deg, rgba(8, 28, 67, .93) 0%, rgba(8, 28, 67, .74) 100%),
+      url('/choir/concerts/concert-28.webp') center / cover no-repeat;
+  }
+
+  .fiuba-edition main:has(.editorial-split) > .page-hero > *:not(.page-hero-grid) {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .fiuba-edition main:has(.editorial-split) > .page-hero h1 {
+    max-width: 100%;
+    font-size: clamp(44px, 13vw, 60px);
+    line-height: .92;
+  }
+
+  .fiuba-edition main:has(.editorial-split) > .page-hero .page-intro {
+    width: 100%;
+    max-width: 100%;
+    font-size: 18px;
+  }
+}
+/* Interacción de los valores del Coro */
+.fiuba-edition .values-band article {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition: transform .38s cubic-bezier(.2, .75, .2, 1), background-color .35s ease, box-shadow .38s ease;
+}
+
+.fiuba-edition .values-band article::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 149, 219, .3), rgba(55, 182, 225, .08));
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+
+.fiuba-edition .values-band article::after {
+  content: "";
+  position: absolute;
+  left: clamp(25px, 4vw, 60px);
+  right: clamp(25px, 4vw, 60px);
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #f7a600, #69d2f7);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .42s cubic-bezier(.2, .75, .2, 1);
+}
+
+.fiuba-edition .values-band article > * {
+  position: relative;
+  z-index: 1;
+}
+
+.fiuba-edition .values-band article span,
+.fiuba-edition .values-band article h3,
+.fiuba-edition .values-band article p {
+  transition: color .3s ease, transform .38s cubic-bezier(.2, .75, .2, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fiuba-edition .values-band article:hover {
+    z-index: 2;
+    transform: translateY(-7px);
+    background-color: rgba(0, 149, 219, .12);
+    box-shadow: 0 18px 36px rgba(1, 14, 36, .24), inset 0 1px rgba(255, 255, 255, .12);
+  }
+
+  .fiuba-edition .values-band article:hover::before { opacity: 1; }
+  .fiuba-edition .values-band article:hover::after { transform: scaleX(1); }
+  .fiuba-edition .values-band article:hover span {
+    color: #ffd166;
+    transform: translateY(-3px);
+  }
+  .fiuba-edition .values-band article:hover h3 {
+    color: #fff;
+    transform: translateX(8px);
+  }
+  .fiuba-edition .values-band article:hover p {
+    color: #d9edf6;
+    transform: translateX(4px);
+  }
+}
+/* Memoria visual de Les Luthiers y década del noventa */
+.fiuba-edition .luthiers-photo {
+  width: min(100%, 420px);
+  margin: 28px 0 34px;
+  padding: 8px 8px 30px;
+  background: #f4f0e7;
+  box-shadow: 0 20px 42px rgba(0, 8, 25, .32);
+  transform: rotate(-1.1deg);
+  transition: transform .4s cubic-bezier(.2, .75, .2, 1), box-shadow .4s ease;
+}
+
+.fiuba-edition .luthiers-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: contrast(1.04);
+}
+
+.fiuba-edition .luthiers-photo figcaption {
+  margin: 12px 5px -18px;
+  color: #405568;
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+}
+
+.fiuba-edition .legacy-heading::before {
+  content: "90";
+  display: block;
+  margin: 0 0 54px;
+  color: rgba(247, 166, 0, .2);
+  font-family: var(--font-display);
+  font-size: clamp(120px, 15vw, 230px);
+  font-weight: 500;
+  line-height: .7;
+  letter-spacing: -.08em;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fiuba-edition .luthiers-photo:hover {
+    transform: rotate(0) translateY(-6px);
+    box-shadow: 0 28px 54px rgba(0, 8, 25, .42);
+  }
+}
+
+@media (max-width: 850px) {
+  .fiuba-edition .luthiers-photo { width: min(100%, 390px); }
+  .fiuba-edition .legacy-heading::before { margin-bottom: 42px; }
+}
+
+@media (max-width: 560px) {
+  .fiuba-edition .luthiers-photo {
+    width: min(88%, 340px);
+    margin: 26px auto 32px;
+    padding: 6px 6px 28px;
+  }
+
+  .fiuba-edition .legacy-heading::before {
+    margin-bottom: 34px;
+    font-size: 120px;
+  }
+}
+/* Confirmación de inscripción */
+.fiuba-edition .application-success-backdrop {
+  z-index: 1200;
+  background: rgba(9, 25, 55, .82);
+  backdrop-filter: blur(10px);
+}
+
+.fiuba-edition .application-success-modal {
+  width: min(600px, 100%);
+  border-top-color: #f7a600;
+  background:
+    radial-gradient(circle at 92% 5%, rgba(0, 149, 219, .13), transparent 32%),
+    linear-gradient(145deg, #f7f4ec, #e8edf0);
+}
+
+.fiuba-edition .application-success-modal h2 {
+  font-size: clamp(36px, 5vw, 54px);
+}
+
+.fiuba-edition .application-success-id {
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  width: min(330px, 100%);
+  margin: 27px auto 8px;
+  padding: 21px 25px;
+  border: 1px solid rgba(25, 52, 103, .18);
+  border-left: 3px solid #f7a600;
+  background: rgba(255, 255, 255, .62);
+}
+
+.fiuba-edition .application-success-id small {
+  color: #607486;
+  font-size: 8px;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+}
+
+.fiuba-edition .application-success-id strong {
+  color: var(--navy);
+  font-family: var(--font-display);
+  font-size: clamp(31px, 5vw, 42px);
+  font-weight: 600;
+  letter-spacing: .04em;
+}
+
+.fiuba-edition .application-success-modal .application-success-note {
+  margin-top: 18px;
+  font-size: 13px;
+}
+
+.fiuba-edition .application-success-modal .button {
+  min-width: 190px;
+  margin-top: 4px;
+}
+
+.fiuba-edition .join-form[aria-busy="true"] .button-submit {
+  box-shadow: none;
+}
+
+.fiuba-edition .application-processing-backdrop {
+  z-index: 1250;
+  cursor: progress;
+  background: rgba(6, 21, 48, .88);
+  backdrop-filter: blur(12px);
+}
+
+.fiuba-edition .application-processing-modal {
+  width: min(560px, 100%);
+  border-top-color: #0095db;
+  background:
+    radial-gradient(circle at 88% 7%, rgba(0, 149, 219, .17), transparent 34%),
+    linear-gradient(145deg, #f7f4ec, #e5ecf0);
+}
+
+.fiuba-edition .application-processing-modal .dashboard-notice-mark i {
+  background: #0095db;
+}
+
+.fiuba-edition .application-processing-modal h2 {
+  font-size: clamp(35px, 5vw, 52px);
+}
+
+.fiuba-edition .application-processing-warning {
+  display: block;
+  margin-top: 22px;
+  color: var(--navy);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+}
+
+.fiuba-edition .application-processing-modal > small {
+  display: block;
+  margin-top: 8px;
+  color: #607486;
+  font-size: 12px;
+}
+
+@media (max-width: 560px) {
+  .fiuba-edition .application-success-backdrop,
+  .fiuba-edition .application-processing-backdrop { padding: 14px; }
+  .fiuba-edition .application-success-modal {
+    max-height: calc(100dvh - 28px);
+    padding: 34px 21px 28px;
+  }
+  .fiuba-edition .application-processing-modal {
+    max-height: calc(100dvh - 28px);
+    padding: 34px 21px 30px;
+  }
+  .fiuba-edition .application-success-modal h2 { font-size: 38px; }
+  .fiuba-edition .application-processing-modal h2 { font-size: 36px; }
+  .fiuba-edition .application-success-id { margin-top: 22px; padding: 17px 18px; }
+  .fiuba-edition .application-success-modal .button { width: 100%; }
+}
+
+/* Campo astral institucional de la portada */
+.fiuba-edition .fiuba-hero-copy {
+  isolation:isolate;
+  overflow:hidden;
+  padding:clamp(36px,3.8vw,58px);
+  border:1px solid rgba(112,210,246,.24);
+  border-left:4px solid #f7a600;
+  border-radius:2px 48px 2px 2px;
+  background:radial-gradient(circle at 83% 16%,rgba(112,210,246,.24) 0,rgba(112,210,246,.08) 18%,transparent 38%),radial-gradient(circle at 12% 92%,rgba(0,149,219,.22) 0,transparent 38%),radial-gradient(circle at 72% 88%,rgba(91,92,177,.2) 0,transparent 36%),linear-gradient(138deg,#061530 0%,#102958 48%,#07547a 100%);
+  box-shadow:0 28px 64px rgba(5,22,54,.26),inset 0 1px 0 rgba(255,255,255,.1);
+}
+.fiuba-edition .fiuba-hero-copy::before {
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:0;
+  pointer-events:none;
+  opacity:.85;
+  background:radial-gradient(circle at 14% 20%,rgba(255,255,255,.9) 0 1px,transparent 1.5px),radial-gradient(circle at 32% 12%,rgba(112,210,246,.8) 0 1px,transparent 1.8px),radial-gradient(circle at 67% 25%,rgba(255,255,255,.7) 0 1px,transparent 1.6px),radial-gradient(circle at 89% 46%,rgba(247,166,0,.8) 0 1.2px,transparent 2px),radial-gradient(circle at 74% 73%,rgba(255,255,255,.65) 0 1px,transparent 1.7px),radial-gradient(circle at 44% 86%,rgba(112,210,246,.75) 0 1px,transparent 1.8px),radial-gradient(ellipse at 108% 112%,transparent 0 41%,rgba(112,210,246,.18) 41.2% 41.55%,transparent 41.8% 54%,rgba(255,255,255,.08) 54.2% 54.45%,transparent 54.7%);
+}
+.fiuba-edition .fiuba-hero-copy::after {
+  content:"";
+  position:absolute;
+  top:27px;
+  right:30px;
+  width:94px;
+  height:2px;
+  background:linear-gradient(90deg,transparent,#f7a600);
+  box-shadow:0 0 14px rgba(247,166,0,.38);
+}
+.fiuba-edition .fiuba-hero-copy h1 { color:#f8fbff; text-shadow:0 5px 24px rgba(0,0,0,.22); }
+.fiuba-edition .fiuba-hero-copy h1 span { color:#70d5f8; }
+.fiuba-edition .fiuba-hero-copy .fiuba-overline { color:#b9cad9; }
+.fiuba-edition .fiuba-hero-copy .fiuba-hero-motto { color:#e4f3fa; }
+.fiuba-edition .fiuba-hero-copy .fiuba-hero-lead { color:#c4d5e3; }
+@media (max-width:980px) {
+  .fiuba-edition .fiuba-hero-copy { max-width:760px; }
+}
+@media (max-width:560px) {
+  .fiuba-edition .fiuba-hero-copy {
+    padding:34px 23px 31px;
+    border-radius:2px 32px 2px 2px;
+    box-shadow:0 20px 44px rgba(5,22,54,.24);
+  }
+  .fiuba-edition .fiuba-hero-copy::after { top:22px; right:20px; width:58px; }
+}

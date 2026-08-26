@@ -20,3 +20,24 @@ test("la ruta del panel informa que estará disponible próximamente", async () 
   assert.match(notice, /próxima versión/i);
   assert.match(notice, /router\.replace\("\/"\)/i);
 });
+test("la convocatoria guarda únicamente mediante Google Apps Script", async () => {
+  const route = await readFile(new URL("../app/api/join/route.ts", import.meta.url), "utf8");
+  const form = await readFile(new URL("../app/contacto/JoinForm.tsx", import.meta.url), "utf8");
+  const helper = await readFile(new URL("../lib/applications.ts", import.meta.url), "utf8");
+  assert.match(route, /process\.env\.APPS_SCRIPT_URL/);
+  assert.doesNotMatch(route, /EMAILJS/i);
+  assert.match(form, /saveApplication\(payload\)/);
+  assert.match(form, /applicationId/);
+  assert.match(form, /application-processing-backdrop/);
+  assert.match(helper, /\/api\/join/);
+});
+
+test("Code.gs genera IDs seguros y configura el flujo de estados", async () => {
+  const script = await readFile(new URL("../google-apps-script/Code.gs", import.meta.url), "utf8");
+  assert.match(script, /function doPost\(e\)/);
+  assert.match(script, /LockService\.getScriptLock\(\)/);
+  assert.match(script, /CF-/);
+  assert.match(script, /Pendiente de audición/);
+  assert.match(script, /setDataValidation/);
+  assert.match(script, /processEmailQueue_\(\)/);
+});

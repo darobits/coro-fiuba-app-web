@@ -17,7 +17,7 @@ const sans = localFont({
   display: "swap",
 });
 
-export const viewport: Viewport = { themeColor: "#010e24", colorScheme: "light dark" };
+export const viewport: Viewport = { themeColor: "#1a2b5e", colorScheme: "light" };
 
 function getMetadataBase() {
   const explicitUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
@@ -58,5 +58,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="es"><head><link rel="icon" href="/favicon-32x32.png?v=2" sizes="32x32" type="image/png" /><link rel="shortcut icon" href="/favicon-32x32.png?v=2" type="image/png" /><link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" sizes="180x180" /></head><body className={`${display.variable} ${sans.variable}`}>{children}</body></html>;
+  return <html lang="es"><head><link rel="icon" href="/favicon-32x32.png?v=2" sizes="32x32" type="image/png" /><link rel="shortcut icon" href="/favicon-32x32.png?v=2" type="image/png" /><link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" sizes="180x180" /></head><body className={`${display.variable} ${sans.variable} fiuba-edition`}>{children}</body></html>;
 }
