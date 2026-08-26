@@ -29,8 +29,10 @@ test("la convocatoria guarda únicamente mediante Google Apps Script", async () 
   assert.match(route, /AbortSignal\.timeout\(55_000\)/);
   assert.doesNotMatch(route, /EMAILJS/i);
   assert.match(form, /saveApplication\(payload\)/);
-  assert.match(form, /applicationId/);
   assert.match(form, /application-processing-backdrop/);
+  assert.match(form, /application-success-check/);
+  assert.match(form, /Mensaje recibido/);
+  assert.doesNotMatch(form, /Número de inscripción/i);
   assert.match(helper, /\/api\/join/);
 });
 

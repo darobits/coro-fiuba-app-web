@@ -25,14 +25,12 @@ export default function JoinForm() {
   const [errors, setErrors] = useState<Errors>({});
   const [submissionState, setSubmissionState] = useState<SubmissionState>("idle");
   const [serverError, setServerError] = useState("");
-  const [applicationId, setApplicationId] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const sending = submissionState === "submitting";
 
   const closeSuccess = useCallback(() => {
     setSubmissionState("idle");
-    setApplicationId("");
     window.requestAnimationFrame(() => formRef.current?.querySelector<HTMLInputElement>("[name=\"fullName\"]")?.focus());
   }, []);
 
@@ -92,11 +90,10 @@ export default function JoinForm() {
 
     setSubmissionState("submitting");
     try {
-      const result = await saveApplication(payload);
+      await saveApplication(payload);
       form.reset();
       setErrors({});
       setServerError("");
-      setApplicationId(result.id);
       setSubmissionState("success");
     } catch (error) {
       setSubmissionState("error");
@@ -126,6 +123,7 @@ export default function JoinForm() {
       {serverError && <div className="form-message error" role="alert">{serverError}</div>}
     </form></section>
     <section className="locations-section"><header><p className="section-index">Dónde encontrarnos</p><h2>Dos sedes.<br /><em>Una comunidad.</em></h2><p>Los ensayos regulares se realizan en Paseo Colón. El Ciclo de Conciertos Corales y presentaciones como La Noche de los Museos tienen lugar en Las Heras.</p></header><div className="locations-grid"><article><div className="location-copy"><span>01</span><div><small>Conciertos y presentaciones</small><h3>Sede Las Heras</h3><p>Av. Las Heras 2214 · Ciudad de Buenos Aires</p></div></div><div className="map-frame"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.6210611631477!2d-58.3963223!3d-34.588453699999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcca98ed16e55b%3A0xbbef040fda1e66bd!2sUBA%2C%20Facultad%20de%20Ingenier%C3%ADa%20-%20Sede%20Las%20Heras!5e0!3m2!1ses!2sar!4v1787329063865!5m2!1ses!2sar" title="Mapa de la sede Las Heras de la Facultad de Ingeniería UBA" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen /></div></article><article><div className="location-copy"><span>02</span><div><small>Ensayos de los viernes</small><h3>Sede Paseo Colón</h3><p>Av. Paseo Colón 850 · Ciudad de Buenos Aires</p></div></div><div className="map-frame"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.469098129668!2d-58.37080352445762!3d-34.61758407294931!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcca98f0058631%3A0x98688c83fc192f2e!2sUBA%2C%20Facultad%20de%20Ingenier%C3%ADa%20-%20Sede%20Paseo%20Col%C3%B3n!5e0!3m2!1ses!2sar!4v1787329094480!5m2!1ses!2sar" title="Mapa de la sede Paseo Colón de la Facultad de Ingeniería UBA" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen /></div></article></div></section>
-    {sending && <div className="dashboard-notice-backdrop application-processing-backdrop" role="presentation"><section className="dashboard-notice application-processing-modal" role="status" aria-live="polite" aria-busy="true"><span className="dashboard-notice-kicker">Procesando solicitud</span><div className="dashboard-notice-mark" aria-hidden="true"><i /><i /><i /><i /><i /></div><h2>Estamos registrando<br /><em>tu solicitud.</em></h2><p>Guardamos tus datos y preparamos el correo de confirmación.</p><strong className="application-processing-warning">No cierres esta ventana.</strong><small>Esto suele demorar solo unos segundos.</small></section></div>}    {submissionState === "success" && applicationId && <div className="dashboard-notice-backdrop application-success-backdrop" role="presentation" onMouseDown={event => { if (event.target === event.currentTarget) closeSuccess(); }}><section className="dashboard-notice application-success-modal" role="dialog" aria-modal="true" aria-labelledby="application-success-title" aria-describedby="application-success-copy"><span className="dashboard-notice-kicker">Inscripción recibida</span><div className="dashboard-notice-mark" aria-hidden="true"><i /><i /><i /><i /><i /></div><h2 id="application-success-title">¡Gracias por contactarte<br /><em>con el Coro FIUBA!</em></h2><p id="application-success-copy">Tus datos fueron enviados correctamente.</p><div className="application-success-id"><small>Número de inscripción</small><strong>{applicationId}</strong></div><p className="application-success-note">Nos pondremos en contacto con vos una vez que revisemos la información.</p><button ref={closeButtonRef} className="button button-blue" type="button" onClick={closeSuccess}>Cerrar</button></section></div>}
+    {sending && <div className="dashboard-notice-backdrop application-processing-backdrop" role="presentation"><section className="dashboard-notice application-processing-modal" role="status" aria-live="polite" aria-busy="true"><span className="dashboard-notice-kicker">Enviando mensaje</span><div className="dashboard-notice-mark" aria-hidden="true"><i /><i /><i /><i /><i /></div><h2>Estamos enviando<br /><em>tu mensaje.</em></h2><strong className="application-processing-warning">No cierres esta ventana.</strong><small>Esto suele demorar solo unos segundos.</small></section></div>}
+    {submissionState === "success" && <div className="dashboard-notice-backdrop application-success-backdrop" role="presentation" onMouseDown={event => { if (event.target === event.currentTarget) closeSuccess(); }}><section className="dashboard-notice application-success-modal" role="dialog" aria-modal="true" aria-labelledby="application-success-title" aria-describedby="application-success-copy"><span className="dashboard-notice-kicker">Mensaje recibido</span><div className="application-success-check" aria-hidden="true"><span /></div><h2 id="application-success-title">¡Gracias por contactarte<br /><em>con el Coro FIUBA!</em></h2><p id="application-success-copy">Recibimos tu mensaje correctamente.</p><p className="application-success-note">Nos pondremos en contacto con vos a la brevedad.</p><button ref={closeButtonRef} className="button button-blue" type="button" onClick={closeSuccess}>Cerrar</button></section></div>}
   </>;
 }

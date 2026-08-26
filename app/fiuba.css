@@ -1332,7 +1332,7 @@ body.fiuba-edition {
     font-size: 120px;
   }
 }
-/* Confirmación de inscripción */
+/* Confirmación del formulario de contacto */
 .fiuba-edition .application-success-backdrop {
   z-index: 1200;
   background: rgba(9, 25, 55, .82);
@@ -1341,44 +1341,38 @@ body.fiuba-edition {
 
 .fiuba-edition .application-success-modal {
   width: min(600px, 100%);
-  border-top-color: #f7a600;
+  border-top-color: #2f9b68;
   background:
-    radial-gradient(circle at 92% 5%, rgba(0, 149, 219, .13), transparent 32%),
+    radial-gradient(circle at 92% 5%, rgba(47, 155, 104, .15), transparent 32%),
     linear-gradient(145deg, #f7f4ec, #e8edf0);
+}
+
+.fiuba-edition .application-success-modal .dashboard-notice-kicker {
+  color: #247a54;
 }
 
 .fiuba-edition .application-success-modal h2 {
   font-size: clamp(36px, 5vw, 54px);
 }
 
-.fiuba-edition .application-success-id {
+.fiuba-edition .application-success-check {
   display: grid;
-  justify-items: center;
-  gap: 7px;
-  width: min(330px, 100%);
-  margin: 27px auto 8px;
-  padding: 21px 25px;
-  border: 1px solid rgba(25, 52, 103, .18);
-  border-left: 3px solid #f7a600;
-  background: rgba(255, 255, 255, .62);
+  place-items: center;
+  width: 68px;
+  height: 68px;
+  margin: 22px auto 26px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #3db17c, #21845a);
+  box-shadow: 0 14px 30px rgba(32, 132, 89, .25), inset 0 1px 0 rgba(255, 255, 255, .35);
 }
 
-.fiuba-edition .application-success-id small {
-  color: #607486;
-  font-size: 8px;
-  font-weight: 750;
-  text-transform: uppercase;
-  letter-spacing: .16em;
+.fiuba-edition .application-success-check span {
+  width: 17px;
+  height: 31px;
+  border-right: 4px solid #fff;
+  border-bottom: 4px solid #fff;
+  transform: translateY(-3px) rotate(45deg);
 }
-
-.fiuba-edition .application-success-id strong {
-  color: var(--navy);
-  font-family: var(--font-display);
-  font-size: clamp(31px, 5vw, 42px);
-  font-weight: 600;
-  letter-spacing: .04em;
-}
-
 .fiuba-edition .application-success-modal .application-success-note {
   margin-top: 18px;
   font-size: 13px;
@@ -1446,7 +1440,6 @@ body.fiuba-edition {
   }
   .fiuba-edition .application-success-modal h2 { font-size: 38px; }
   .fiuba-edition .application-processing-modal h2 { font-size: 36px; }
-  .fiuba-edition .application-success-id { margin-top: 22px; padding: 17px 18px; }
   .fiuba-edition .application-success-modal .button { width: 100%; }
 }
 
