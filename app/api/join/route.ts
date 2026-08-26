@@ -1,5 +1,9 @@
 import { isValidEmail } from "@/lib/validation";
 
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+export const maxDuration = 60;
+
 const VOICE_OPTIONS = new Set(["Soprano", "Contralto", "Tenor", "Bajo", "No estoy seguro/a"]);
 const EXPERIENCE_OPTIONS = new Set(["Sin experiencia", "Algo de experiencia", "Experiencia coral"]);
 const SEND_ERROR = "No pudimos enviar tus datos en este momento. Por favor, intentá nuevamente.";
@@ -39,7 +43,7 @@ async function saveInGoogleSheets(payload: Record<string, string | number | bool
       body: JSON.stringify(payload),
       cache: "no-store",
       redirect: "follow",
-      signal: AbortSignal.timeout(20_000),
+      signal: AbortSignal.timeout(55_000),
     });
   } catch {
     return { response: Response.json({ success: false, message: SEND_ERROR }, { status: 502 }) };
@@ -57,6 +61,14 @@ async function saveInGoogleSheets(payload: Record<string, string | number | bool
   }
 
   return { result: { success: true as const, id: result.id, message: result.message || "Inscripción registrada correctamente" } };
+}
+
+export async function GET() {
+  const configured = Boolean(process.env.APPS_SCRIPT_URL?.trim());
+  return Response.json(
+    { success: configured, service: "Google Apps Script", configured },
+    { status: configured ? 200 : 503, headers: { "cache-control": "no-store" } },
+  );
 }
 
 export async function POST(request: Request) {

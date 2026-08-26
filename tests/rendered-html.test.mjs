@@ -25,6 +25,8 @@ test("la convocatoria guarda únicamente mediante Google Apps Script", async () 
   const form = await readFile(new URL("../app/contacto/JoinForm.tsx", import.meta.url), "utf8");
   const helper = await readFile(new URL("../lib/applications.ts", import.meta.url), "utf8");
   assert.match(route, /process\.env\.APPS_SCRIPT_URL/);
+  assert.match(route, /maxDuration = 60/);
+  assert.match(route, /AbortSignal\.timeout\(55_000\)/);
   assert.doesNotMatch(route, /EMAILJS/i);
   assert.match(form, /saveApplication\(payload\)/);
   assert.match(form, /applicationId/);
