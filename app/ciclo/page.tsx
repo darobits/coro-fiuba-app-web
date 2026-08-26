@@ -3,7 +3,7 @@ import SiteFooter from "@/app/components/SiteFooter";
 import SiteHeader from "@/app/components/SiteHeader";
 import { pageMetadata } from "@/lib/metadata";
 
-export const metadata = pageMetadata("Ciclo de conciertos", "Historia, fechas y sede del Ciclo de Conciertos organizado por el Coro FIUBA.");
+export const metadata = pageMetadata("Ciclo de conciertos", "Historia, fechas y sede del Ciclo de Conciertos organizado por el Coro FIUBA.", "/ciclo");
 
 export default function CyclePage() {
   return <main><SiteHeader /><PageHero index="02 — Ciclo de conciertos" eyebrow="Una tradición desde 1995" title="La facultad" italic="abre sus puertas." intro="Encuentros anuales que reúnen a coros del ámbito cultural y universitario en la sede Las Heras." />

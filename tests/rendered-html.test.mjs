@@ -13,6 +13,18 @@ test("genera una salida nativa de Next.js compatible con Vercel", async () => {
   assert.ok(appPaths["/login/page"]);
 });
 
+test("el SEO usa el dominio canónico y publica sitemap y robots", async () => {
+  const site = await readFile(new URL("../lib/site.ts", import.meta.url), "utf8");
+  const sitemap = await readFile(new URL("../app/sitemap.ts", import.meta.url), "utf8");
+  const robots = await readFile(new URL("../app/robots.ts", import.meta.url), "utf8");
+  assert.match(site, /https:\/\/www\.corofiuba\.com\.ar/);
+  assert.match(sitemap, /\/el-coro/);
+  assert.match(sitemap, /\/agenda/);
+  assert.match(sitemap, /\/archivo/);
+  assert.doesNotMatch(sitemap, /\/login/);
+  assert.match(robots, /\/sitemap\.xml/);
+  assert.match(robots, /\/login/);
+});
 test("la ruta del panel informa que estará disponible próximamente", async () => {
   const page = await readFile(new URL("../app/login/page.tsx", import.meta.url), "utf8");
   const notice = await readFile(new URL("../app/components/DashboardNotice.tsx", import.meta.url), "utf8");

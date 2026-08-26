@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 import "./fiuba.css";
 
@@ -20,22 +21,14 @@ const sans = localFont({
 
 export const viewport: Viewport = { themeColor: "#1a2b5e", colorScheme: "light" };
 
-function getMetadataBase() {
-  const explicitUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-  if (explicitUrl) return new URL(explicitUrl);
-
-  const vercelHost = process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL;
-  return new URL(vercelHost ? `https://${vercelHost}` : "http://localhost:3000");
-}
-
-const metadataBase = getMetadataBase();
 const title = "Coro FIUBA — Ingeniería en armonía";
 const description = "Coro de la Facultad de Ingeniería de la Universidad de Buenos Aires. Conocé nuestra actividad y sumate a cantar.";
 
 export const metadata: Metadata = {
-  metadataBase,
+  metadataBase: new URL(SITE_URL),
   title,
   description,
+  alternates: { canonical: "/" },
   applicationName: "Coro FIUBA",
   manifest: "/site.webmanifest",
   icons: {
@@ -52,6 +45,7 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     description,
+    url: "/",
     images: [{ url: "/logo-fiuba.png", width: 1254, height: 1254, alt: "Logo del Coro FIUBA" }],
     type: "website",
   },

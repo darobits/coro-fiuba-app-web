@@ -3,5 +3,5 @@ import SiteHeader from "@/app/components/SiteHeader";
 import { pageMetadata } from "@/lib/metadata";
 import AgendaContent from "./AgendaContent";
 
-export const metadata = pageMetadata("Agenda", "Anuncios, conciertos y novedades del Coro FIUBA.");
+export const metadata = pageMetadata("Agenda", "Anuncios, conciertos y novedades del Coro FIUBA.", "/agenda");
 export default function AgendaPage() { return <main><SiteHeader /><AgendaContent /><SiteFooter /></main>; }

@@ -3,7 +3,7 @@ import SiteFooter from "@/app/components/SiteFooter";
 import SiteHeader from "@/app/components/SiteHeader";
 import { pageMetadata } from "@/lib/metadata";
 
-export const metadata = pageMetadata("El coro", "Conocé la historia, las direcciones, el repertorio y la comunidad del Coro FIUBA desde la década del 60.");
+export const metadata = pageMetadata("El coro", "Conocé la historia, las direcciones, el repertorio y la comunidad del Coro FIUBA desde la década del 60.", "/el-coro");
 
 export default function ChoirPage() {
   return <main><SiteHeader /><PageHero index="01 — El coro" eyebrow="Muchas voces, una obra" title="Respirar juntos." italic="Construir sonido." intro="Un punto de encuentro entre la disciplina de la ingeniería y la sensibilidad de la música coral." />
