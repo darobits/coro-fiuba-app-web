@@ -24,6 +24,8 @@ test("el SEO usa el dominio canónico y publica sitemap y robots", async () => {
   assert.match(sitemap, /\/el-coro/);
   assert.match(sitemap, /\/agenda/);
   assert.match(sitemap, /\/archivo/);
+  assert.match(sitemap, /lastModified/);
+  assert.match(sitemap, /2026-08-27/);
   assert.doesNotMatch(sitemap, /\/login/);
   assert.match(robots, /\/sitemap\.xml/);
   assert.match(robots, /\/login/);
