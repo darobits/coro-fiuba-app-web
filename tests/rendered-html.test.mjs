@@ -28,6 +28,9 @@ test("el SEO usa el dominio canónico y publica sitemap y robots", async () => {
   assert.match(robots, /\/login/);
   assert.match(layout, /Coro de la Facultad de Ingeniería UBA/);
   assert.match(layout, /max-image-preview/);
+  assert.match(layout, /favicon\.ico/);
+  assert.match(layout, /android-chrome-192x192\.png/);
+  assert.doesNotMatch(layout, /favicon[^"']*\?v=/);
   assert.match(structuredData, /"WebSite"/);
   assert.match(structuredData, /"MusicGroup"/);
   assert.match(structuredData, /"MusicEvent"/);
