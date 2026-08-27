@@ -20,6 +20,7 @@ export function SiteStructuredData() {
         alternateName: "Coro de la Facultad de Ingeniería UBA",
         inLanguage: "es-AR",
         publisher: { "@id": organizationId },
+        about: { "@id": organizationId },
       },
       {
         "@type": "MusicGroup",
@@ -51,8 +52,17 @@ export function SiteStructuredData() {
         },
         parentOrganization: {
           "@type": "CollegeOrUniversity",
+          "@id": "https://www.fi.uba.ar/#organization",
           name: "Facultad de Ingeniería de la Universidad de Buenos Aires",
+          alternateName: "FIUBA",
           url: "https://www.fi.uba.ar/",
+          parentOrganization: {
+            "@type": "CollegeOrUniversity",
+            "@id": "https://www.uba.ar/#organization",
+            name: "Universidad de Buenos Aires",
+            alternateName: "UBA",
+            url: "https://www.uba.ar/",
+          },
         },
         contactPoint: {
           "@type": "ContactPoint",

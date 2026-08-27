@@ -34,6 +34,10 @@ test("el SEO usa el dominio canónico y publica sitemap y robots", async () => {
   assert.match(structuredData, /instagram\.com\/corofiuba/);
   assert.match(structuredData, /youtube\.com\/@CoroFIUBA/);
   assert.match(structuredData, /fi\.uba\.ar\/bienestar\/cultura\/coro/);
+  assert.match(structuredData, /Facultad de Ingeniería de la Universidad de Buenos Aires/);
+  assert.match(structuredData, /Universidad de Buenos Aires/);
+  assert.match(structuredData, /alternateName: "FIUBA"/);
+  assert.match(structuredData, /alternateName: "UBA"/);
 });
 test("la ruta del panel informa que estará disponible próximamente", async () => {
   const page = await readFile(new URL("../app/login/page.tsx", import.meta.url), "utf8");
