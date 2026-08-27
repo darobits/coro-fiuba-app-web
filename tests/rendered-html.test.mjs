@@ -17,6 +17,8 @@ test("el SEO usa el dominio canónico y publica sitemap y robots", async () => {
   const site = await readFile(new URL("../lib/site.ts", import.meta.url), "utf8");
   const sitemap = await readFile(new URL("../app/sitemap.ts", import.meta.url), "utf8");
   const robots = await readFile(new URL("../app/robots.ts", import.meta.url), "utf8");
+  const layout = await readFile(new URL("../app/layout.tsx", import.meta.url), "utf8");
+  const structuredData = await readFile(new URL("../app/components/StructuredData.tsx", import.meta.url), "utf8");
   assert.match(site, /https:\/\/www\.corofiuba\.com\.ar/);
   assert.match(sitemap, /\/el-coro/);
   assert.match(sitemap, /\/agenda/);
@@ -24,6 +26,14 @@ test("el SEO usa el dominio canónico y publica sitemap y robots", async () => {
   assert.doesNotMatch(sitemap, /\/login/);
   assert.match(robots, /\/sitemap\.xml/);
   assert.match(robots, /\/login/);
+  assert.match(layout, /Coro de la Facultad de Ingeniería UBA/);
+  assert.match(layout, /max-image-preview/);
+  assert.match(structuredData, /"WebSite"/);
+  assert.match(structuredData, /"MusicGroup"/);
+  assert.match(structuredData, /"MusicEvent"/);
+  assert.match(structuredData, /instagram\.com\/corofiuba/);
+  assert.match(structuredData, /youtube\.com\/@CoroFIUBA/);
+  assert.match(structuredData, /fi\.uba\.ar\/bienestar\/cultura\/coro/);
 });
 test("la ruta del panel informa que estará disponible próximamente", async () => {
   const page = await readFile(new URL("../app/login/page.tsx", import.meta.url), "utf8");

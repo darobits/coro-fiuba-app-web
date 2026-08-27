@@ -5,10 +5,10 @@ export default function Home() {
   return <main><SiteHeader />
     <section className="fiuba-home-hero">
       <div className="fiuba-hero-copy">
-        <p className="fiuba-overline"><span>Extensión universitaria</span> Cultura FIUBA</p>
+        <p className="fiuba-overline"><span>Sitio oficial</span> Facultad de Ingeniería · UBA</p>
         <h1><span>Coro</span> FIUBA</h1>
         <p className="fiuba-hero-motto">Ingeniería en armonía.</p>
-        <p className="fiuba-hero-lead">Una comunidad abierta que transforma la arquitectura de la Facultad en un espacio de música, escucha y encuentro.</p>
+        <p className="fiuba-hero-lead">El Coro de la Facultad de Ingeniería de la Universidad de Buenos Aires es una comunidad abierta que transforma la arquitectura de la Facultad en un espacio de música, escucha y encuentro.</p>
         <div className="hero-actions">
           <a className="button button-hero-primary" href="/contacto">Quiero participar</a>
           <a className="button button-hero-secondary" href="/el-coro">Conocé al coro</a>
