@@ -23,7 +23,7 @@ const sans = localFont({
 export const viewport: Viewport = { themeColor: "#1a2b5e", colorScheme: "light" };
 
 const title = "Coro FIUBA | Coro de la Facultad de Ingeniería UBA";
-const description = "Sitio oficial del Coro de la Facultad de Ingeniería de la Universidad de Buenos Aires (FIUBA). Historia, conciertos, agenda, archivo y cómo sumarte.";
+const description = "Sitio oficial del Coro FIUBA (FIUBA Coro), el Coro de la Facultad de Ingeniería de la Universidad de Buenos Aires. Historia, conciertos, agenda, archivo y cómo sumarte.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

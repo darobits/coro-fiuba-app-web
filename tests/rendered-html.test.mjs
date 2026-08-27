@@ -18,6 +18,7 @@ test("el SEO usa el dominio canónico y publica sitemap y robots", async () => {
   const sitemap = await readFile(new URL("../app/sitemap.ts", import.meta.url), "utf8");
   const robots = await readFile(new URL("../app/robots.ts", import.meta.url), "utf8");
   const layout = await readFile(new URL("../app/layout.tsx", import.meta.url), "utf8");
+  const homePage = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
   const structuredData = await readFile(new URL("../app/components/StructuredData.tsx", import.meta.url), "utf8");
   assert.match(site, /https:\/\/www\.corofiuba\.com\.ar/);
   assert.match(sitemap, /\/el-coro/);
@@ -41,6 +42,8 @@ test("el SEO usa el dominio canónico y publica sitemap y robots", async () => {
   assert.match(structuredData, /Universidad de Buenos Aires/);
   assert.match(structuredData, /alternateName: "FIUBA"/);
   assert.match(structuredData, /alternateName: "UBA"/);
+  assert.match(structuredData, /"FIUBA Coro"/);
+  assert.match(homePage, /también conocido como FIUBA Coro/);
 });
 test("la ruta del panel informa que estará disponible próximamente", async () => {
   const page = await readFile(new URL("../app/login/page.tsx", import.meta.url), "utf8");
