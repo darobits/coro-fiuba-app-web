@@ -37,6 +37,9 @@ test("el SEO usa el dominio canónico y publica sitemap y robots", async () => {
   assert.match(structuredData, /"WebSite"/);
   assert.match(structuredData, /"MusicGroup"/);
   assert.match(structuredData, /"MusicEvent"/);
+  assert.match(structuredData, /endDate: event\.endDate \?\? event\.eventDate/);
+  assert.match(structuredData, /"Offer"/);
+  assert.match(structuredData, /priceCurrency: "ARS"/);
   assert.match(structuredData, /instagram\.com\/corofiuba/);
   assert.match(structuredData, /youtube\.com\/@CoroFIUBA/);
   assert.match(structuredData, /fi\.uba\.ar\/bienestar\/cultura\/coro/);
@@ -66,6 +69,10 @@ test("la convocatoria guarda únicamente mediante Google Apps Script", async () 
   assert.match(form, /application-processing-backdrop/);
   assert.match(form, /application-success-check/);
   assert.match(form, /Mensaje recibido/);
+  assert.match(form, /Vínculo con FIUBA/);
+  assert.match(form, /FIUBA_CAREERS\.map/);
+  assert.match(route, /FIUBA_STUDENT_AFFILIATION/);
+  assert.match(helper, /vinculoFiuba/);
   assert.doesNotMatch(form, /Número de inscripción/i);
   assert.match(helper, /\/api\/join/);
 });
@@ -78,4 +85,7 @@ test("Code.gs genera IDs seguros y configura el flujo de estados", async () => {
   assert.match(script, /Pendiente de audición/);
   assert.match(script, /setDataValidation/);
   assert.match(script, /processEmailQueue_\(\)/);
+  assert.match(script, /Vínculo con FIUBA/);
+  assert.match(script, /insertColumnsAfter\(7, 2\)/);
+  assert.match(script, /CAREER_OPTIONS/);
 });

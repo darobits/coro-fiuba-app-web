@@ -1,4 +1,5 @@
 import { isValidEmail } from "@/lib/validation";
+import { FIUBA_AFFILIATIONS, FIUBA_CAREERS, FIUBA_STUDENT_AFFILIATION } from "@/lib/application-options";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -6,6 +7,8 @@ export const maxDuration = 60;
 
 const VOICE_OPTIONS = new Set(["Soprano", "Contralto", "Tenor", "Bajo", "No estoy seguro/a"]);
 const EXPERIENCE_OPTIONS = new Set(["Sin experiencia", "Algo de experiencia", "Experiencia coral"]);
+const AFFILIATION_OPTIONS = new Set<string>(FIUBA_AFFILIATIONS);
+const CAREER_OPTIONS = new Set<string>(FIUBA_CAREERS);
 const SEND_ERROR = "No pudimos enviar tus datos en este momento. Por favor, intentá nuevamente.";
 
 type ScriptResponse = {
@@ -82,6 +85,8 @@ export async function POST(request: Request) {
   const nombre = sanitizeText(body.nombre, 120);
   const email = sanitizeText(body.email, 150).toLowerCase();
   const celular = sanitizeText(body.celular, 50);
+  const vinculoFiuba = sanitizeText(body.vinculoFiuba, 40);
+  const carrera = vinculoFiuba === FIUBA_STUDENT_AFFILIATION ? sanitizeText(body.carrera, 100) : "";
   const registroVoz = sanitizeText(body.registroVoz, 40);
   const experiencia = sanitizeText(body.experiencia, 60);
   const sobreVos = sanitizeText(body.sobreVos, 1500);
@@ -97,6 +102,12 @@ export async function POST(request: Request) {
   if (!Number.isInteger(edad) || edad < 16 || edad > 99) {
     return Response.json({ success: false, message: "Por favor, ingresá una edad correcta." }, { status: 400 });
   }
+  if (!AFFILIATION_OPTIONS.has(vinculoFiuba)) {
+    return Response.json({ success: false, message: "Seleccioná cuál es tu vínculo con FIUBA." }, { status: 400 });
+  }
+  if (vinculoFiuba === FIUBA_STUDENT_AFFILIATION && !CAREER_OPTIONS.has(carrera)) {
+    return Response.json({ success: false, message: "Seleccioná tu carrera de FIUBA." }, { status: 400 });
+  }
   if (!VOICE_OPTIONS.has(registroVoz) || !EXPERIENCE_OPTIONS.has(experiencia)) {
     return Response.json({ success: false, message: "Completá el registro de voz y la experiencia previa." }, { status: 400 });
   }
@@ -104,7 +115,7 @@ export async function POST(request: Request) {
     return Response.json({ success: false, message: "Necesitamos tu autorización para contactarte." }, { status: 400 });
   }
 
-  const payload = { nombre, email, celular, edad, registroVoz, experiencia, sobreVos, consentimiento };
+  const payload = { nombre, email, celular, edad, vinculoFiuba, carrera, registroVoz, experiencia, sobreVos, consentimiento };
   const saved = await saveInGoogleSheets(payload);
   if (saved.response) return saved.response;
   return Response.json(saved.result);

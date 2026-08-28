@@ -1,4 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "env": {
+    "APPS_SCRIPT_URL": "https://script.google.com/macros/s/AKfycbxhZKr59vBcQ3M3weS48KHJd1XlTL36cEBwuOvlWHarjHkCakyLKTE0IvlFGBhRkwBprg/exec"
+  }
 }

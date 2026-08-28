@@ -51,7 +51,7 @@ En Vercel, cargá `APPS_SCRIPT_URL` desde la configuración de variables de ento
 
 En el primer envío, Apps Script crea o prepara la pestaña **Inscripciones Coro FIUBA** con:
 
-- Las trece columnas definidas para la convocatoria.
+- Las quince columnas definidas para la convocatoria, incluyendo vínculo con FIUBA y carrera.
 - Encabezado azul institucional, texto blanco y primera fila congelada.
 - Filtros, anchos de columna, ajuste de texto, formatos de fecha y hora.
 - Filas alternadas para mejorar la lectura.
@@ -60,6 +60,8 @@ En el primer envío, Apps Script crea o prepara la pestaña **Inscripciones Coro
 - ID correlativo `CF-0001`, `CF-0002`, etc.
 
 El ID se genera dentro de Apps Script bajo `LockService`, por lo que dos envíos simultáneos no deberían recibir el mismo número. También se evita repetir exactamente la misma inscripción durante unos pocos segundos.
+
+Si la pestaña ya tiene la estructura anterior de trece columnas, el script inserta automáticamente las dos columnas nuevas después de **Edad** y conserva todas las inscripciones existentes.
 
 ## Actualizaciones futuras de Code.gs
 

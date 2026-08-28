@@ -26,6 +26,24 @@ var HEADERS = [
   'Correo electrónico',
   'Celular',
   'Edad',
+  'Vínculo con FIUBA',
+  'Carrera',
+  'Registro de voz',
+  'Experiencia previa',
+  'Sobre vos',
+  'Consentimiento',
+  'Estado',
+  'Observaciones internas'
+];
+
+var LEGACY_HEADERS = [
+  'ID',
+  'Fecha',
+  'Hora',
+  'Nombre y apellido',
+  'Correo electrónico',
+  'Celular',
+  'Edad',
   'Registro de voz',
   'Experiencia previa',
   'Sobre vos',
@@ -57,6 +75,22 @@ var STATUS_OPTIONS = [
 
 var VOICE_OPTIONS = ['Soprano', 'Contralto', 'Tenor', 'Bajo', 'No estoy seguro/a'];
 var EXPERIENCE_OPTIONS = ['Sin experiencia', 'Algo de experiencia', 'Experiencia coral'];
+var AFFILIATION_OPTIONS = ['Estudiante de FIUBA', 'Graduado/a de FIUBA', 'Persona externa a FIUBA'];
+var CAREER_OPTIONS = [
+  'Bioingeniería',
+  'Ingeniería Civil',
+  'Ingeniería en Alimentos',
+  'Ingeniería en Energía Eléctrica',
+  'Ingeniería Electrónica',
+  'Ingeniería en Agrimensura',
+  'Ingeniería en Informática',
+  'Ingeniería en Petróleo',
+  'Ingeniería Industrial',
+  'Ingeniería Mecánica',
+  'Ingeniería Naval',
+  'Ingeniería Química',
+  'Lic. en Análisis de Sistemas'
+];
 
 function doGet() {
   try {
@@ -120,6 +154,8 @@ function doPost(e) {
       data.email,
       data.celular,
       data.edad,
+      data.vinculoFiuba,
+      data.carrera,
       data.registroVoz,
       data.experiencia,
       data.sobreVos,
@@ -143,6 +179,8 @@ function doPost(e) {
       email: data.email,
       celular: data.celular,
       edad: data.edad,
+      vinculoFiuba: data.vinculoFiuba,
+      carrera: data.carrera,
       registroVoz: data.registroVoz,
       experiencia: data.experiencia,
       sobreVos: data.sobreVos
@@ -355,6 +393,8 @@ function buildInternalPlainText_(data) {
     'Correo: ' + data.email,
     'Celular: ' + data.celular,
     'Edad: ' + data.edad,
+    'Vínculo con FIUBA: ' + data.vinculoFiuba,
+    'Carrera: ' + (data.carrera || '-'),
     'Registro de voz: ' + data.registroVoz,
     'Experiencia previa: ' + data.experiencia,
     '',
@@ -389,6 +429,8 @@ function buildInternalEmailHtml_(data) {
   var email = escapeHtml_(data.email);
   var celular = escapeHtml_(data.celular);
   var edad = escapeHtml_(String(data.edad));
+  var vinculoFiuba = escapeHtml_(data.vinculoFiuba);
+  var carrera = escapeHtml_(data.carrera || '-');
   var registro = escapeHtml_(data.registroVoz);
   var experiencia = escapeHtml_(data.experiencia);
   var sobreVos = nl2br_(data.sobreVos || '-');
@@ -427,6 +469,8 @@ function buildInternalEmailHtml_(data) {
             buildDataRow_('Correo electrónico', '<a href="mailto:' + email + '" style="color:#078dc7;text-decoration:none;">' + email + '</a>', false) +
             buildDataRow_('Celular', celular, false) +
             buildDataRow_('Edad', edad, false) +
+            buildDataRow_('Vínculo con FIUBA', vinculoFiuba, false) +
+            buildDataRow_('Carrera', carrera, false) +
             buildDataRow_('Registro de voz', registro, false) +
             buildDataRow_('Experiencia previa', experiencia, false) +
 
@@ -561,6 +605,16 @@ function assertSheetStructure_(sheet) {
     return;
   }
 
+  var legacyHeaders = sheet.getRange(1, 1, 1, LEGACY_HEADERS.length).getDisplayValues()[0];
+  var usesLegacyStructure = LEGACY_HEADERS.every(function(header, index) {
+    return legacyHeaders[index] === header;
+  });
+
+  if (usesLegacyStructure) {
+    sheet.insertColumnsAfter(7, 2);
+    sheet.getRange(1, 8, 1, 2).setValues([['Vínculo con FIUBA', 'Carrera']]);
+  }
+
   var currentHeaders = sheet.getRange(1, 1, 1, HEADERS.length).getDisplayValues()[0];
   var validHeaders = HEADERS.every(function(header, index) {
     return currentHeaders[index] === header;
@@ -589,7 +643,7 @@ function configureSheet_(sheet) {
   sheet.setTabColor('#D5A900');
   sheet.setRowHeight(1, 36);
 
-  var widths = [110, 100, 80, 220, 220, 150, 70, 140, 170, 340, 120, 180, 300];
+  var widths = [110, 100, 80, 220, 220, 150, 70, 180, 230, 140, 170, 340, 120, 180, 300];
   widths.forEach(function(width, index) {
     sheet.setColumnWidth(index + 1, width);
   });
@@ -597,9 +651,9 @@ function configureSheet_(sheet) {
   sheet.getRange(2, 2, bodyRows, 1).setNumberFormat('dd/MM/yyyy').setHorizontalAlignment('center');
   sheet.getRange(2, 3, bodyRows, 1).setNumberFormat('HH:mm').setHorizontalAlignment('center');
   sheet.getRange(2, 7, bodyRows, 1).setHorizontalAlignment('center');
-  sheet.getRange(2, 11, bodyRows, 2).setHorizontalAlignment('center');
-  sheet.getRange(2, 4, bodyRows, 8).setVerticalAlignment('middle').setWrap(true);
-  sheet.getRange(2, 13, bodyRows, 1).setVerticalAlignment('middle').setWrap(true);
+  sheet.getRange(2, 13, bodyRows, 2).setHorizontalAlignment('center');
+  sheet.getRange(2, 4, bodyRows, 10).setVerticalAlignment('middle').setWrap(true);
+  sheet.getRange(2, 15, bodyRows, 1).setVerticalAlignment('middle').setWrap(true);
 
   var statusRule = SpreadsheetApp.newDataValidation()
     .requireValueInList(STATUS_OPTIONS, true)
@@ -607,7 +661,7 @@ function configureSheet_(sheet) {
     .setHelpText('Seleccioná un estado de la lista.')
     .build();
 
-  sheet.getRange(2, 12, bodyRows, 1).setDataValidation(statusRule);
+  sheet.getRange(2, 14, bodyRows, 1).setDataValidation(statusRule);
 
   if (!sheet.getFilter()) {
     sheet.getRange(1, 1, maxRows, HEADERS.length).createFilter();
@@ -692,9 +746,9 @@ function formatNewRow_(sheet, rowNumber) {
   sheet.getRange(rowNumber, 2).setNumberFormat('dd/MM/yyyy').setHorizontalAlignment('center');
   sheet.getRange(rowNumber, 3).setNumberFormat('HH:mm').setHorizontalAlignment('center');
   sheet.getRange(rowNumber, 7).setHorizontalAlignment('center');
-  sheet.getRange(rowNumber, 11, 1, 2).setHorizontalAlignment('center');
-  sheet.getRange(rowNumber, 4, 1, 8).setVerticalAlignment('middle').setWrap(true);
-  sheet.getRange(rowNumber, 13).setVerticalAlignment('middle').setWrap(true);
+  sheet.getRange(rowNumber, 13, 1, 2).setHorizontalAlignment('center');
+  sheet.getRange(rowNumber, 4, 1, 10).setVerticalAlignment('middle').setWrap(true);
+  sheet.getRange(rowNumber, 15).setVerticalAlignment('middle').setWrap(true);
 }
 
 function getNextId_(sheet) {
@@ -720,6 +774,8 @@ function validateAndSanitize_(raw) {
     email: sanitizeText_(raw.email, 150).toLowerCase(),
     celular: sanitizeText_(raw.celular, 50),
     edad: Number(raw.edad),
+    vinculoFiuba: sanitizeText_(raw.vinculoFiuba, 40),
+    carrera: sanitizeText_(raw.carrera, 100),
     registroVoz: sanitizeText_(raw.registroVoz, 40),
     experiencia: sanitizeText_(raw.experiencia, 60),
     sobreVos: sanitizeText_(raw.sobreVos, 1500),
@@ -735,6 +791,11 @@ function validateAndSanitize_(raw) {
   }
 
   if (!Number.isInteger(data.edad) || data.edad < 16 || data.edad > 99) throw new Error('Edad inválida');
+  if (AFFILIATION_OPTIONS.indexOf(data.vinculoFiuba) === -1) throw new Error('Vínculo con FIUBA inválido');
+  if (data.vinculoFiuba === 'Estudiante de FIUBA' && CAREER_OPTIONS.indexOf(data.carrera) === -1) {
+    throw new Error('Carrera inválida');
+  }
+  if (data.vinculoFiuba !== 'Estudiante de FIUBA') data.carrera = '';
   if (VOICE_OPTIONS.indexOf(data.registroVoz) === -1) throw new Error('Registro de voz inválido');
   if (EXPERIENCE_OPTIONS.indexOf(data.experiencia) === -1) throw new Error('Experiencia inválida');
   if (!data.consentimiento) throw new Error('Falta consentimiento');
@@ -760,6 +821,8 @@ function buildDuplicateKey_(data) {
     data.nombre,
     data.celular,
     data.edad,
+    data.vinculoFiuba,
+    data.carrera,
     data.registroVoz,
     data.experiencia,
     data.sobreVos

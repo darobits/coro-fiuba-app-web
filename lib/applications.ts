@@ -3,6 +3,8 @@ export type ApplicationPayload = {
   email: string;
   celular: string;
   edad: number;
+  vinculoFiuba: string;
+  carrera: string;
   registroVoz: string;
   experiencia: string;
   sobreVos: string;

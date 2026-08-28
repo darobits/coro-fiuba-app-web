@@ -2,6 +2,7 @@
 
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import { saveApplication, type ApplicationPayload } from "@/lib/applications";
+import { FIUBA_AFFILIATIONS, FIUBA_CAREERS, FIUBA_STUDENT_AFFILIATION } from "@/lib/application-options";
 import { isValidEmail } from "@/lib/validation";
 
 type Errors = Record<string, string>;
@@ -15,6 +16,8 @@ function validate(values: Record<string, string>) {
   if (!/^\+?\d{8,15}$/.test(phone) || /^(\+?)(\d)\2{7,}$/.test(phone)) errors.phone = "Ingresá un celular válido, con código de área.";
   const age = Number(values.age);
   if (!Number.isInteger(age) || age < 16 || age > 99) errors.age = "Por favor, ingresá una edad correcta.";
+  if (!values.affiliation) errors.affiliation = "Seleccioná cuál es tu vínculo con FIUBA.";
+  if (values.affiliation === FIUBA_STUDENT_AFFILIATION && !values.career) errors.career = "Seleccioná tu carrera.";
   if (!values.voice) errors.voice = "Seleccioná una opción.";
   if (!values.experience) errors.experience = "Seleccioná una opción.";
   if (!values.consent) errors.consent = "Necesitamos tu autorización para poder contactarte.";
@@ -25,6 +28,7 @@ export default function JoinForm() {
   const [errors, setErrors] = useState<Errors>({});
   const [submissionState, setSubmissionState] = useState<SubmissionState>("idle");
   const [serverError, setServerError] = useState("");
+  const [affiliation, setAffiliation] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const sending = submissionState === "submitting";
@@ -82,6 +86,8 @@ export default function JoinForm() {
       email: values.email.trim(),
       celular: values.phone.trim(),
       edad: Number(values.age),
+      vinculoFiuba: values.affiliation,
+      carrera: values.affiliation === FIUBA_STUDENT_AFFILIATION ? values.career : "",
       registroVoz: values.voice,
       experiencia: values.experience,
       sobreVos: values.message?.trim() || "",
@@ -92,6 +98,7 @@ export default function JoinForm() {
     try {
       await saveApplication(payload);
       form.reset();
+      setAffiliation("");
       setErrors({});
       setServerError("");
       setSubmissionState("success");
@@ -116,6 +123,7 @@ export default function JoinForm() {
       <div className="form-heading"><div><small>Formulario de contacto y participación</small><h2>Datos personales</h2></div><span>01 / 01</span></div>
       <div className="form-row"><label className={fieldClass("fullName")}><span>Nombre y apellido *</span><input name="fullName" autoComplete="name" placeholder="¿Cómo te llamás?" required maxLength={120} onChange={() => clear("fullName")} aria-invalid={!!errors.fullName} />{errors.fullName && <em>{errors.fullName}</em>}</label><label className={fieldClass("email")}><span>Correo electrónico *</span><input name="email" type="email" inputMode="email" autoComplete="email" placeholder="tu@email.com" required maxLength={150} onChange={() => clear("email")} onBlur={event => checkEmail(event.currentTarget.value)} aria-invalid={!!errors.email} />{errors.email && <em>{errors.email}</em>}</label></div>
       <div className="form-row"><label className={fieldClass("phone")}><span>Celular *</span><input name="phone" type="tel" inputMode="tel" autoComplete="tel" maxLength={50} placeholder="11 0000 0000" onChange={() => clear("phone")} aria-invalid={!!errors.phone} />{errors.phone && <em>{errors.phone}</em>}</label><label className={fieldClass("age")}><span>Edad *</span><input name="age" type="number" inputMode="numeric" min={16} max={99} placeholder="Tu edad" onChange={() => clear("age")} aria-invalid={!!errors.age} />{errors.age && <em>{errors.age}</em>}</label></div>
+      <div className={`form-row affiliation-row ${affiliation === FIUBA_STUDENT_AFFILIATION ? "has-career" : ""}`}><label className={fieldClass("affiliation")}><span>Vínculo con FIUBA *</span><div className="select-wrap"><select name="affiliation" value={affiliation} onChange={event => { setAffiliation(event.currentTarget.value); clear("affiliation"); clear("career"); }} aria-invalid={!!errors.affiliation}><option value="" disabled>Elegí una opción</option>{FIUBA_AFFILIATIONS.map(option => <option key={option} value={option}>{option}</option>)}</select></div>{errors.affiliation && <em>{errors.affiliation}</em>}</label>{affiliation === FIUBA_STUDENT_AFFILIATION && <label className={`${fieldClass("career")} conditional-field`}><span>Carrera en FIUBA *</span><div className="select-wrap"><select name="career" defaultValue="" onChange={() => clear("career")} aria-invalid={!!errors.career}><option value="" disabled>Elegí tu carrera</option>{FIUBA_CAREERS.map(career => <option key={career} value={career}>{career}</option>)}</select></div>{errors.career && <em>{errors.career}</em>}</label>}</div>
       <div className="form-row"><label className={fieldClass("voice")}><span>Registro de voz *</span><div className="select-wrap"><select name="voice" defaultValue="" onChange={() => clear("voice")} aria-invalid={!!errors.voice}><option value="" disabled>Elegí una opción</option><option value="Soprano">Soprano</option><option value="Contralto">Contralto</option><option value="Tenor">Tenor</option><option value="Bajo">Bajo</option><option value="No estoy seguro/a">No estoy seguro/a</option></select></div>{errors.voice && <em>{errors.voice}</em>}</label><label className={fieldClass("experience")}><span>Experiencia previa *</span><div className="select-wrap"><select name="experience" defaultValue="" onChange={() => clear("experience")} aria-invalid={!!errors.experience}><option value="" disabled>Elegí una opción</option><option value="Sin experiencia">Sin experiencia</option><option value="Algo de experiencia">Algo de experiencia</option><option value="Experiencia coral">Experiencia coral</option></select></div>{errors.experience && <em>{errors.experience}</em>}</label></div>
       <label className="field"><span>Contanos algo sobre vos <small>(opcional)</small></span><textarea name="message" rows={4} maxLength={1500} placeholder="¿Qué te acerca al canto coral?" /></label>
       <label className={errors.consent ? "consent invalid" : "consent"}><input name="consent" type="checkbox" onChange={() => clear("consent")} /><i aria-hidden="true">✓</i><span>Acepto que el Coro FIUBA use estos datos para contactarme sobre la convocatoria.</span>{errors.consent && <em>{errors.consent}</em>}</label>
