@@ -13,7 +13,7 @@ function concertSet(numbers:number[], captions:string[]): Media[] {
 
 const museumNight = concertSet(
   [30,31,32,37,41,42,43,45,46],
-  ["El Coro FIUBA durante La Noche de los Museos.","Una presentación especial en la sede Las Heras.","Voces y arquitectura en una noche abierta a la comunidad."]
+  ["El Coro FIUBA durante La Noche de los Museos.","Una presentación especial en la sede Las Heras.","Voces e ingeniería en una noche abierta a la comunidad."]
 );
 
 const concertCycle = concertSet(

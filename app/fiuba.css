@@ -66,10 +66,12 @@ body.fiuba-edition {
 .fiuba-edition .brand-copy strong {
   color:var(--navy);
   font-family:var(--font-display);
-  font-size:35px;
+  font-size:25px;
   font-weight:600;
-  letter-spacing:.005em;
+  line-height:.87;
+  letter-spacing:0;
 }
+.fiuba-edition .brand-copy strong span { color:#007fb9; }
 .fiuba-edition .brand-copy small {
   margin-top:6px;
   color:#5b6d80;
@@ -575,6 +577,8 @@ body.fiuba-edition {
 .fiuba-edition .footer-identity h2 {
   color:#fff;
   font-family:var(--font-display);
+  font-size:32px;
+  line-height:.9;
   font-weight:600;
 }
 .fiuba-edition .footer-identity p,
@@ -591,7 +595,7 @@ body.fiuba-edition {
   .fiuba-edition .institutional-ribbon { height:28px; padding-inline:24px; }
   .fiuba-edition .header-shell { height:71px; padding-inline:24px; }
   .fiuba-edition .brand img { width:46px; height:46px; }
-  .fiuba-edition .brand-copy strong { font-size:29px; }
+  .fiuba-edition .brand-copy strong { font-size:23px; }
   .fiuba-edition .site-header nav {
     top:100%;
     padding:10px 24px 20px;
@@ -652,7 +656,7 @@ body.fiuba-edition {
   .fiuba-edition .header-shell { height:65px; padding-inline:17px; }
   .fiuba-edition .brand { gap:10px; }
   .fiuba-edition .brand img { width:41px; height:41px; }
-  .fiuba-edition .brand-copy strong { font-size:26px; }
+  .fiuba-edition .brand-copy strong { font-size:19px; }
   .fiuba-edition .site-header nav { padding-inline:18px; }
   .fiuba-edition .fiuba-home-hero {
     gap:34px;
@@ -835,7 +839,7 @@ body.fiuba-edition {
 @media (max-width:560px) {
   .fiuba-edition .site-header { height:74px; }
   .fiuba-edition .header-shell { height:71px; }
-  .fiuba-edition .brand-copy strong { font-size:24px; }
+  .fiuba-edition .brand-copy strong { font-size:19px; }
   .fiuba-edition .brand-copy small {
     max-width:225px;
     margin-top:5px;

@@ -31,11 +31,10 @@ export default function SiteHeader() {
   return <>
     <header className={`site-header${scrolled ? " is-scrolled" : ""}`}>
       <div className="header-shell">
-        <Link className="brand" href="/" aria-label="Coro FIUBA, inicio">
+        <Link className="brand" href="/" aria-label="Coro de la Facultad de Ingeniería UBA, inicio">
           <img src="/logo-fiuba.png" alt="" />
           <span className="brand-copy">
-            <strong>Coro FIUBA</strong>
-            <small>Facultad de Ingeniería · Universidad de Buenos Aires</small>
+            <strong>Coro de la Facultad de<br /><span>Ingeniería UBA</span></strong>
           </span>
         </Link>
         <nav className={open ? "open" : ""} aria-label="Navegación principal">

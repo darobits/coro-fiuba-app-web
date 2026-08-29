@@ -8,7 +8,7 @@ export default function Home() {
         <p className="fiuba-overline"><span>Sitio oficial</span> Facultad de Ingeniería · UBA</p>
         <h1><span>Coro</span> FIUBA</h1>
         <p className="fiuba-hero-motto">Ingeniería en armonía.</p>
-        <p className="fiuba-hero-lead">El Coro de la Facultad de Ingeniería de la Universidad de Buenos Aires es una comunidad abierta que transforma la arquitectura de la Facultad en un espacio de música, escucha y encuentro.</p>
+        <p className="fiuba-hero-lead">El Coro de la Facultad de Ingeniería de la Universidad de Buenos Aires es una comunidad abierta que hace de la Facultad un espacio de música, escucha y encuentro.</p>
         <div className="hero-actions">
           <a className="button button-hero-primary" href="/contacto">Quiero participar</a>
           <a className="button button-hero-secondary" href="/el-coro">Conocé al coro</a>
@@ -16,7 +16,7 @@ export default function Home() {
       </div>
       <figure className="fiuba-hero-image">
         <img src="/choir/hero-architecture.webp" alt="El Coro FIUBA cantando en la sede Las Heras" />
-        <figcaption>Sede Las Heras · Música y arquitectura universitaria</figcaption>
+        <figcaption>Sede Las Heras · Música e ingeniería</figcaption>
       </figure>
       <aside className="fiuba-hero-facts" aria-label="Datos principales del Coro FIUBA">
         <article><small>Ensayos</small><strong>Viernes · 19:30 a 22:00</strong><span>Sede Paseo Colón</span></article>
@@ -32,7 +32,7 @@ export default function Home() {
 
     <section className="home-intro"><p className="section-index">Una comunidad coral</p><div><p className="eyebrow dark"><span /> Muchas voces, una obra</p><h2>Respirar juntos.<br /><em>Construir sonido.</em></h2></div><p>Coro FIUBA —también conocido como FIUBA Coro— reúne música, aprendizaje y vida universitaria en un proyecto colectivo abierto a la comunidad.</p></section>
 
-    <section className="home-photo-band"><figure><img src="/choir/concert-close.webp" alt="El Coro FIUBA cantando bajo la dirección de Carolina Abbamonte" /></figure><div><p className="section-index">El coro en acción</p><h2>La música habita<br /><em>la Facultad.</em></h2><p>Ensayos, conciertos y encuentros transforman la arquitectura universitaria en un espacio vivo de escucha y comunidad.</p><a className="text-link dark-link archive-link" href="/archivo">Explorar el archivo</a></div></section>
+    <section className="home-photo-band"><figure><img src="/choir/concert-close.webp" alt="El Coro FIUBA cantando bajo la dirección de Carolina Abbamonte" /></figure><div><p className="section-index">El coro en acción</p><h2>La música habita<br /><em>la Facultad.</em></h2><p>Ensayos, conciertos y encuentros hacen de la Facultad de Ingeniería un espacio vivo de escucha y comunidad.</p><a className="text-link dark-link archive-link" href="/archivo">Explorar el archivo</a></div></section>
 
     <section className="portal-grid" aria-label="Explorar el sitio">
       <header><p className="eyebrow dark"><span /> Conocé el proyecto</p><h2>El Coro FIUBA,<br /><em>por dentro.</em></h2></header>
