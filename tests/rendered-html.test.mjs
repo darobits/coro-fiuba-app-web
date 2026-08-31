@@ -20,7 +20,7 @@ test("el SEO usa el dominio canónico y publica sitemap y robots", async () => {
   const layout = await readFile(new URL("../app/layout.tsx", import.meta.url), "utf8");
   const homePage = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
   const structuredData = await readFile(new URL("../app/components/StructuredData.tsx", import.meta.url), "utf8");
-  const openGraphImage = await readFile(new URL("../app/opengraph-image.tsx", import.meta.url), "utf8");
+  const socialImage = await readFile(new URL("../public/social-preview-fiuba-v2.png", import.meta.url));
   assert.match(site, /https:\/\/www\.corofiuba\.com\.ar/);
   assert.match(sitemap, /\/el-coro/);
   assert.match(sitemap, /\/agenda/);
@@ -52,10 +52,9 @@ test("el SEO usa el dominio canónico y publica sitemap y robots", async () => {
   assert.match(layout, /coro de la facultad de ingeniería UBA/i);
   assert.match(layout, /coro de ingeniería de la UBA/i);
   assert.match(layout, /summary_large_image/);
-  assert.match(layout, /\/opengraph-image/);
-  assert.match(openGraphImage, /width: 1200/);
-  assert.match(openGraphImage, /height: 630/);
-  assert.match(openGraphImage, /logo-fiuba2\.png/);
+  assert.match(layout, /\/social-preview-fiuba-v2\.png/);
+  assert.ok(socialImage.length > 100_000);
+  assert.equal(socialImage.subarray(1, 4).toString("ascii"), "PNG");
   assert.doesNotMatch(homePage, /también conocido como FIUBA Coro/);
 });
 test("la ruta del panel informa que estará disponible próximamente", async () => {

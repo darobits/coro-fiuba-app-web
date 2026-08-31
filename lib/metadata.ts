@@ -9,11 +9,11 @@ export function pageMetadata(title: string, description: string, path: string): 
       title: `${title} — Coro de la Facultad de Ingeniería UBA`,
       description,
       url: path,
-      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Coro de la Facultad de Ingeniería UBA", type: "image/png" }],
+      images: [{ url: "/social-preview-fiuba-v2.png", width: 1200, height: 630, alt: "Coro de la Facultad de Ingeniería UBA", type: "image/png" }],
       type: "website",
       siteName: "Coro de la Facultad de Ingeniería UBA",
       locale: "es_AR",
     },
-    twitter: { card: "summary_large_image", title: `${title} — Coro de la Facultad de Ingeniería UBA`, description, images: ["/opengraph-image"] },
+    twitter: { card: "summary_large_image", title: `${title} — Coro de la Facultad de Ingeniería UBA`, description, images: ["/social-preview-fiuba-v2.png"] },
   };
 }
