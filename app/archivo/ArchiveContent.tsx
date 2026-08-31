@@ -44,7 +44,7 @@ const choirLife = concertSet(
 );
 
 function MediaCard({ item, index, onVideo, quiet = false }: { item:Media; index:number; onVideo:(item:Media)=>void; quiet?:boolean }) {
-  const content = <><div className="media-image"><img src={item.type === "image" ? item.url : item.thumbnailUrl || "/logo-fiuba.png"} alt={item.type === "image" ? item.title : ""} loading={index > 1 ? "lazy" : "eager"} /></div>{quiet && item.type === "image" ? item.caption && <small className="media-caption">{item.caption}</small> : <><span>{item.type === "image" ? "Fotografía" : "Ver video"}</span><strong>{item.title}</strong>{item.caption && <small>{item.caption}</small>}</>}</>;
+  const content = <><div className="media-image"><img src={item.type === "image" ? item.url : item.thumbnailUrl || "/logo-fiuba2.png"} alt={item.type === "image" ? item.title : ""} loading={index > 1 ? "lazy" : "eager"} /></div>{quiet && item.type === "image" ? item.caption && <small className="media-caption">{item.caption}</small> : <><span>{item.type === "image" ? "Fotografía" : "Ver video"}</span><strong>{item.title}</strong>{item.caption && <small>{item.caption}</small>}</>}</>;
   const className = `media-card reveal-item media-${index%4}`;
   return item.type === "image"
     ? <article className={className}>{content}</article>

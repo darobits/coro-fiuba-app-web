@@ -32,7 +32,7 @@ export default function SiteHeader() {
     <header className={`site-header${scrolled ? " is-scrolled" : ""}`}>
       <div className="header-shell">
         <Link className="brand" href="/" aria-label="Coro de la Facultad de Ingeniería UBA, inicio">
-          <img src="/logo-fiuba.png" alt="" />
+          <img src="/logo-fiuba2.png" alt="" />
           <span className="brand-copy">
             <strong>Coro de la Facultad de<br /><span>Ingeniería UBA</span></strong>
           </span>

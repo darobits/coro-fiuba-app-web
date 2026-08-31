@@ -48,7 +48,9 @@ test("el SEO usa el dominio canónico y publica sitemap y robots", async () => {
   assert.match(structuredData, /alternateName: "FIUBA"/);
   assert.match(structuredData, /alternateName: "UBA"/);
   assert.match(structuredData, /"FIUBA Coro"/);
-  assert.match(homePage, /también conocido como FIUBA Coro/);
+  assert.match(layout, /coro de la facultad de ingeniería UBA/i);
+  assert.match(layout, /coro de ingeniería de la UBA/i);
+  assert.doesNotMatch(homePage, /también conocido como FIUBA Coro/);
 });
 test("la ruta del panel informa que estará disponible próximamente", async () => {
   const page = await readFile(new URL("../app/login/page.tsx", import.meta.url), "utf8");

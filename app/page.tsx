@@ -30,7 +30,7 @@ export default function Home() {
       <article><span>03</span><div><strong>Memoria viva</strong><p>Más de seis décadas de historia y actividad coral.</p></div></article>
     </section>
 
-    <section className="home-intro"><p className="section-index">Una comunidad coral</p><div><p className="eyebrow dark"><span /> Muchas voces, una obra</p><h2>Respirar juntos.<br /><em>Construir sonido.</em></h2></div><p>Coro FIUBA —también conocido como FIUBA Coro— reúne música, aprendizaje y vida universitaria en un proyecto colectivo abierto a la comunidad.</p></section>
+    <section className="home-intro"><p className="section-index">Una comunidad coral</p><div><p className="eyebrow dark"><span /> Muchas voces, una obra</p><h2>Respirar juntos.<br /><em>Construir sonido.</em></h2></div><p>El Coro de la Facultad de Ingeniería UBA reúne música, aprendizaje y vida universitaria en un proyecto colectivo abierto a la comunidad.</p></section>
 
     <section className="home-photo-band"><figure><img src="/choir/concert-close.webp" alt="El Coro FIUBA cantando bajo la dirección de Carolina Abbamonte" /></figure><div><p className="section-index">El coro en acción</p><h2>La música habita<br /><em>la Facultad.</em></h2><p>Ensayos, conciertos y encuentros hacen de la Facultad de Ingeniería un espacio vivo de escucha y comunidad.</p><a className="text-link dark-link archive-link" href="/archivo">Explorar el archivo</a></div></section>
 

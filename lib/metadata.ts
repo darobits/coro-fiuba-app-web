@@ -9,11 +9,11 @@ export function pageMetadata(title: string, description: string, path: string): 
       title: `${title} — Coro FIUBA`,
       description,
       url: path,
-      images: [{ url: "/logo-fiuba.png", width: 1254, height: 1254, alt: "Logo del Coro FIUBA" }],
+      images: [{ url: "/logo-fiuba2.png", width: 1254, height: 1254, alt: "Logo del Coro FIUBA" }],
       type: "website",
       siteName: "Coro FIUBA",
       locale: "es_AR",
     },
-    twitter: { card: "summary", title: `${title} — Coro FIUBA`, description, images: ["/logo-fiuba.png"] },
+    twitter: { card: "summary", title: `${title} — Coro FIUBA`, description, images: ["/logo-fiuba2.png"] },
   };
 }

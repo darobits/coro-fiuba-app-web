@@ -498,3 +498,25 @@ h1 em, h2 em { color: var(--gold); font-weight: 400; }
 }
 
 @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition-duration:.01ms !important; animation-duration:.01ms !important; }.archive-mosaic .media-card { opacity:1; transform:none; } }
+
+/* Equipo histórico, requisitos de audición e invitados de agenda */
+.assistant-team { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; margin:26px 0; background:#d2c8b8; border:1px solid #d2c8b8; }
+.assistant-team section { display:grid; align-content:start; gap:8px; min-height:118px; padding:22px 18px; background:var(--cream); }
+.assistant-team strong { color:var(--navy); font-family:var(--font-display); font-size:23px; font-weight:600; line-height:1.05; }
+.assistant-team small { color:#8a682d; font-size:7px; font-weight:700; text-transform:uppercase; letter-spacing:.13em; }
+
+.audition-requirements { display:grid; gap:12px; max-width:390px; margin:22px 0 28px; padding:0; list-style:none; color:#4f606a; }
+.audition-requirements li { position:relative; padding-left:22px; line-height:1.6; }
+.audition-requirements li::before { content:""; position:absolute; left:0; top:.72em; width:8px; height:2px; background:#0095db; }
+
+.announcement-guests { margin-top:22px; padding-top:18px; border-top:1px solid rgba(3,29,63,.12); }
+.announcement-guests > small { color:#8b651f; }
+.announcement-guests ul { display:grid; gap:13px; margin:13px 0 0; padding:0; list-style:none; }
+.announcement-guests li { display:grid; gap:3px; }
+.announcement-guests strong { color:var(--navy); font-size:13px; line-height:1.4; }
+.announcement-guests span { color:#657482; font-size:9px; }
+
+@media (max-width:700px) {
+  .assistant-team { grid-template-columns:1fr; }
+  .assistant-team section { min-height:0; }
+}

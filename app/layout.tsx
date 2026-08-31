@@ -24,11 +24,21 @@ export const viewport: Viewport = { themeColor: "#1a2b5e", colorScheme: "light" 
 
 const title = "Coro FIUBA | Coro de la Facultad de Ingeniería UBA";
 const description = "Sitio oficial del Coro FIUBA (FIUBA Coro), el Coro de la Facultad de Ingeniería de la Universidad de Buenos Aires. Historia, conciertos, agenda, archivo y cómo sumarte.";
+const keywords = [
+  "Coro FIUBA",
+  "coro de la facultad de ingeniería UBA",
+  "coro de la facultad de ingeniería",
+  "coro ingeniería UBA",
+  "coro facultad de ingeniería",
+  "coro de ingeniería de la UBA",
+  "FIUBA Coro",
+];
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title,
   description,
+  keywords,
   alternates: { canonical: "/" },
   applicationName: "Coro FIUBA",
   creator: "Coro FIUBA",
@@ -60,12 +70,12 @@ export const metadata: Metadata = {
     title,
     description,
     url: "/",
-    images: [{ url: "/logo-fiuba.png", width: 1254, height: 1254, alt: "Logo del Coro FIUBA" }],
+    images: [{ url: "/logo-fiuba2.png", width: 1254, height: 1254, alt: "Logo del Coro FIUBA" }],
     type: "website",
     siteName: "Coro FIUBA",
     locale: "es_AR",
   },
-  twitter: { card: "summary", title, description, images: ["/logo-fiuba.png"] },
+  twitter: { card: "summary", title, description, images: ["/logo-fiuba2.png"] },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
