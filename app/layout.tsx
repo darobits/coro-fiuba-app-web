@@ -22,8 +22,8 @@ const sans = localFont({
 
 export const viewport: Viewport = { themeColor: "#1a2b5e", colorScheme: "light" };
 
-const title = "Coro FIUBA | Coro de la Facultad de Ingeniería UBA";
-const description = "Sitio oficial del Coro FIUBA (FIUBA Coro), el Coro de la Facultad de Ingeniería de la Universidad de Buenos Aires. Historia, conciertos, agenda, archivo y cómo sumarte.";
+const title = "Coro de la Facultad de Ingeniería UBA | Coro FIUBA";
+const description = "Sitio oficial del Coro de la Facultad de Ingeniería UBA. Historia, conciertos, agenda, archivo y cómo sumarte.";
 const keywords = [
   "Coro FIUBA",
   "coro de la facultad de ingeniería UBA",
@@ -40,8 +40,8 @@ export const metadata: Metadata = {
   description,
   keywords,
   alternates: { canonical: "/" },
-  applicationName: "Coro FIUBA",
-  creator: "Coro FIUBA",
+  applicationName: "Coro de la Facultad de Ingeniería UBA",
+  creator: "Coro de la Facultad de Ingeniería UBA",
   publisher: "Facultad de Ingeniería de la Universidad de Buenos Aires",
   manifest: "/site.webmanifest",
   icons: {
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     shortcut: ["/favicon.ico"],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
-  appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "Coro FIUBA" },
+  appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "Coro de la Facultad de Ingeniería UBA" },
   formatDetection: { telephone: false },
   robots: {
     index: true,
@@ -70,9 +70,9 @@ export const metadata: Metadata = {
     title,
     description,
     url: "/",
-    images: [{ url: "/logo-fiuba2.png", width: 1254, height: 1254, alt: "Logo del Coro FIUBA" }],
+    images: [{ url: "/logo-fiuba2.png", width: 1254, height: 1254, alt: "Logo del Coro de la Facultad de Ingeniería UBA" }],
     type: "website",
-    siteName: "Coro FIUBA",
+    siteName: "Coro de la Facultad de Ingeniería UBA",
     locale: "es_AR",
   },
   twitter: { card: "summary", title, description, images: ["/logo-fiuba2.png"] },

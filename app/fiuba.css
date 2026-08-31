@@ -238,10 +238,10 @@ body.fiuba-edition {
 }
 .fiuba-edition .fiuba-hero-copy h1 {
   color:var(--navy);
-  font-size:clamp(82px,8vw,126px);
+  font-size:clamp(54px,5.5vw,86px);
   font-weight:500;
-  line-height:.78;
-  letter-spacing:-.055em;
+  line-height:.86;
+  letter-spacing:-.045em;
 }
 .fiuba-edition .fiuba-hero-copy h1 span {
   display:block;
@@ -666,7 +666,7 @@ body.fiuba-edition {
   .fiuba-edition .fiuba-home-hero::before { width:80%; }
   .fiuba-edition .fiuba-overline { align-items:flex-start; flex-direction:column; gap:7px; font-size:7px; }
   .fiuba-edition .fiuba-overline::before { order:-1; }
-  .fiuba-edition .fiuba-hero-copy h1 { font-size:clamp(74px,24vw,102px); }
+  .fiuba-edition .fiuba-hero-copy h1 { font-size:clamp(43px,13.5vw,60px); }
   .fiuba-edition .fiuba-hero-motto { margin-top:22px; font-size:34px; }
   .fiuba-edition .fiuba-hero-lead { font-size:14px; line-height:1.75; }
   .fiuba-edition .hero-actions { align-items:stretch; flex-direction:column; }

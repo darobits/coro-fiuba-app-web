@@ -83,7 +83,7 @@ export function AgendaStructuredData({ events }: { events: AgendaEvent[] }) {
     "@graph": events.map(event => ({
       "@type": "MusicEvent",
       "@id": `${SITE_URL}/agenda#evento-${Math.abs(event.id)}`,
-      name: `${event.title} — Coro FIUBA`,
+      name: `${event.title} — Coro de la Facultad de Ingeniería UBA`,
       description: event.summary,
       startDate: event.startDate,
       endDate: event.endDate ?? event.eventDate,

@@ -10,7 +10,7 @@ export const metadata = {
 export default function LoginPage() {
   return <main className="dashboard-coming-page">
     <SiteHeader />
-    <section aria-hidden="true"><span>Próxima versión</span><h1>Panel editorial<br />del Coro FIUBA</h1></section>
+    <section aria-hidden="true"><span>Próxima versión</span><h1>Panel editorial<br />del Coro de la Facultad de Ingeniería UBA</h1></section>
     <DashboardNotice open />
   </main>;
 }
