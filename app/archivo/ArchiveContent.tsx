@@ -9,6 +9,7 @@ type Media = {
   url: string;
   thumbnailUrl?: string;
   caption?: string;
+  focus?: string;
 };
 
 type ArchiveCollection = {
@@ -59,12 +60,12 @@ const generations: Media[] = [
 const otherStages = concertSet(
   [1, 2, 3, 7, 13, 14, 15, 16, 17, 21, 22, 29, 36, 40],
   ["El Coro de la Facultad de Ingeniería UBA en uno de sus escenarios invitados.", "Una presentación coral fuera del ciclo de Las Heras.", "Encuentros y conciertos que forman parte de nuestra historia."],
-);
+).map((item) => item.url.endsWith("concert-21.webp") || item.url.endsWith("concert-29.webp") ? { ...item, focus: "center 78%" } : item);
 
 const choirLife = concertSet(
   [4, 5, 11, 12, 18, 20, 23, 25, 26, 27, 28, 34, 35, 44, 47],
   ["Coreutas e invitados reunidos después de cantar.", "Un momento compartido fuera del escenario.", "El encuentro y el ágape también forman parte de la vida coral."],
-);
+).map((item) => item.url.endsWith("concert-12.webp") ? { ...item, focus: "center center" } : item);
 
 const collections: ArchiveCollection[] = [
   { id: "ciclo", number: "01", eyebrow: "Sede Las Heras", title: "Ciclo de Conciertos Corales", intro: "Presentaciones del ciclo organizado por el Coro de la Facultad de Ingeniería UBA junto a agrupaciones invitadas.", items: concertCycle, tone: "collection-cycle" },
@@ -79,7 +80,7 @@ function MediaCard({ item, index, onOpen }: { item: Media; index: number; onOpen
   return (
     <button className={`media-card reveal-item media-${index % 4}`} onClick={() => onOpen(item)} aria-label={`Ampliar: ${item.title}`}>
       <span className="media-image">
-        <img src={item.url} alt={item.title} loading={index > 1 ? "lazy" : "eager"} />
+        <img src={item.url} alt={item.title} loading={index > 1 ? "lazy" : "eager"} style={{ objectPosition: item.focus || "center" }} />
         <span className="media-expand" aria-hidden="true">Ver imagen <b>↗</b></span>
       </span>
       {item.caption && <small className="media-caption">{item.caption}</small>}

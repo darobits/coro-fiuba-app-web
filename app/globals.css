@@ -744,3 +744,48 @@ h1 em, h2 em { color: var(--gold); font-weight: 400; }
     grid-template-columns:repeat(2,minmax(0,1fr));
   }
 }
+
+/* Alternancia editorial: claro / oscuro en todas las colecciones */
+.collection-generations,
+.collection-life {
+  position:relative;
+  margin-inline:calc(clamp(24px,7vw,110px) * -1);
+  padding-inline:clamp(24px,7vw,110px);
+  background:radial-gradient(circle at 84% 14%,rgba(0,149,219,.24),transparent 34%),linear-gradient(135deg,#07162d,#1a2b5e 72%,#0b416b);
+  color:white;
+}
+.collection-generations > header h2,
+.collection-life > header h2 { color:white; }
+.collection-generations .section-index,
+.collection-life .section-index { color:#9dcbe0; }
+.collection-generations .collection-intro > p,
+.collection-life .collection-intro > p { color:#c0d0dd; }
+.collection-generations .collection-intro > small,
+.collection-life .collection-intro > small { border-color:rgba(255,255,255,.2); color:#b7cad8; }
+.collection-generations .media-caption,
+.collection-life .media-caption { color:#e1ecf2; }
+.collection-generations .collection-slider-tools,
+.collection-life .collection-slider-tools { border-color:rgba(255,255,255,.14); background:rgba(255,255,255,.055); box-shadow:none; }
+.collection-generations .collection-progress,
+.collection-life .collection-progress { background:rgba(255,255,255,.15); }
+.collection-generations .collection-progress i,
+.collection-life .collection-progress i { background:linear-gradient(90deg,#66d1f7,#f7a600); }
+.collection-generations .collection-slider-tools > span,
+.collection-life .collection-slider-tools > span { color:#bdd0df; }
+.collection-generations .collection-slider-tools > span strong,
+.collection-life .collection-slider-tools > span strong { color:white; }
+.collection-generations .collection-slider-tools button,
+.collection-life .collection-slider-tools button { border-color:rgba(255,255,255,.2); color:white; background:rgba(255,255,255,.07); box-shadow:none; }
+
+@media (max-width:1100px) {
+  .collection-generations,
+  .collection-life {
+    margin-inline:calc(var(--archive-gutter) * -1);
+    padding-inline:var(--archive-gutter);
+  }
+}
+
+@media (hover:hover) and (pointer:fine) {
+  .collection-generations .collection-slider-tools button:not(:disabled):hover,
+  .collection-life .collection-slider-tools button:not(:disabled):hover { border-color:#66d1f7; color:#1a2b5e; background:#66d1f7; }
+}
