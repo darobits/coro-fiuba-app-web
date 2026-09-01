@@ -11,7 +11,8 @@ const routes: Array<{
   { path: "/el-coro", changeFrequency: "monthly", priority: 0.9, lastModified: "2026-08-26" },
   { path: "/ciclo", changeFrequency: "monthly", priority: 0.9, lastModified: "2026-08-26" },
   { path: "/agenda", changeFrequency: "weekly", priority: 0.9, lastModified: "2026-08-26" },
-  { path: "/archivo", changeFrequency: "monthly", priority: 0.8, lastModified: "2026-08-26" },
+  { path: "/archivo", changeFrequency: "monthly", priority: 0.8, lastModified: "2026-09-01" },
+  { path: "/archivo/compartir", changeFrequency: "yearly", priority: 0.7, lastModified: "2026-09-01" },
   { path: "/contacto", changeFrequency: "yearly", priority: 0.8, lastModified: "2026-08-26" },
 ];
 

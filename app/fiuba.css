@@ -975,7 +975,9 @@ body.fiuba-edition {
   font-weight: 500;
 }
 
-.fiuba-edition .collection-night .archive-mosaic .media-caption {
+.fiuba-edition .collection-night .archive-mosaic .media-caption,
+.fiuba-edition .collection-generations .archive-mosaic .media-caption,
+.fiuba-edition .collection-life .archive-mosaic .media-caption {
   color: #e4eef5;
   text-shadow: 0 1px 3px rgba(0, 0, 0, .38);
 }

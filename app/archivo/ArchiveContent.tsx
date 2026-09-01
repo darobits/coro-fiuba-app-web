@@ -250,6 +250,17 @@ export default function ArchiveContent() {
         </div>
       </nav>
       {collections.map((collection) => <Collection collection={collection} onOpen={openItem} key={collection.id} />)}
+      <section className="archive-contribution">
+        <p className="section-index">07 — Archivo abierto</p>
+        <div className="archive-contribution-heading">
+          <p className="eyebrow dark"><span /> Memoria colectiva</p>
+          <h2>La memoria también<br />se construye <em>entre todos.</em></h2>
+        </div>
+        <div className="archive-contribution-copy">
+          <p>¿Tenés fotografías, programas o recuerdos del Coro? Ayudanos a seguir completando nuestra historia compartiendo ese material con nosotros.</p>
+          <a className="button button-blue" href="/archivo/compartir">Compartir un recuerdo <span>→</span></a>
+        </div>
+      </section>
     </div>
     {activeItem && activeIndex !== null && (
       <div
