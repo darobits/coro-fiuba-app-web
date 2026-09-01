@@ -947,3 +947,46 @@ h1 em, h2 em { color: var(--gold); font-weight: 400; }
   .archive-share-submit .button { width:100%; }
   .archive-share-submit p { text-align:center; }
 }
+
+/* Seguimiento de carga del archivo colaborativo */
+.fiuba-edition .application-processing-modal.archive-upload-modal {
+  width:min(660px,100%);
+  padding:clamp(30px,4vw,46px);
+}
+.archive-upload-modal .dashboard-notice-mark { margin-block:14px 16px; }
+.archive-upload-modal h2 { font-size:clamp(34px,4.5vw,48px); }
+.archive-upload-overall { margin:24px 0 14px; text-align:left; }
+.archive-upload-overall > div { display:flex; justify-content:space-between; gap:20px; align-items:baseline; margin-bottom:8px; color:#526879; font-family:Arial,sans-serif; font-size:10px; text-transform:uppercase; letter-spacing:.08em; }
+.archive-upload-overall > div strong { color:#1a2b5e; font-size:13px; }
+.archive-upload-overall > i { display:block; height:5px; overflow:hidden; background:rgba(26,43,94,.12); }
+.archive-upload-overall > i span { display:block; height:100%; background:linear-gradient(90deg,#0095db,#1a2b5e); transition:width .25s ease; }
+.archive-upload-current { padding:14px 16px; border-left:3px solid #0095db; background:rgba(0,149,219,.08); text-align:left; }
+.archive-upload-current > span,.archive-upload-current > strong,.archive-upload-current > small { display:block; }
+.archive-upload-current > span { margin-bottom:4px; color:#007caf; font:800 8px/1.2 Arial,sans-serif; text-transform:uppercase; letter-spacing:.12em; }
+.archive-upload-current > strong { overflow:hidden; color:#1a2b5e; font-size:13px; text-overflow:ellipsis; white-space:nowrap; }
+.archive-upload-current > small { margin-top:4px; color:#617683; font:10px/1.3 Arial,sans-serif; }
+.archive-upload-queue { max-height:min(210px,25dvh); margin:14px 0 0; padding:0; overflow:auto; border:1px solid rgba(26,43,94,.12); background:rgba(255,255,255,.48); list-style:none; text-align:left; }
+.archive-upload-queue li { display:grid; grid-template-columns:28px minmax(0,1fr) auto; gap:10px; align-items:center; padding:10px 12px; border-bottom:1px solid rgba(26,43,94,.09); color:#7a8c96; }
+.archive-upload-queue li:last-child { border-bottom:0; }
+.archive-upload-queue li > span { display:grid; place-items:center; width:25px; height:25px; border:1px solid rgba(26,43,94,.18); border-radius:50%; color:#637984; font:800 8px/1 Arial,sans-serif; }
+.archive-upload-queue li div { min-width:0; }
+.archive-upload-queue li strong,.archive-upload-queue li small { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.archive-upload-queue li strong { color:#536b78; font-size:11px; }
+.archive-upload-queue li small { margin-top:2px; color:#87969e; font:9px/1.2 Arial,sans-serif; }
+.archive-upload-queue li em { color:#7b8d96; font:800 8px/1 Arial,sans-serif; font-style:normal; text-transform:uppercase; letter-spacing:.08em; }
+.archive-upload-queue li.is-active { background:rgba(0,149,219,.07); }
+.archive-upload-queue li.is-active > span { border-color:#0095db; color:white; background:#0095db; }
+.archive-upload-queue li.is-active em { color:#007caf; }
+.archive-upload-queue li.is-complete > span { border-color:#328b62; color:white; background:#328b62; }
+.archive-upload-queue li.is-complete strong,.archive-upload-queue li.is-complete em { color:#327254; }
+.archive-upload-modal .application-processing-warning { margin-top:18px; }
+
+@media (max-width:560px) {
+  .fiuba-edition .application-processing-modal.archive-upload-modal { padding:27px 18px 24px; }
+  .archive-upload-modal .dashboard-notice-mark { height:32px; margin-block:10px 12px; }
+  .archive-upload-modal h2 { font-size:31px; }
+  .archive-upload-overall { margin-top:19px; }
+  .archive-upload-queue { max-height:24dvh; }
+  .archive-upload-queue li { grid-template-columns:27px minmax(0,1fr); padding:9px 10px; }
+  .archive-upload-queue li em { grid-column:2; margin-top:-6px; }
+}
