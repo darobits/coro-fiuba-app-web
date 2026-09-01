@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 type Media = {
   id: number;
@@ -95,8 +95,9 @@ function Collection({ collection, onOpen }: { collection: ArchiveCollection; onO
     const track = trackRef.current;
     const nextIndex = Math.max(0, Math.min(index, collection.items.length - 1));
     const card = track?.children[nextIndex] as HTMLElement | undefined;
-    if (!track || !card) return;
-    track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: "smooth" });
+    const firstCard = track?.children[0] as HTMLElement | undefined;
+    if (!track || !card || !firstCard) return;
+    track.scrollTo({ left: card.offsetLeft - firstCard.offsetLeft, behavior: "smooth" });
     setCurrentSlide(nextIndex);
   };
 
@@ -105,10 +106,11 @@ function Collection({ collection, onOpen }: { collection: ArchiveCollection; onO
     if (!track) return;
     const viewportCenter = track.scrollLeft + track.clientWidth / 2;
     const cards = Array.from(track.children) as HTMLElement[];
+    const firstCardOffset = cards[0]?.offsetLeft || 0;
     const nextIndex = cards.reduce((closest, card, index) => {
-      const cardCenter = card.offsetLeft - track.offsetLeft + card.clientWidth / 2;
+      const cardCenter = card.offsetLeft - firstCardOffset + card.clientWidth / 2;
       const closestCard = cards[closest];
-      const closestCenter = closestCard.offsetLeft - track.offsetLeft + closestCard.clientWidth / 2;
+      const closestCenter = closestCard.offsetLeft - firstCardOffset + closestCard.clientWidth / 2;
       return Math.abs(cardCenter - viewportCenter) < Math.abs(closestCenter - viewportCenter) ? index : closest;
     }, 0);
     setCurrentSlide(nextIndex);
@@ -142,10 +144,13 @@ function Collection({ collection, onOpen }: { collection: ArchiveCollection; onO
 export default function ArchiveContent() {
   const allItems = useMemo(() => collections.flatMap((collection) => collection.items), []);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const lightboxTouch = useRef<{ x: number; y: number } | null>(null);
   const activeItem = activeIndex === null ? null : allItems[activeIndex];
 
   const openItem = (item: Media) => setActiveIndex(allItems.findIndex((candidate) => candidate.id === item.id));
-  const move = (direction: number) => setActiveIndex((current) => current === null ? null : (current + direction + allItems.length) % allItems.length);
+  const move = useCallback((direction: number) => {
+    setActiveIndex((current) => current === null ? null : (current + direction + allItems.length) % allItems.length);
+  }, [allItems.length]);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
@@ -172,7 +177,7 @@ export default function ArchiveContent() {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [activeIndex]);
+  }, [activeIndex, move]);
 
   return <>
     <section className="page-hero archive-hero">
@@ -181,7 +186,7 @@ export default function ArchiveContent() {
       <div><p className="eyebrow"><span /> Nuestra memoria</p><h1>Escuchanos.<br /><em>Miranos.</em></h1></div>
       <p className="page-intro">Conciertos, ensayos y momentos que forman nuestra historia colectiva.</p>
     </section>
-    <main className="archive-page">
+    <div className="archive-page">
       <div className="archive-heading">
         <p className="section-index">Una memoria en movimiento</p>
         <h2>Generaciones,<br /><em>escenarios y encuentros.</em></h2>
@@ -204,17 +209,38 @@ export default function ArchiveContent() {
         </div>
       </nav>
       {collections.map((collection) => <Collection collection={collection} onOpen={openItem} key={collection.id} />)}
-    </main>
+    </div>
     {activeItem && activeIndex !== null && (
-      <div className="archive-lightbox" role="dialog" aria-modal="true" aria-label={activeItem.title} onMouseDown={() => setActiveIndex(null)}>
+      <div
+        className="archive-lightbox"
+        role="dialog"
+        aria-modal="true"
+        aria-label={activeItem.title}
+        onTouchStart={(event) => {
+          const touch = event.touches[0];
+          lightboxTouch.current = { x: touch.clientX, y: touch.clientY };
+        }}
+        onTouchEnd={(event) => {
+          const start = lightboxTouch.current;
+          const touch = event.changedTouches[0];
+          lightboxTouch.current = null;
+          if (!start || !touch) return;
+          const deltaX = touch.clientX - start.x;
+          const deltaY = touch.clientY - start.y;
+          if (Math.abs(deltaX) > 48 && Math.abs(deltaX) > Math.abs(deltaY) * 1.15) move(deltaX < 0 ? 1 : -1);
+        }}
+        onTouchCancel={() => { lightboxTouch.current = null; }}
+      >
+        <button className="lightbox-backdrop" onClick={() => setActiveIndex(null)} aria-label="Cerrar visor" />
         <button className="lightbox-close" onClick={() => setActiveIndex(null)} aria-label="Cerrar imagen">×</button>
         <button className="lightbox-arrow lightbox-prev" onClick={(event) => { event.stopPropagation(); move(-1); }} aria-label="Imagen anterior">←</button>
-        <figure onMouseDown={(event) => event.stopPropagation()}>
+        <figure>
           <img src={activeItem.url} alt={activeItem.title} />
           <figcaption>
             <span>{String(activeIndex + 1).padStart(2, "0")} / {String(allItems.length).padStart(2, "0")}</span>
             <p>{activeItem.caption || activeItem.title}</p>
           </figcaption>
+          <small className="lightbox-swipe-hint">Deslizá para recorrer</small>
         </figure>
         <button className="lightbox-arrow lightbox-next" onClick={(event) => { event.stopPropagation(); move(1); }} aria-label="Imagen siguiente">→</button>
       </div>
