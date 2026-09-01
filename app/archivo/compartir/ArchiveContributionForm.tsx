@@ -4,7 +4,9 @@ import { ChangeEvent, DragEvent, FormEvent, useMemo, useRef, useState } from "re
 
 type UploadState = "idle" | "preparing" | "uploading" | "success" | "error";
 type FieldErrors = Record<string, string>;
-type UploadSession = { name: string; uploadUrl: string };
+type UploadSession = { name: string; uploadUrl: string; signature: string };
+
+const CHUNK_SIZE = 2 * 1024 * 1024;
 
 const IMAGE_EXTENSIONS = new Set(["jpg", "jpeg", "png", "webp", "gif", "heic", "heif", "tif", "tiff", "bmp", "avif", "svg", "dng", "raw", "cr2", "nef", "arw"]);
 
@@ -25,17 +27,30 @@ function formatBytes(bytes: number) {
 }
 
 function uploadFile(file: File, session: UploadSession, onProgress: (progress: number) => void) {
-  return new Promise<void>((resolve, reject) => {
-    const request = new XMLHttpRequest();
-    request.open("PUT", session.uploadUrl);
-    request.setRequestHeader("Content-Type", file.type || "application/octet-stream");
-    request.upload.addEventListener("progress", event => {
-      if (event.lengthComputable) onProgress(Math.round((event.loaded / event.total) * 100));
-    });
-    request.addEventListener("load", () => request.status >= 200 && request.status < 300 ? resolve() : reject(new Error("No pudimos guardar uno de los archivos.")));
-    request.addEventListener("error", () => reject(new Error("La conexión se interrumpió durante la carga.")));
-    request.send(file);
-  });
+  return (async () => {
+    let start = 0;
+    while (start < file.size) {
+      const end = Math.min(start + CHUNK_SIZE, file.size);
+      const response = await fetch("/api/archive-upload/chunk", {
+        method: "POST",
+        headers: {
+          "content-type": "application/octet-stream",
+          "x-archive-upload-url": session.uploadUrl,
+          "x-archive-upload-signature": session.signature,
+          "x-archive-upload-start": String(start),
+          "x-archive-upload-total": String(file.size),
+          "x-archive-upload-type": file.type || "application/octet-stream",
+        },
+        body: file.slice(start, end),
+      });
+      const result = await response.json() as { success?: boolean; message?: string; received?: number };
+      if (!response.ok || !result.success || result.received !== end) {
+        throw new Error(result.message || "La conexión se interrumpió durante la carga.");
+      }
+      start = end;
+      onProgress(Math.round((start / file.size) * 100));
+    }
+  })();
 }
 
 export default function ArchiveContributionForm() {

@@ -1,4 +1,5 @@
 import { isValidEmail } from "@/lib/validation";
+import { createHmac } from "node:crypto";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -68,5 +69,9 @@ export async function POST(request: Request) {
 
   const validUploads = result.uploads?.length === files.length && result.uploads.every(upload => upload && typeof upload.name === "string" && /^https:\/\//.test(upload.uploadUrl));
   if (!response.ok || result.success !== true || !validUploads) return Response.json({ success: false, message: result.message || ERROR_MESSAGE }, { status: 502 });
-  return Response.json({ success: true, uploads: result.uploads }, { headers: { "cache-control": "no-store" } });
+  const uploads = result.uploads!.map(upload => ({
+    ...upload,
+    signature: createHmac("sha256", uploadSecret).update(upload.uploadUrl).digest("base64url"),
+  }));
+  return Response.json({ success: true, uploads }, { headers: { "cache-control": "no-store" } });
 }
