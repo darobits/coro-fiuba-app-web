@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 type Media = {
   id: number;
@@ -88,6 +88,32 @@ function MediaCard({ item, index, onOpen }: { item: Media; index: number; onOpen
 }
 
 function Collection({ collection, onOpen }: { collection: ArchiveCollection; onOpen: (item: Media) => void }) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const goToSlide = (index: number) => {
+    const track = trackRef.current;
+    const nextIndex = Math.max(0, Math.min(index, collection.items.length - 1));
+    const card = track?.children[nextIndex] as HTMLElement | undefined;
+    if (!track || !card) return;
+    track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: "smooth" });
+    setCurrentSlide(nextIndex);
+  };
+
+  const syncCurrentSlide = () => {
+    const track = trackRef.current;
+    if (!track) return;
+    const viewportCenter = track.scrollLeft + track.clientWidth / 2;
+    const cards = Array.from(track.children) as HTMLElement[];
+    const nextIndex = cards.reduce((closest, card, index) => {
+      const cardCenter = card.offsetLeft - track.offsetLeft + card.clientWidth / 2;
+      const closestCard = cards[closest];
+      const closestCenter = closestCard.offsetLeft - track.offsetLeft + closestCard.clientWidth / 2;
+      return Math.abs(cardCenter - viewportCenter) < Math.abs(closestCenter - viewportCenter) ? index : closest;
+    }, 0);
+    setCurrentSlide(nextIndex);
+  };
+
   return (
     <section className={`archive-collection ${collection.tone}`} id={collection.id}>
       <header>
@@ -98,7 +124,15 @@ function Collection({ collection, onOpen }: { collection: ArchiveCollection; onO
           <small>{collection.items.length} fotografías</small>
         </div>
       </header>
-      <div className="archive-mosaic">
+      <div className="collection-slider-tools" aria-label={`Navegación de ${collection.title}`}>
+        <div className="collection-progress" aria-hidden="true"><i style={{ width: `${((currentSlide + 1) / collection.items.length) * 100}%` }} /></div>
+        <span aria-live="polite"><strong>{String(currentSlide + 1).padStart(2, "0")}</strong> / {String(collection.items.length).padStart(2, "0")}</span>
+        <div>
+          <button onClick={() => goToSlide(currentSlide - 1)} disabled={currentSlide === 0} aria-label={`Anterior en ${collection.title}`}>←</button>
+          <button onClick={() => goToSlide(currentSlide + 1)} disabled={currentSlide === collection.items.length - 1} aria-label={`Siguiente en ${collection.title}`}>→</button>
+        </div>
+      </div>
+      <div className="archive-mosaic" ref={trackRef} onScroll={syncCurrentSlide}>
         {collection.items.map((item, index) => <MediaCard item={item} index={index} onOpen={onOpen} key={item.id} />)}
       </div>
     </section>

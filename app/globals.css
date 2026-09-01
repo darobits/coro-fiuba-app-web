@@ -587,3 +587,56 @@ h1 em, h2 em { color: var(--gold); font-weight: 400; }
   .assistant-team { grid-template-columns:1fr; }
   .assistant-team section { min-height:0; }
 }
+
+/* Archivo táctil: carrusel editorial para tablet y mobile */
+.collection-slider-tools { display:none; }
+
+@media (max-width:900px) {
+  .archive-page { overflow:hidden; }
+  .archive-collection > header { margin-bottom:28px; }
+  .collection-slider-tools { display:grid; grid-template-columns:minmax(90px,1fr) auto auto; gap:18px; align-items:center; margin:0 0 24px; }
+  .collection-progress { height:2px; overflow:hidden; background:rgba(3,29,63,.16); }
+  .collection-progress i { display:block; height:100%; background:linear-gradient(90deg,#0095db,#1a2b5e); transition:width .28s ease; }
+  .collection-slider-tools > span { color:#63717c; font-size:8px; font-weight:700; letter-spacing:.13em; }
+  .collection-slider-tools > span strong { color:var(--navy); font-family:var(--font-display); font-size:18px; font-weight:600; }
+  .collection-slider-tools > div:last-child { display:flex; gap:8px; }
+  .collection-slider-tools button { width:43px; height:43px; display:grid; place-items:center; border:1px solid rgba(3,29,63,.18); border-radius:50%; color:var(--navy); background:rgba(255,255,255,.46); font-size:17px; cursor:pointer; transition:color .2s ease,background .2s ease,border-color .2s ease,transform .2s ease; }
+  .collection-slider-tools button:active { transform:scale(.94); }
+  .collection-slider-tools button:disabled { opacity:.28; cursor:default; }
+  .collection-night .collection-progress { background:rgba(255,255,255,.18); }
+  .collection-night .collection-progress i { background:linear-gradient(90deg,#66d1f7,var(--gold)); }
+  .collection-night .collection-slider-tools > span { color:#aebfd1; }
+  .collection-night .collection-slider-tools > span strong { color:white; }
+  .collection-night .collection-slider-tools button { border-color:rgba(255,255,255,.22); color:white; background:rgba(255,255,255,.06); }
+  .archive-collection .archive-mosaic,
+  .collection-rehearsals .archive-mosaic,
+  .collection-generations .archive-mosaic,
+  .collection-stages .archive-mosaic { display:flex; grid-template-columns:none; gap:clamp(18px,3vw,28px); width:auto; max-width:none; margin-inline:calc(clamp(24px,7vw,110px) * -1); padding:8px clamp(24px,7vw,110px) 30px; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; scroll-padding-inline:clamp(24px,7vw,110px); overscroll-behavior-x:contain; scrollbar-width:none; touch-action:pan-x pinch-zoom; }
+  .archive-collection .archive-mosaic::-webkit-scrollbar { display:none; }
+  .archive-collection .archive-mosaic .media-card,
+  .archive-collection .archive-mosaic .media-card:nth-child(n) { flex:0 0 min(62vw,480px); width:auto; min-width:0; max-width:none; margin:0; padding:0; scroll-snap-align:start; scroll-snap-stop:always; transform:none; }
+  .archive-collection .archive-mosaic .media-image { transform:rotate(-.35deg); }
+  .archive-collection .archive-mosaic .media-card:nth-child(even) .media-image { transform:rotate(.35deg); }
+  .archive-collection .archive-mosaic .media-card.is-visible { transform:none; }
+  .archive-collection .media-expand { opacity:1; transform:none; }
+}
+
+@media (hover:hover) and (pointer:fine) and (max-width:900px) {
+  .collection-slider-tools button:not(:disabled):hover { border-color:#0095db; color:white; background:var(--navy); transform:translateY(-2px); }
+  .collection-night .collection-slider-tools button:not(:disabled):hover { border-color:#66d1f7; color:var(--navy); background:#66d1f7; }
+}
+
+@media (max-width:560px) {
+  .archive-collection > header { margin-bottom:22px; }
+  .collection-intro { gap:12px; }
+  .collection-slider-tools { grid-template-columns:minmax(70px,1fr) auto auto; gap:12px; margin-bottom:18px; }
+  .collection-slider-tools button { width:40px; height:40px; }
+  .archive-collection .archive-mosaic,
+  .collection-rehearsals .archive-mosaic,
+  .collection-generations .archive-mosaic,
+  .collection-stages .archive-mosaic { gap:16px; margin-inline:-22px; padding:7px 22px 26px; scroll-padding-inline:22px; }
+  .archive-collection .archive-mosaic .media-card,
+  .archive-collection .archive-mosaic .media-card:nth-child(n) { flex-basis:82vw; }
+  .archive-mosaic .media-caption { margin-top:11px; font-size:15px; }
+  .media-expand { right:10px; bottom:10px; padding:9px 10px; }
+}
