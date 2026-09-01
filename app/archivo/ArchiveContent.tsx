@@ -145,11 +145,33 @@ export default function ArchiveContent() {
   const allItems = useMemo(() => collections.flatMap((collection) => collection.items), []);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const lightboxTouch = useRef<{ x: number; y: number } | null>(null);
+  const lightboxHistoryActive = useRef(false);
   const activeItem = activeIndex === null ? null : allItems[activeIndex];
 
-  const openItem = (item: Media) => setActiveIndex(allItems.findIndex((candidate) => candidate.id === item.id));
+  const openItem = (item: Media) => {
+    const index = allItems.findIndex((candidate) => candidate.id === item.id);
+    if (index < 0) return;
+    setActiveIndex(index);
+    if (!lightboxHistoryActive.current) {
+      lightboxHistoryActive.current = true;
+      window.history.pushState({ ...(window.history.state || {}), archiveLightboxIndex: index }, "");
+    } else {
+      window.history.replaceState({ ...(window.history.state || {}), archiveLightboxIndex: index }, "");
+    }
+  };
+  const closeLightbox = useCallback(() => {
+    if (lightboxHistoryActive.current) window.history.back();
+    else setActiveIndex(null);
+  }, []);
   const move = useCallback((direction: number) => {
-    setActiveIndex((current) => current === null ? null : (current + direction + allItems.length) % allItems.length);
+    setActiveIndex((current) => {
+      if (current === null) return null;
+      const next = (current + direction + allItems.length) % allItems.length;
+      if (lightboxHistoryActive.current) {
+        window.history.replaceState({ ...(window.history.state || {}), archiveLightboxIndex: next }, "");
+      }
+      return next;
+    });
   }, [allItems.length]);
 
   useEffect(() => {
@@ -164,11 +186,29 @@ export default function ArchiveContent() {
   }, []);
 
   useEffect(() => {
+    const syncLightboxWithHistory = (state: unknown) => {
+      const historyState = state as { archiveLightboxIndex?: unknown } | null;
+      const historyIndex = historyState?.archiveLightboxIndex;
+      if (typeof historyIndex === "number" && historyIndex >= 0 && historyIndex < allItems.length) {
+        lightboxHistoryActive.current = true;
+        setActiveIndex(historyIndex);
+      } else {
+        lightboxHistoryActive.current = false;
+        setActiveIndex(null);
+      }
+    };
+    const onPopState = (event: PopStateEvent) => syncLightboxWithHistory(event.state);
+    syncLightboxWithHistory(window.history.state);
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, [allItems.length]);
+
+  useEffect(() => {
     if (activeIndex === null) return;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setActiveIndex(null);
+      if (event.key === "Escape") closeLightbox();
       if (event.key === "ArrowLeft") move(-1);
       if (event.key === "ArrowRight") move(1);
     };
@@ -177,7 +217,7 @@ export default function ArchiveContent() {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [activeIndex, move]);
+  }, [activeIndex, closeLightbox, move]);
 
   return <>
     <section className="page-hero archive-hero">
@@ -231,8 +271,8 @@ export default function ArchiveContent() {
         }}
         onTouchCancel={() => { lightboxTouch.current = null; }}
       >
-        <button className="lightbox-backdrop" onClick={() => setActiveIndex(null)} aria-label="Cerrar visor" />
-        <button className="lightbox-close" onClick={() => setActiveIndex(null)} aria-label="Cerrar imagen">×</button>
+        <button className="lightbox-backdrop" onClick={closeLightbox} aria-label="Cerrar visor" />
+        <button className="lightbox-close" onClick={closeLightbox} aria-label="Cerrar imagen">×</button>
         <button className="lightbox-arrow lightbox-prev" onClick={(event) => { event.stopPropagation(); move(-1); }} aria-label="Imagen anterior">←</button>
         <figure>
           <img src={activeItem.url} alt={activeItem.title} />
@@ -240,7 +280,7 @@ export default function ArchiveContent() {
             <span>{String(activeIndex + 1).padStart(2, "0")} / {String(allItems.length).padStart(2, "0")}</span>
             <p>{activeItem.caption || activeItem.title}</p>
           </figcaption>
-          <small className="lightbox-swipe-hint">Deslizá para recorrer</small>
+          <small className="lightbox-swipe-hint">Deslizá para recorrer · Volver para cerrar</small>
         </figure>
         <button className="lightbox-arrow lightbox-next" onClick={(event) => { event.stopPropagation(); move(1); }} aria-label="Imagen siguiente">→</button>
       </div>
