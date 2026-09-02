@@ -352,31 +352,23 @@ h1 em, h2 em { color: var(--gold); font-weight: 400; }
 .agenda-aside > a:hover::before { transform:translateX(120%); }
 .agenda-aside > a:hover small { color:#40526a; }
 
-/* Archivo como pared de fotografías */
-.archive-mosaic { columns:3 280px; column-gap:clamp(18px,2.7vw,38px); }
-.archive-mosaic .media-card { margin-bottom:clamp(22px,3vw,42px); }
-.archive-mosaic .media-card:nth-child(3n+2) { padding:0 7% 0 2%; }
-.archive-mosaic .media-card:nth-child(4n) { padding:0 1% 0 9%; }
-.archive-mosaic .media-card:nth-child(5n) { padding:0 5%; }
-.archive-mosaic .media-image { border:7px solid rgba(246,241,230,.92); background:#07162d; box-shadow:0 14px 30px rgba(1,14,36,.2),0 2px 5px rgba(1,14,36,.16); transform:rotate(-.7deg); }
-.archive-mosaic .media-card:nth-child(even) .media-image { transform:rotate(.85deg); }
-.archive-mosaic .media-card:nth-child(3n) .media-image { transform:rotate(-1.15deg); }
-.archive-mosaic .media-card:hover .media-image { transform:rotate(0) translateY(-7px) scale(1.012); box-shadow:0 25px 48px rgba(1,14,36,.25); }
+/* Archivo como grilla uniforme de fotografías */
+.archive-mosaic { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); columns:auto; gap:clamp(28px,3vw,44px); }
+.archive-mosaic .media-card,
+.archive-mosaic .media-card:nth-child(n) { grid-column:auto; grid-row:auto; justify-self:stretch; width:100%; min-width:0; max-width:none; margin:0; padding:0; }
+.archive-mosaic .media-image,
+.archive-mosaic .media-card:nth-child(n) .media-image { aspect-ratio:4/3; border:7px solid rgba(246,241,230,.92); background:#07162d; box-shadow:0 14px 30px rgba(1,14,36,.2),0 2px 5px rgba(1,14,36,.16); transform:none; }
+.archive-mosaic .media-image img { display:block; width:100%; height:100%; object-fit:cover; object-position:center 58%; }
+.archive-mosaic .media-card:hover .media-image { transform:translateY(-7px) scale(1.012); box-shadow:0 25px 48px rgba(1,14,36,.25); }
 .archive-mosaic .media-caption { display:block; margin:13px 7px 0; color:#5f696d; font-family:var(--font-display); font-size:16px; line-height:1.35; }
 .collection-night .media-image { border-color:rgba(233,226,210,.88); }
-.collection-night .archive-mosaic { columns:2 360px; max-width:1040px; margin-inline:auto; }
 .collection-night .media-caption { color:#c3cfdb; }
-.collection-life .archive-mosaic { columns:3 280px; max-width:1280px; margin-inline:auto; }
-.collection-life .archive-mosaic .media-card:nth-child(2) { padding:6% 2% 0 8%; }
-.collection-life .archive-mosaic .media-card:nth-child(3) { padding:0 9% 0 1%; }
 .collection-life { padding-bottom:54px; }
 
 @media (max-width:850px) {
   .agenda-page { grid-template-columns:1fr; }
   .announcement-list article { grid-template-columns:46px minmax(0,1fr) minmax(170px,.4fr); }
-  .archive-mosaic { columns:2 245px; }
-  .collection-life .archive-mosaic { columns:2 260px; }
-  .collection-night .archive-mosaic { columns:2 245px; }
+  .archive-mosaic { grid-template-columns:repeat(2,minmax(0,1fr)); columns:auto; }
 }
 
 @media (max-width:620px) {
@@ -388,11 +380,7 @@ h1 em, h2 em { color: var(--gold); font-weight: 400; }
   .announcement-place { grid-column:2; padding:16px 0 0; border-top:1px solid rgba(3,29,63,.12); border-left:0; }
   .announcement-place > strong { font-size:25px; }
   .agenda-aside { padding:30px 24px; }
-  .archive-mosaic,.collection-life .archive-mosaic { columns:1; }
-  .collection-night .archive-mosaic { columns:1; }
-  .archive-mosaic .media-card,.archive-mosaic .media-card:nth-child(3n+2),.archive-mosaic .media-card:nth-child(4n),.archive-mosaic .media-card:nth-child(5n),.collection-life .archive-mosaic .media-card:nth-child(2),.collection-life .archive-mosaic .media-card:nth-child(3) { margin-bottom:34px; padding:0; }
-  .archive-mosaic .media-card:nth-child(even) { width:94%; margin-left:auto; }
-  .archive-mosaic .media-card:nth-child(3n) { width:91%; }
+  .archive-mosaic { grid-template-columns:1fr; columns:auto; }
 }
 
 /* Historia ampliada del Coro */
@@ -699,8 +687,7 @@ h1 em, h2 em { color: var(--gold); font-weight: 400; }
 .archive-mosaic .media-image img {
   width:100%;
   height:100%;
-  object-fit:contain;
-  object-position:center;
+  object-fit:cover;
 }
 .collection-night .archive-mosaic .media-image {
   background:radial-gradient(circle at 50% 42%,#12466e 0%,#0b294d 48%,#020b1c 100%);

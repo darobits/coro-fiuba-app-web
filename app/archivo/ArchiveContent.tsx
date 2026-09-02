@@ -80,7 +80,7 @@ function MediaCard({ item, index, onOpen }: { item: Media; index: number; onOpen
   return (
     <button className={`media-card reveal-item media-${index % 4}`} onClick={() => onOpen(item)} aria-label={`Ampliar: ${item.title}`}>
       <span className="media-image">
-        <img src={item.url} alt={item.title} loading={index > 1 ? "lazy" : "eager"} style={{ objectPosition: item.focus || "center" }} />
+        <img src={item.url} alt={item.title} loading={index > 1 ? "lazy" : "eager"} style={{ objectPosition: item.focus || "center 58%" }} />
         <span className="media-expand" aria-hidden="true">Ver imagen <b>↗</b></span>
       </span>
       {item.caption && <small className="media-caption">{item.caption}</small>}
