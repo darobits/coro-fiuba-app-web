@@ -986,3 +986,89 @@ h1 em, h2 em { color: var(--gold); font-weight: 400; }
   .archive-upload-queue li { grid-template-columns:27px minmax(0,1fr); padding:9px 10px; }
   .archive-upload-queue li em { grid-column:2; margin-top:-6px; }
 }
+
+/* Plantel actual del Coro */
+.choir-members {
+  position: relative;
+  overflow: hidden;
+  padding: 115px clamp(24px, 7vw, 110px) 125px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 92% 7%, rgba(0, 149, 219, .18), transparent 30%),
+    linear-gradient(135deg, #06142d 0%, #092c59 62%, #07517a 100%);
+}
+.choir-members::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .5;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .045) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+.members-heading,
+.voice-groups { position: relative; z-index: 1; }
+.members-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 66px;
+  padding-bottom: 42px;
+  border-bottom: 1px solid rgba(255, 255, 255, .2);
+}
+.members-heading h2 { color: #fff; font-size: clamp(58px, 6vw, 90px); line-height: .88; }
+.members-heading h2 em { color: #70d5f8; }
+.members-summary { display: flex; align-items: center; gap: 18px; padding-right: 8px; }
+.members-summary strong { color: #f7a600; font-family: var(--font-display); font-size: 70px; font-weight: 500; line-height: .8; }
+.members-summary span { color: #b9cede; font-size: 8px; font-weight: 750; line-height: 1.55; text-transform: uppercase; letter-spacing: .15em; }
+.voice-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.voice-group {
+  min-width: 0;
+  border: 1px solid rgba(255, 255, 255, .18);
+  background: rgba(255, 255, 255, .055);
+  backdrop-filter: blur(6px);
+  transition: transform .35s ease, border-color .35s ease, background .35s ease;
+}
+.voice-group header { display: grid; grid-template-columns: 62px 1fr auto; align-items: center; gap: 19px; padding: 25px 28px; border-bottom: 1px solid rgba(255, 255, 255, .14); }
+.voice-group header > span { display: grid; place-items: center; width: 52px; height: 52px; border: 1px solid rgba(112, 213, 248, .5); border-radius: 50%; color: #70d5f8; font-family: var(--font-display); font-size: 25px; }
+.voice-group header small { display: block; margin-bottom: 4px; color: #92aabd; font-size: 7px; font-weight: 750; text-transform: uppercase; letter-spacing: .15em; }
+.voice-group h3 { margin: 0; color: #fff; font-size: 32px; line-height: 1; }
+.voice-group header b { align-self: start; color: #f7a600; font-family: var(--font-display); font-size: 28px; font-weight: 500; }
+.voice-group ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; padding: 16px 28px 24px; list-style: none; }
+.voice-group li { display: flex; align-items: center; gap: 11px; min-width: 0; padding: 11px 8px 11px 0; color: #e8f1f6; font-size: 13px; line-height: 1.35; }
+.voice-group li span { width: 17px; height: 1px; flex: none; background: linear-gradient(90deg, #f7a600, rgba(247, 166, 0, .2)); }
+.voice-group:nth-child(2) { grid-row: span 2; }
+.voice-group:nth-child(2) ul { grid-template-columns: 1fr; }
+.voice-group:nth-child(4) { grid-column: 1 / -1; }
+.voice-group:nth-child(4) ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+@media (hover: hover) and (pointer: fine) {
+  .voice-group:hover { transform: translateY(-5px); border-color: rgba(112, 213, 248, .52); background: rgba(255, 255, 255, .09); }
+}
+
+@media (max-width: 850px) {
+  .choir-members { padding: 90px 42px 100px; }
+  .voice-groups { grid-template-columns: 1fr; }
+  .voice-group:nth-child(2) { grid-row: auto; }
+  .voice-group:nth-child(4) { grid-column: auto; }
+  .voice-group:nth-child(2) ul,
+  .voice-group:nth-child(4) ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 560px) {
+  .choir-members { padding: 72px 22px 78px; }
+  .members-heading { align-items: start; margin-bottom: 38px; padding-bottom: 30px; }
+  .members-heading h2 { font-size: 53px; }
+  .members-summary { display: none; }
+  .voice-groups { gap: 15px; }
+  .voice-group header { grid-template-columns: 45px 1fr auto; gap: 14px; padding: 20px 18px; }
+  .voice-group header > span { width: 42px; height: 42px; font-size: 21px; }
+  .voice-group h3 { font-size: 27px; }
+  .voice-group ul,
+  .voice-group:nth-child(2) ul,
+  .voice-group:nth-child(4) ul { grid-template-columns: 1fr; padding: 12px 19px 19px; }
+  .voice-group li { padding: 9px 0; font-size: 13px; }
+}

@@ -1495,3 +1495,31 @@ body.fiuba-edition {
   }
   .fiuba-edition .fiuba-hero-copy::after { top:22px; right:20px; width:58px; }
 }
+
+/* Subdirección integrada al bloque de legado */
+.fiuba-edition .legacy-content .assistant-team-card {
+  margin-left: 6%;
+  border: 1px solid rgba(112, 213, 248, .24);
+  border-left: 4px solid #f7a600;
+  background:
+    radial-gradient(circle at 92% 8%, rgba(0, 149, 219, .2), transparent 34%),
+    linear-gradient(135deg, #0c315c 0%, #071d39 100%);
+  color: #fff;
+  box-shadow: 0 24px 54px rgba(0, 7, 24, .28);
+}
+.fiuba-edition .assistant-team-card > span { color: #f7a600; }
+.fiuba-edition .legacy-content .assistant-team-card h3 { color: #f7f9fb; }
+.fiuba-edition .legacy-content .assistant-team-card p { color: #bfd0dc; }
+.fiuba-edition .assistant-team-card .assistant-team {
+  border-color: rgba(112, 213, 248, .22);
+  background: rgba(112, 213, 248, .22);
+}
+.fiuba-edition .assistant-team-card .assistant-team section {
+  background: rgba(4, 25, 52, .72);
+}
+.fiuba-edition .assistant-team-card .assistant-team strong { color: #f4f7fb; }
+.fiuba-edition .assistant-team-card .assistant-team small { color: #70d5f8; }
+
+@media (max-width: 560px) {
+  .fiuba-edition .legacy-content .assistant-team-card { margin-left: 0; }
+}
