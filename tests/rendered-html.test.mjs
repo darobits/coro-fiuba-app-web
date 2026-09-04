@@ -57,12 +57,14 @@ test("el SEO usa el dominio canónico y publica sitemap y robots", async () => {
   assert.equal(socialImage.subarray(1, 4).toString("ascii"), "PNG");
   assert.doesNotMatch(homePage, /también conocido como FIUBA Coro/);
 });
-test("la ruta del panel informa que estará disponible próximamente", async () => {
-  const page = await readFile(new URL("../app/login/page.tsx", import.meta.url), "utf8");
-  const notice = await readFile(new URL("../app/components/DashboardNotice.tsx", import.meta.url), "utf8");
-  assert.match(page, /Panel en preparación/i);
-  assert.match(notice, /próxima versión/i);
-  assert.match(notice, /router\.replace\("\/"\)/i);
+test("las rutas de login y administración permanecen cerradas", async () => {
+  const login = await readFile(new URL("../app/login/page.tsx", import.meta.url), "utf8");
+  const admin = await readFile(new URL("../app/admin/page.tsx", import.meta.url), "utf8");
+  assert.match(login, /import \{ notFound \} from "next\/navigation"/);
+  assert.match(admin, /import \{ notFound \} from "next\/navigation"/);
+  assert.match(login, /notFound\(\)/);
+  assert.match(admin, /notFound\(\)/);
+  assert.doesNotMatch(login, /DashboardNotice/);
 });
 test("la convocatoria guarda únicamente mediante Google Apps Script", async () => {
   const route = await readFile(new URL("../app/api/join/route.ts", import.meta.url), "utf8");

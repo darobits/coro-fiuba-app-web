@@ -4,11 +4,14 @@ import { ChangeEvent, DragEvent, FormEvent, useCallback, useEffect, useMemo, use
 
 type UploadState = "idle" | "preparing" | "uploading" | "success" | "error";
 type FieldErrors = Record<string, string>;
-type UploadSession = { name: string; uploadUrl: string; signature: string };
+type UploadSession = { name: string; uploadUrl: string; signature: string; type: string };
 
 const CHUNK_SIZE = 2 * 1024 * 1024;
+const MAX_FILES = 20;
+const MAX_FILE_SIZE = 100 * 1024 * 1024;
+const MAX_TOTAL_SIZE = 500 * 1024 * 1024;
 
-const IMAGE_EXTENSIONS = new Set(["jpg", "jpeg", "png", "webp", "gif", "heic", "heif", "tif", "tiff", "bmp", "avif", "svg", "dng", "raw", "cr2", "nef", "arw"]);
+const IMAGE_EXTENSIONS = new Set(["jpg", "jpeg", "png", "webp", "gif", "heic", "heif", "tif", "tiff", "bmp", "avif", "dng", "raw", "cr2", "nef", "arw"]);
 
 function extension(name: string) {
   return name.toLowerCase().split(".").pop() || "";
@@ -16,7 +19,7 @@ function extension(name: string) {
 
 function isAcceptedFile(file: File) {
   const ext = extension(file.name);
-  return file.type.startsWith("image/") || IMAGE_EXTENSIONS.has(ext) || ext === "zip";
+  return IMAGE_EXTENSIONS.has(ext) && file.size > 0 && file.size <= MAX_FILE_SIZE;
 }
 
 function formatBytes(bytes: number) {
@@ -39,7 +42,7 @@ function uploadFile(file: File, session: UploadSession, onProgress: (progress: n
           "x-archive-upload-signature": session.signature,
           "x-archive-upload-start": String(start),
           "x-archive-upload-total": String(file.size),
-          "x-archive-upload-type": file.type || "application/octet-stream",
+          "x-archive-upload-type": session.type,
         },
         body: file.slice(start, end),
       });
@@ -114,9 +117,9 @@ export default function ArchiveContributionForm() {
     setFiles(current => {
       const unique = new Map(current.map(file => [`${file.name}-${file.size}-${file.lastModified}`, file]));
       accepted.forEach(file => unique.set(`${file.name}-${file.size}-${file.lastModified}`, file));
-      return [...unique.values()];
+      return [...unique.values()].slice(0, MAX_FILES);
     });
-    setErrors(current => ({ ...current, files: rejected ? "Algunos archivos no eran imágenes ni archivos ZIP y no se agregaron." : "" }));
+    setErrors(current => ({ ...current, files: rejected || incoming.length > MAX_FILES ? "Sólo se permiten hasta 20 imágenes de un máximo de 100 MB cada una." : "" }));
     setMessage("");
     if (state === "error") setState("idle");
   }
@@ -147,7 +150,9 @@ export default function ArchiveContributionForm() {
     if ((values.fullName || "").trim().length < 3) nextErrors.fullName = "Ingresá tu nombre y apellido.";
     if (!/^\S+@\S+\.\S+$/.test((values.email || "").trim())) nextErrors.email = "Ingresá un correo electrónico válido.";
     if (!(values.story || "").trim()) nextErrors.story = "Contanos brevemente qué muestran estos archivos.";
-    if (!files.length) nextErrors.files = "Agregá al menos una imagen o un archivo ZIP.";
+    if (!files.length) nextErrors.files = "Agregá al menos una imagen.";
+    if (files.length > MAX_FILES) nextErrors.files = "Podés enviar hasta 20 imágenes por vez.";
+    if (totalSize > MAX_TOTAL_SIZE) nextErrors.files = "El envío completo no puede superar los 500 MB.";
     if (!data.get("consent")) nextErrors.consent = "Necesitamos tu autorización para conservar y revisar el material.";
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length) {
@@ -242,9 +247,9 @@ export default function ArchiveContributionForm() {
           onDragLeave={event => { if (event.currentTarget === event.target) setDragging(false); }}
           onDrop={handleDrop}
         >
-          <input ref={inputRef} name="files" type="file" multiple accept="image/*,.heic,.heif,.tif,.tiff,.avif,.dng,.raw,.cr2,.nef,.arw,.zip,application/zip,application/x-zip-compressed" onChange={handleInput} tabIndex={-1} />
+          <input ref={inputRef} name="files" type="file" multiple accept="image/jpeg,image/png,image/webp,image/gif,image/heic,image/heif,image/tiff,image/bmp,image/avif,.dng,.raw,.cr2,.nef,.arw" onChange={handleInput} tabIndex={-1} />
           <span className="archive-dropzone-icon" aria-hidden="true">＋</span>
-          <h3>Arrastrá imágenes o un ZIP</h3>
+          <h3>Arrastrá tus imágenes</h3>
           <p>JPG, PNG, WEBP, HEIC, TIFF, archivos RAW y otros formatos de imagen.</p>
           <button type="button" onClick={() => inputRef.current?.click()}>Elegir archivos</button>
         </div>
@@ -253,7 +258,7 @@ export default function ArchiveContributionForm() {
         {!!files.length && <section className="archive-file-list" aria-label="Archivos seleccionados">
           <header><strong>{files.length} {files.length === 1 ? "archivo" : "archivos"}</strong><span>{formatBytes(totalSize)} en total</span></header>
           {files.map((file, index) => <article key={`${file.name}-${file.size}-${file.lastModified}`}>
-            <span className="archive-file-kind">{extension(file.name) === "zip" ? "ZIP" : "IMG"}</span>
+            <span className="archive-file-kind">IMG</span>
             <div><strong>{file.name}</strong><small>{formatBytes(file.size)}</small>{busy && <i><span style={{ width: `${progress[file.name] || 0}%` }} /></i>}</div>
             <button type="button" disabled={busy} onClick={() => removeFile(index)} aria-label={`Quitar ${file.name}`}>×</button>
           </article>)}

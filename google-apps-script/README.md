@@ -66,3 +66,7 @@ Si la pestaña ya tiene la estructura anterior de trece columnas, el script inse
 ## Actualizaciones futuras de Code.gs
 
 Cuando modifiques `Code.gs`, guardá los cambios y creá una nueva versión desde **Administrar implementaciones**. Conservá la URL `/exec` configurada en el proyecto si Google mantiene la misma implementación.
+
+## Seguridad del endpoint
+
+En las propiedades del proyecto de Apps Script configurá `JOIN_SUBMISSION_SECRET` con una clave aleatoria larga y cargá exactamente el mismo valor como variable de entorno `JOIN_SUBMISSION_SECRET` en Vercel. Después, creá una nueva implementación del Apps Script para que la validación quede activa.

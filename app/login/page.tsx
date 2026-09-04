@@ -1,16 +1,5 @@
-import DashboardNotice from "@/app/components/DashboardNotice";
-import SiteHeader from "@/app/components/SiteHeader";
-import { pageMetadata } from "@/lib/metadata";
-
-export const metadata = {
-  ...pageMetadata("Panel en preparación", "El panel editorial estará disponible en una próxima versión.", "/login"),
-  robots: { index: false, follow: false },
-};
+import { notFound } from "next/navigation";
 
 export default function LoginPage() {
-  return <main className="dashboard-coming-page">
-    <SiteHeader />
-    <section aria-hidden="true"><span>Próxima versión</span><h1>Panel editorial<br />del Coro de la Facultad de Ingeniería UBA</h1></section>
-    <DashboardNotice open />
-  </main>;
+  notFound();
 }

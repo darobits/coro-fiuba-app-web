@@ -125,6 +125,10 @@ function doPost(e) {
     }
 
     var raw = JSON.parse(e.postData.contents);
+    var expectedSecret = PropertiesService.getScriptProperties().getProperty('JOIN_SUBMISSION_SECRET');
+    if (!expectedSecret || raw.secret !== expectedSecret) {
+      throw new Error('Solicitud no autorizada');
+    }
     var data = validateAndSanitize_(raw);
     var spreadsheet = getSpreadsheet_();
     var sheet = getOrCreateSheet_(spreadsheet);
@@ -150,15 +154,15 @@ function doPost(e) {
       id,
       now,
       now,
-      data.nombre,
-      data.email,
-      data.celular,
+      safeSheetValue_(data.nombre),
+      safeSheetValue_(data.email),
+      safeSheetValue_(data.celular),
       data.edad,
-      data.vinculoFiuba,
-      data.carrera,
-      data.registroVoz,
-      data.experiencia,
-      data.sobreVos,
+      safeSheetValue_(data.vinculoFiuba),
+      safeSheetValue_(data.carrera),
+      safeSheetValue_(data.registroVoz),
+      safeSheetValue_(data.experiencia),
+      safeSheetValue_(data.sobreVos),
       'Sí',
       'Nuevo',
       ''
@@ -813,6 +817,10 @@ function sanitizeText_(value, maxLength) {
     .slice(0, maxLength);
 
   return cleaned === '[object Object]' ? '' : cleaned;
+}
+
+function safeSheetValue_(value) {
+  return typeof value === 'string' && /^[=+\-@]/.test(value) ? "'" + value : value;
 }
 
 function buildDuplicateKey_(data) {

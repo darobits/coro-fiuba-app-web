@@ -1,5 +1,6 @@
 import { isValidEmail } from "@/lib/validation";
 import { FIUBA_AFFILIATIONS, FIUBA_CAREERS, FIUBA_STUDENT_AFFILIATION } from "@/lib/application-options";
+import { checkRateLimit, hasTrustedOrigin, readJsonObject, securityError } from "@/lib/request-security";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -34,7 +35,8 @@ function sanitizeText(value: unknown, maxLength: number) {
 
 async function saveInGoogleSheets(payload: Record<string, string | number | boolean>) {
   const scriptUrl = process.env.APPS_SCRIPT_URL?.trim();
-  if (!scriptUrl) {
+  const submissionSecret = process.env.JOIN_SUBMISSION_SECRET?.trim();
+  if (!scriptUrl || !submissionSecret) {
     return { response: Response.json({ success: false, message: "El formulario todavía no está conectado." }, { status: 503 }) };
   }
 
@@ -43,7 +45,7 @@ async function saveInGoogleSheets(payload: Record<string, string | number | bool
     response = await fetch(scriptUrl, {
       method: "POST",
       headers: { "content-type": "text/plain;charset=utf-8" },
-      body: JSON.stringify(payload),
+      body: JSON.stringify({ ...payload, secret: submissionSecret }),
       cache: "no-store",
       redirect: "follow",
       signal: AbortSignal.timeout(55_000),
@@ -66,21 +68,16 @@ async function saveInGoogleSheets(payload: Record<string, string | number | bool
   return { result: { success: true as const, id: result.id, message: result.message || "Inscripción registrada correctamente" } };
 }
 
-export async function GET() {
-  const configured = Boolean(process.env.APPS_SCRIPT_URL?.trim());
-  return Response.json(
-    { success: configured, service: "Google Apps Script", configured },
-    { status: configured ? 200 : 503, headers: { "cache-control": "no-store" } },
-  );
-}
-
 export async function POST(request: Request) {
-  let body: Record<string, unknown>;
-  try {
-    body = await request.json() as Record<string, unknown>;
-  } catch {
-    return Response.json({ success: false, message: "La solicitud no tiene un formato válido." }, { status: 400 });
-  }
+  if (!hasTrustedOrigin(request)) return securityError("El origen de la solicitud no es válido.", 403);
+
+  const rateLimit = checkRateLimit(request, "join", 6, 15 * 60 * 1000);
+  if (!rateLimit.allowed) return securityError("Se realizaron demasiados intentos. Esperá unos minutos.", 429, rateLimit.retryAfter);
+
+  const parsed = await readJsonObject(request, 16 * 1024);
+  if (parsed.error === "too-large") return securityError("La solicitud es demasiado grande.", 413);
+  if (!parsed.data) return securityError("La solicitud no tiene un formato válido.", 400);
+  const body = parsed.data;
 
   const nombre = sanitizeText(body.nombre, 120);
   const email = sanitizeText(body.email, 150).toLowerCase();
@@ -118,5 +115,5 @@ export async function POST(request: Request) {
   const payload = { nombre, email, celular, edad, vinculoFiuba, carrera, registroVoz, experiencia, sobreVos, consentimiento };
   const saved = await saveInGoogleSheets(payload);
   if (saved.response) return saved.response;
-  return Response.json(saved.result);
+  return Response.json(saved.result, { headers: { "cache-control": "no-store" } });
 }

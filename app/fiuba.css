@@ -1384,6 +1384,36 @@ body.fiuba-edition {
   font-size: 13px;
 }
 
+/* Header inteligente: libera espacio al bajar y vuelve al subir. */
+.fiuba-edition .site-header {
+  transform: translateY(0);
+  transition: transform .32s cubic-bezier(.2,.75,.2,1), background .28s ease, box-shadow .28s ease, border-color .28s ease, backdrop-filter .28s ease;
+  will-change: transform;
+}
+
+.fiuba-edition .site-header.is-hidden {
+  transform: translateY(calc(-100% - 2px));
+}
+
+.fiuba-edition .site-header-spacer { display: none; }
+
+@media (min-width: 1200px) {
+  .fiuba-edition .site-header {
+    position: fixed;
+    inset: 0 0 auto;
+    width: 100%;
+  }
+
+  .fiuba-edition .site-header-spacer {
+    display: block;
+    height: 88px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fiuba-edition .site-header { transition: none; }
+}
+
 .fiuba-edition .application-success-modal .button {
   min-width: 190px;
   margin-top: 4px;
