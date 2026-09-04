@@ -55,12 +55,26 @@ const generations: Media[] = [
   { id: -11, type: "image", url: "/choir/coro-1999.webp", title: "Coro de la Facultad de Ingeniería UBA, 1999", caption: "Una generación del Coro a fines del siglo XX." },
   { id: -12, type: "image", url: "/choir/coro-2015.webp", title: "Generación 2015", caption: "El Coro de la Facultad de Ingeniería UBA reunido durante la temporada 2015." },
   { id: -13, type: "image", url: "/choir/coro-generations.webp", title: "Generaciones del Coro", caption: "Distintas voces y épocas que forman una misma historia colectiva." },
+  { id: -2001, type: "image", url: "/choir/archive/generations-60/generation-60-01.jpg", title: "Coro FIUBA en concierto, década del 60", caption: "Una de las primeras generaciones del Coro de la Facultad de Ingeniería UBA." },
+  { id: -2002, type: "image", url: "/choir/archive/generations-60/generation-60-02.jpg", title: "El Coro visto desde las alturas", caption: "Una formación histórica del Coro durante una presentación en la década del 60." },
+  { id: -2003, type: "image", url: "/choir/archive/generations-60/generation-60-03.jpg", title: "Presentación coral en los años sesenta", caption: "El conjunto reunido en escena durante sus primeros años de actividad." },
+  { id: -2004, type: "image", url: "/choir/archive/generations-60/generation-60-04.jpg", title: "Encuentro coral universitario", caption: "El Coro de Ingeniería compartiendo una presentación junto a otras voces." },
+  { id: -2005, type: "image", url: "/choir/archive/generations-60/generation-60-05.jpg", title: "El Coro junto a Virtú Maragno", caption: "Virtú Maragno al frente de una generación fundacional del Coro." },
+  { id: -2006, type: "image", url: "/choir/archive/generations-60/generation-60-06.jpg", title: "Festival universitario en La Plata", caption: "Una presentación histórica del Coro en un encuentro de coros universitarios." },
 ];
 
-const otherStages = concertSet(
-  [1, 2, 3, 7, 13, 14, 15, 16, 17, 21, 22, 29, 36, 40],
-  ["El Coro de la Facultad de Ingeniería UBA en uno de sus escenarios invitados.", "Una presentación coral fuera del ciclo de Las Heras.", "Encuentros y conciertos que forman parte de nuestra historia."],
-).map((item) => item.url.endsWith("concert-21.webp") || item.url.endsWith("concert-29.webp") ? { ...item, focus: "center 78%" } : item);
+const otherStages: Media[] = [
+  ...concertSet(
+    [1, 2, 3, 7, 13, 14, 15, 16, 17, 21, 22, 29, 36, 40],
+    ["El Coro de la Facultad de Ingeniería UBA en uno de sus escenarios invitados.", "Una presentación coral fuera del ciclo de Las Heras.", "Encuentros y conciertos que forman parte de nuestra historia."],
+  ).map((item) => item.url.endsWith("concert-21.webp") || item.url.endsWith("concert-29.webp") ? { ...item, focus: "center 78%" } : item),
+  { id: -2101, type: "image", url: "/choir/archive/exactas-2026/exactas-2026-01.jpg", title: "El Coro en Exactas", caption: "Presentación del Coro de la Facultad de Ingeniería UBA en Exactas, junio de 2026." },
+  { id: -2102, type: "image", url: "/choir/archive/exactas-2026/exactas-2026-02.jpg", title: "Concierto en Exactas", caption: "El conjunto y su dirección durante la presentación de junio de 2026." },
+  { id: -2103, type: "image", url: "/choir/archive/exactas-2026/exactas-2026-03.jpg", title: "Voces en el escenario de Exactas", caption: "Una de las obras interpretadas por el Coro durante el concierto." },
+  { id: -2104, type: "image", url: "/choir/archive/exactas-2026/exactas-2026-04.jpg", title: "Presentación en Exactas", caption: "El Coro de la Facultad de Ingeniería UBA compartiendo música en otro escenario universitario." },
+  { id: -2105, type: "image", url: "/choir/archive/exactas-2026/exactas-2026-05.jpg", title: "Encuentro coral en Exactas", caption: "Una imagen del concierto realizado en junio de 2026." },
+  { id: -2106, type: "image", url: "/choir/archive/exactas-2026/exactas-2026-06.jpg", title: "Dirección y voces en Exactas", caption: "El Coro y su dirección durante la presentación de junio de 2026." },
+];
 
 const choirLife = concertSet(
   [4, 5, 11, 12, 18, 20, 23, 25, 26, 27, 28, 34, 35, 44, 47],
