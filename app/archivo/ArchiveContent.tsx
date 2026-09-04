@@ -22,33 +22,43 @@ type ArchiveCollection = {
   tone: string;
 };
 
-function concertSet(numbers: number[], captions: string[]): Media[] {
-  return numbers.map((number, index) => {
-    const caption = captions[index % captions.length];
-    return {
-      id: -1000 - number,
-      type: "image",
-      url: `/choir/concerts/concert-${String(number).padStart(2, "0")}.webp`,
-      title: caption,
-      caption,
-    };
-  });
+function concertPhoto(number: number, title: string, caption: string, focus?: string): Media {
+  return {
+    id: -1000 - number,
+    type: "image",
+    url: `/choir/concerts/concert-${String(number).padStart(2, "0")}.webp`,
+    title,
+    caption,
+    focus,
+  };
 }
 
-const museumNight = concertSet(
-  [30, 31, 32, 37, 41, 42, 43, 45, 46],
-  ["El Coro de la Facultad de Ingeniería UBA durante La Noche de los Museos.", "Una presentación especial en la sede Las Heras.", "Voces e ingeniería en una noche abierta a la comunidad."],
-);
+const museumNight = [
+  concertPhoto(30, "El Coro en la escalinata", "El Coro canta en la escalinata del hall de Las Heras durante La Noche de los Museos."),
+  concertPhoto(31, "Voces en el hall de Las Heras", "Una vista cercana del conjunto durante la presentación de La Noche de los Museos."),
+  concertPhoto(32, "Concierto abierto a la comunidad", "El Coro y su dirección musical durante La Noche de los Museos en la Facultad."),
+  concertPhoto(37, "Carolina Abbamonte dirigiendo", "La directora Carolina Abbamonte al frente del Coro durante La Noche de los Museos."),
+  concertPhoto(41, "Música en el hall histórico", "El Coro, instrumentistas y público reunidos en el hall de la sede Las Heras."),
+  concertPhoto(42, "El Coro en escena", "Una presentación del conjunto bajo las luces de La Noche de los Museos."),
+  concertPhoto(43, "Las voces del Coro", "Coreutas durante la interpretación de una obra en La Noche de los Museos."),
+  concertPhoto(45, "Cantar juntos", "Una vista cercana de las distintas cuerdas durante el concierto."),
+  concertPhoto(46, "Dirección, voces e instrumentos", "Carolina Abbamonte dirige al Coro y a los instrumentistas en el hall de Las Heras."),
+];
 
-const concertCycle = concertSet(
-  [8, 19, 24, 33, 38, 39],
-  ["El Ciclo de Conciertos Corales en la sede Las Heras.", "El Coro de la Facultad de Ingeniería UBA compartiendo escenario con agrupaciones invitadas.", "Una jornada del ciclo organizado por el Coro de la Facultad de Ingeniería UBA."],
-);
+const concertCycle = [
+  concertPhoto(8, "Coro invitado en Las Heras", "Una agrupación invitada se presenta en la escalinata durante el Ciclo de Conciertos Corales."),
+  concertPhoto(19, "Concierto coral en el hall", "Una jornada del Ciclo de Conciertos Corales en el hall histórico de la sede Las Heras."),
+  concertPhoto(24, "Una agrupación invitada", "Coro invitado durante su presentación en el Ciclo organizado por el Coro FIUBA."),
+  concertPhoto(33, "Conjunto vocal invitado", "Un ensamble participante canta en la escalinata de la Facultad."),
+  concertPhoto(38, "El Coro FIUBA en el Ciclo", "El Coro de la Facultad de Ingeniería UBA durante una fecha del Ciclo de Conciertos Corales."),
+  concertPhoto(39, "Una mirada desde las alturas", "Vista general del Coro, la dirección y el público en el hall de Las Heras."),
+];
 
-const rehearsals = concertSet(
-  [6, 9, 10],
-  ["Ensayo del Coro de la Facultad de Ingeniería UBA en la Facultad.", "Preparación musical antes de una presentación.", "Trabajo de voces y dirección durante el ensayo."],
-);
+const rehearsals = [
+  concertPhoto(6, "Ensayo con instrumentistas", "Preparación conjunta de voces e instrumentos antes de una presentación."),
+  concertPhoto(9, "Marcación durante el ensayo", "La dirección trabaja con el conjunto en una sala de la Facultad."),
+  concertPhoto(10, "Trabajo de repertorio", "Coreutas reunidos durante una instancia de preparación musical."),
+];
 
 const generations: Media[] = [
   { id: -10, type: "image", url: "/choir/chubut-1996.webp", title: "El Coro en Chubut", caption: "Una imagen histórica de la actividad coral durante la década del noventa." },
@@ -64,10 +74,19 @@ const generations: Media[] = [
 ];
 
 const otherStages: Media[] = [
-  ...concertSet(
-    [1, 2, 3, 7, 13, 14, 15, 16, 17, 21, 22, 29, 36, 40],
-    ["El Coro de la Facultad de Ingeniería UBA en uno de sus escenarios invitados.", "Una presentación coral fuera del ciclo de Las Heras.", "Encuentros y conciertos que forman parte de nuestra historia."],
-  ).map((item) => item.url.endsWith("concert-21.webp") || item.url.endsWith("concert-29.webp") ? { ...item, focus: "center 78%" } : item),
+  concertPhoto(1, "Entrega de un reconocimiento", "Un homenaje realizado en el marco de la trayectoria artística del Coro."),
+  concertPhoto(2, "Presentación en Agronomía", "El Coro canta en el salón de actos de la Facultad de Agronomía de la UBA."),
+  concertPhoto(3, "Concierto en un espacio histórico", "El conjunto durante una presentación coral fuera de la sede Las Heras."),
+  concertPhoto(7, "Una gran formación sinfónico-coral", "Coro, solistas y orquesta reunidos durante un concierto de gran formato."),
+  concertPhoto(13, "Músicos durante una presentación", "Instrumentistas acompañan una actividad artística del Coro."),
+  concertPhoto(15, "Preparación sinfónico-coral", "Vista del conjunto, la dirección y la orquesta durante una instancia musical conjunta."),
+  concertPhoto(16, "Coreutas en concierto", "Una vista cercana de las voces durante una presentación del Coro."),
+  concertPhoto(17, "Una sala colmada", "Público, coro y orquesta reunidos durante una gran presentación."),
+  concertPhoto(21, "El Coro en un escenario invitado", "El conjunto durante una presentación coral fuera de la Facultad.", "center 78%"),
+  concertPhoto(22, "Concierto fuera de Las Heras", "Las distintas cuerdas del Coro durante una actuación en otro escenario universitario."),
+  concertPhoto(29, "Bodas de Oro y de Plata con la Ingeniería", "Participación del Coro en el encuentro de graduados y graduadas de la Facultad.", "center 78%"),
+  concertPhoto(36, "Coro invitado en concierto", "Una agrupación coral comparte su música en uno de los encuentros del Coro FIUBA."),
+  concertPhoto(40, "Encuentro en otro espacio universitario", "Una presentación coral realizada fuera del hall de la sede Las Heras."),
   { id: -2101, type: "image", url: "/choir/archive/exactas-2026/exactas-2026-01.jpg", title: "El Coro en Exactas", caption: "Presentación del Coro de la Facultad de Ingeniería UBA en Exactas, junio de 2026." },
   { id: -2102, type: "image", url: "/choir/archive/exactas-2026/exactas-2026-02.jpg", title: "Concierto en Exactas", caption: "El conjunto y su dirección durante la presentación de junio de 2026." },
   { id: -2103, type: "image", url: "/choir/archive/exactas-2026/exactas-2026-03.jpg", title: "Voces en el escenario de Exactas", caption: "Una de las obras interpretadas por el Coro durante el concierto." },
@@ -76,10 +95,23 @@ const otherStages: Media[] = [
   { id: -2106, type: "image", url: "/choir/archive/exactas-2026/exactas-2026-06.jpg", title: "Dirección y voces en Exactas", caption: "El Coro y su dirección durante la presentación de junio de 2026." },
 ];
 
-const choirLife = concertSet(
-  [4, 5, 11, 12, 18, 20, 23, 25, 26, 27, 28, 34, 35, 44, 47],
-  ["Coreutas e invitados reunidos después de cantar.", "Un momento compartido fuera del escenario.", "El encuentro y el ágape también forman parte de la vida coral."],
-).map((item) => item.url.endsWith("concert-12.webp") ? { ...item, focus: "center center" } : item);
+const choirLife = [
+  concertPhoto(4, "Una generación reunida", "Coreutas, dirección e invitados posan juntos después de una actividad coral."),
+  concertPhoto(5, "Retrato del conjunto", "Una formación del Coro reunida en uno de los salones de la Facultad."),
+  concertPhoto(11, "Un abrazo en el concierto de despedida", "Carolina Abbamonte y Marcelo Ortiz Rocca se abrazan durante el concierto de despedida realizado en 2023."),
+  concertPhoto(12, "Un recuerdo compartido", "Integrantes del Coro posan juntas para una fotografía después de una actividad.", "center center"),
+  concertPhoto(18, "El Coro después de cantar", "Una fotografía grupal que reúne a coreutas de una de las generaciones del conjunto."),
+  concertPhoto(20, "Encuentro sobre el escenario", "Coreutas e invitados reunidos al finalizar una presentación."),
+  concertPhoto(23, "Una gran familia coral", "Distintas agrupaciones y generaciones reunidas para una fotografía colectiva."),
+  concertPhoto(25, "Palabras después del concierto", "Un intercambio entre integrantes al finalizar una presentación coral."),
+  concertPhoto(26, "Una charla distendida", "Coreutas comparten un momento espontáneo fuera del escenario."),
+  concertPhoto(27, "El conjunto reunido", "Una generación del Coro posa junto a la dirección y personas invitadas."),
+  concertPhoto(28, "Retrato en la Facultad", "El Coro de la Facultad de Ingeniería UBA reunido en el hall."),
+  concertPhoto(34, "Celebración después de cantar", "Coreutas reunidos al cierre de una presentación."),
+  concertPhoto(35, "La alegría del encuentro", "Una fotografía grupal después de compartir música."),
+  concertPhoto(44, "Coros reunidos", "Integrantes de distintas agrupaciones posan juntos al finalizar un encuentro coral."),
+  concertPhoto(47, "Historias entre coreutas", "Un momento de conversación y encuentro entre integrantes del Coro."),
+];
 
 const collections: ArchiveCollection[] = [
   { id: "ciclo", number: "01", eyebrow: "Sede Las Heras", title: "Ciclo de Conciertos Corales", intro: "Presentaciones del ciclo organizado por el Coro de la Facultad de Ingeniería UBA junto a agrupaciones invitadas.", items: concertCycle, tone: "collection-cycle" },
@@ -87,7 +119,7 @@ const collections: ArchiveCollection[] = [
   { id: "ensayos", number: "03", eyebrow: "Trabajo musical", title: "Ensayos", intro: "El proceso de escucha, preparación y construcción colectiva antes de cada concierto.", items: rehearsals, tone: "collection-rehearsals" },
   { id: "generaciones", number: "04", eyebrow: "Memoria coral", title: "Generaciones del Coro", intro: "Retratos del conjunto completo a través de distintas etapas, viajes y grandes presentaciones.", items: generations, tone: "collection-generations" },
   { id: "escenarios", number: "05", eyebrow: "Recorridos", title: "Otros escenarios", intro: "Conciertos, encuentros y presentaciones que llevaron las voces del Coro de la Facultad de Ingeniería UBA a distintos espacios.", items: otherStages, tone: "collection-stages" },
-  { id: "vida-coral", number: "06", eyebrow: "Comunidad", title: "Vida coral", intro: "Después de cantar, el coro se encuentra en el ágape: una celebración compartida que también forma parte de nuestra vida coral.", items: choirLife, tone: "collection-life" },
+  { id: "vida-coral", number: "06", eyebrow: "Comunidad", title: "Vida coral", intro: "Encuentros, homenajes, despedidas y momentos compartidos que también forman parte de nuestra historia coral.", items: choirLife, tone: "collection-life" },
 ];
 
 function MediaCard({ item, index, onOpen }: { item: Media; index: number; onOpen: (item: Media) => void }) {
