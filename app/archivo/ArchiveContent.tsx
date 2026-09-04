@@ -10,6 +10,7 @@ type Media = {
   thumbnailUrl?: string;
   caption?: string;
   focus?: string;
+  presentationFocus?: string;
 };
 
 type ArchiveCollection = {
@@ -22,7 +23,7 @@ type ArchiveCollection = {
   tone: string;
 };
 
-function concertPhoto(number: number, title: string, caption: string, focus?: string): Media {
+function concertPhoto(number: number, title: string, caption: string, focus?: string, presentationFocus?: string): Media {
   return {
     id: -1000 - number,
     type: "image",
@@ -30,17 +31,17 @@ function concertPhoto(number: number, title: string, caption: string, focus?: st
     title,
     caption,
     focus,
+    presentationFocus,
   };
 }
 
 const museumNight = [
+  concertPhoto(41, "Música en el hall histórico", "El Coro, instrumentistas y público reunidos en el hall de la sede Las Heras."),
   concertPhoto(30, "El Coro en la escalinata", "El Coro canta en la escalinata del hall de Las Heras durante La Noche de los Museos."),
   concertPhoto(31, "Voces en el hall de Las Heras", "Una vista cercana del conjunto durante la presentación de La Noche de los Museos."),
   concertPhoto(32, "Concierto abierto a la comunidad", "El Coro y su dirección musical durante La Noche de los Museos en la Facultad."),
-  concertPhoto(21, "El Coro en La Noche de los Museos", "El Coro de la Facultad de Ingeniería UBA durante una presentación de La Noche de los Museos."),
   concertPhoto(22, "Voces en La Noche de los Museos", "Las distintas cuerdas del Coro FIUBA durante una presentación de La Noche de los Museos."),
   concertPhoto(37, "Carolina Abbamonte dirigiendo", "La directora Carolina Abbamonte al frente del Coro durante La Noche de los Museos."),
-  concertPhoto(41, "Música en el hall histórico", "El Coro, instrumentistas y público reunidos en el hall de la sede Las Heras."),
   concertPhoto(42, "El Coro en escena", "Una presentación del conjunto bajo las luces de La Noche de los Museos."),
   concertPhoto(43, "Las voces del Coro", "Coreutas durante la interpretación de una obra en La Noche de los Museos."),
   concertPhoto(45, "Cantar juntos", "Una vista cercana de las distintas cuerdas durante el concierto."),
@@ -63,6 +64,7 @@ const rehearsals = [
 ];
 
 const generations: Media[] = [
+  { id: -2006, type: "image", url: "/choir/archive/generations-60/generation-60-06.jpg", title: "Festival universitario en La Plata", caption: "Una presentación histórica del Coro en un encuentro de coros universitarios." },
   { id: -10, type: "image", url: "/choir/chubut-1996.webp", title: "El Coro en Chubut", caption: "Una imagen histórica de la actividad coral durante la década del noventa." },
   { id: -11, type: "image", url: "/choir/coro-1999.webp", title: "Coro de la Facultad de Ingeniería UBA, 1999", caption: "Una generación del Coro a fines del siglo XX." },
   { id: -12, type: "image", url: "/choir/coro-2015.webp", title: "Generación 2015", caption: "El Coro de la Facultad de Ingeniería UBA reunido durante la temporada 2015." },
@@ -72,10 +74,12 @@ const generations: Media[] = [
   { id: -2003, type: "image", url: "/choir/archive/generations-60/generation-60-03.jpg", title: "Presentación coral en los años sesenta", caption: "El conjunto reunido en escena durante sus primeros años de actividad." },
   { id: -2004, type: "image", url: "/choir/archive/generations-60/generation-60-04.jpg", title: "Encuentro coral universitario", caption: "El Coro de Ingeniería compartiendo una presentación junto a otras voces." },
   { id: -2005, type: "image", url: "/choir/archive/generations-60/generation-60-05.jpg", title: "El Coro junto a Virtú Maragno", caption: "Virtú Maragno al frente de una generación fundacional del Coro." },
-  { id: -2006, type: "image", url: "/choir/archive/generations-60/generation-60-06.jpg", title: "Festival universitario en La Plata", caption: "Una presentación histórica del Coro en un encuentro de coros universitarios." },
 ];
 
 const otherStages: Media[] = [
+  { id: -2105, type: "image", url: "/choir/archive/exactas-2026/exactas-2026-05.jpg", title: "Encuentro coral en Exactas", caption: "Una imagen del concierto realizado en junio de 2026." },
+  concertPhoto(23, "Encuentro coral en Exactas", "El Coro FIUBA junto a otros coros invitados durante un encuentro coral en la Facultad de Ciencias Exactas y Naturales de la UBA."),
+  concertPhoto(28, "El Coro en Santa Rosa de Lima", "El Coro de la Facultad de Ingeniería UBA durante una presentación en la Basílica Santa Rosa de Lima."),
   concertPhoto(1, "Entrega de un reconocimiento", "Un homenaje realizado en el marco de la trayectoria artística del Coro."),
   concertPhoto(2, "Presentación en Agronomía", "El Coro canta en el salón de actos de la Facultad de Agronomía de la UBA."),
   concertPhoto(3, "Presentación en la Facultad de Derecho", "El Coro de la Facultad de Ingeniería UBA durante una presentación en la Facultad de Derecho de la UBA."),
@@ -84,31 +88,27 @@ const otherStages: Media[] = [
   concertPhoto(15, "Canto compartido en el ágape", "El Coro FIUBA canta junto a los coros invitados durante el ágape posterior al Ciclo de Conciertos Corales."),
   concertPhoto(16, "El Coro FIUBA en la Ballena Azul", "Una vista cercana del Coro de la Facultad durante su presentación en la Ballena Azul del Centro Cultural Kirchner, actualmente Palacio Libertad."),
   concertPhoto(17, "El auditorio de la Ballena Azul", "El Coro FIUBA y el público durante la presentación en el auditorio de la Ballena Azul del Centro Cultural Kirchner, actualmente Palacio Libertad."),
-  concertPhoto(29, "Bodas de Oro y de Plata con la Ingeniería", "Participación del Coro en el encuentro de graduados y graduadas de la Facultad.", "center 78%"),
   concertPhoto(36, "El Coro FIUBA en Santa Julia", "Presentación del Coro de la Facultad de Ingeniería UBA en la Parroquia Santa Julia, en el barrio de Caballito."),
   concertPhoto(40, "Presentación en un aula de Las Heras", "El Coro de la Facultad de Ingeniería UBA durante una presentación en un aula de la sede Las Heras."),
   { id: -2101, type: "image", url: "/choir/archive/exactas-2026/exactas-2026-01.jpg", title: "El Coro en Exactas", caption: "Presentación del Coro de la Facultad de Ingeniería UBA en Exactas, junio de 2026." },
   { id: -2102, type: "image", url: "/choir/archive/exactas-2026/exactas-2026-02.jpg", title: "Concierto en Exactas", caption: "El conjunto y su dirección durante la presentación de junio de 2026." },
   { id: -2103, type: "image", url: "/choir/archive/exactas-2026/exactas-2026-03.jpg", title: "Voces en el escenario de Exactas", caption: "Una de las obras interpretadas por el Coro durante el concierto." },
   { id: -2104, type: "image", url: "/choir/archive/exactas-2026/exactas-2026-04.jpg", title: "Presentación en Exactas", caption: "El Coro de la Facultad de Ingeniería UBA compartiendo música en otro escenario universitario." },
-  { id: -2105, type: "image", url: "/choir/archive/exactas-2026/exactas-2026-05.jpg", title: "Encuentro coral en Exactas", caption: "Una imagen del concierto realizado en junio de 2026." },
   { id: -2106, type: "image", url: "/choir/archive/exactas-2026/exactas-2026-06.jpg", title: "Dirección y voces en Exactas", caption: "El Coro y su dirección durante la presentación de junio de 2026." },
 ];
 
 const choirLife = [
+  concertPhoto(35, "La alegría del encuentro", "Una fotografía grupal después de compartir música."),
   concertPhoto(4, "Una generación reunida", "Coreutas, dirección e invitados posan juntos después de una actividad coral."),
   concertPhoto(5, "Antes de salir a escena", "Una formación del Coro reunida en el vestuario antes de una presentación."),
-  concertPhoto(11, "Un abrazo en el concierto de despedida", "Carolina Abbamonte y Marcelo Ortiz Rocca se abrazan durante el concierto de despedida realizado en 2023."),
-  concertPhoto(12, "Dirección y subdirección en un acto", "Carolina Abbamonte, Marcelo Ortiz Rocca y Lurdes Sabeckis durante un acto.", "center center"),
+  concertPhoto(11, "Un abrazo en el concierto de despedida", "Carolina Abbamonte y Marcelo Ortiz Rocca se abrazan durante el concierto de despedida realizado en 2023.", undefined, "center 15%"),
+  concertPhoto(12, "Dirección y subdirección en un acto", "Carolina Abbamonte, Marcelo Ortiz Rocca y Lurdes Sabeckis durante un acto.", "center center", "center 32%"),
   concertPhoto(18, "El Coro después de cantar", "Una fotografía grupal que reúne a coreutas de una de las generaciones del conjunto."),
   concertPhoto(20, "El Coro sobre el escenario", "Integrantes del Coro reunidos al finalizar una presentación."),
-  concertPhoto(23, "Encuentro coral en Exactas", "El Coro FIUBA junto a otros coros invitados durante un encuentro coral en la Facultad de Ciencias Exactas y Naturales de la UBA."),
-  concertPhoto(25, "Palabras después del concierto", "Un intercambio entre integrantes al finalizar una presentación coral."),
+  concertPhoto(25, "Palabras después del concierto", "Un intercambio entre integrantes al finalizar una presentación coral.", undefined, "center 18%"),
   concertPhoto(26, "Una charla distendida", "Coreutas comparten un momento espontáneo fuera del escenario."),
   concertPhoto(27, "El conjunto reunido", "Una generación del Coro posa junto a la dirección y personas invitadas."),
-  concertPhoto(28, "El Coro en Santa Rosa de Lima", "El Coro de la Facultad de Ingeniería UBA durante una presentación en la Basílica Santa Rosa de Lima."),
   concertPhoto(34, "Celebración después de cantar", "Coreutas reunidos al cierre de una presentación."),
-  concertPhoto(35, "La alegría del encuentro", "Una fotografía grupal después de compartir música."),
   concertPhoto(44, "Coros reunidos", "Integrantes de distintas agrupaciones posan juntos al finalizar un encuentro coral."),
   concertPhoto(47, "Historias entre coreutas", "Un momento de conversación y encuentro entre integrantes del Coro."),
 ];
@@ -135,8 +135,31 @@ function MediaCard({ item, index, onOpen }: { item: Media; index: number; onOpen
 }
 
 function Collection({ collection, onOpen }: { collection: ArchiveCollection; onOpen: (item: Media) => void }) {
+  const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [featuredIndex, setFeaturedIndex] = useState(0);
+  const [showAll, setShowAll] = useState(false);
+  const [presentationInView, setPresentationInView] = useState(false);
+  const featuredItem = collection.items[featuredIndex];
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(([entry]) => setPresentationInView(entry.isIntersecting), { threshold: 0.25 });
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (showAll || !presentationInView || collection.items.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = window.setInterval(() => setFeaturedIndex((current) => (current + 1) % collection.items.length), 5200);
+    return () => window.clearInterval(timer);
+  }, [collection.items.length, presentationInView, showAll]);
+
+  const moveFeatured = (direction: number) => {
+    setFeaturedIndex((current) => (current + direction + collection.items.length) % collection.items.length);
+  };
 
   const goToSlide = (index: number) => {
     const track = trackRef.current;
@@ -164,7 +187,7 @@ function Collection({ collection, onOpen }: { collection: ArchiveCollection; onO
   };
 
   return (
-    <section className={`archive-collection ${collection.tone}`} id={collection.id}>
+    <section className={`archive-collection ${collection.tone}`} id={collection.id} ref={sectionRef}>
       <header>
         <p className="section-index">{collection.number} · {collection.eyebrow}</p>
         <h2>{collection.title}</h2>
@@ -173,6 +196,38 @@ function Collection({ collection, onOpen }: { collection: ArchiveCollection; onO
           <small>{collection.items.length} fotografías</small>
         </div>
       </header>
+      <div className="archive-desktop-controls">
+        <button className="archive-view-toggle" type="button" aria-expanded={showAll} onClick={() => setShowAll((current) => !current)}>
+          <span>{showAll ? "Volver a la presentación" : "Ver todas las fotos"}</span><b aria-hidden="true">{showAll ? "×" : "↗"}</b>
+        </button>
+      </div>
+      {!showAll && <div className="archive-presentation">
+        <button className="archive-presentation-image" type="button" onClick={() => onOpen(featuredItem)} aria-label={`Ampliar: ${featuredItem.title}`} key={featuredItem.id}>
+          <img
+            src={featuredItem.url}
+            alt={featuredItem.title}
+            style={{
+              objectPosition: featuredItem.presentationFocus || featuredItem.focus || "center 58%",
+            }}
+          />
+          <span>Ver imagen completa <b aria-hidden="true">↗</b></span>
+        </button>
+        <div className="archive-presentation-panel">
+          <div className="archive-presentation-status">
+            <span>Presentación automática</span>
+            <div aria-hidden="true"><i key={featuredItem.id} /></div>
+          </div>
+          <div className="archive-presentation-copy" key={`copy-${featuredItem.id}`}>
+            <small>{String(featuredIndex + 1).padStart(2, "0")} / {String(collection.items.length).padStart(2, "0")}</small>
+            <h3>{featuredItem.title}</h3>
+            <p>{featuredItem.caption}</p>
+          </div>
+          <div className="archive-presentation-nav">
+            <button type="button" onClick={() => moveFeatured(-1)} aria-label={`Foto anterior en ${collection.title}`}>←</button>
+            <button type="button" onClick={() => moveFeatured(1)} aria-label={`Foto siguiente en ${collection.title}`}>→</button>
+          </div>
+        </div>
+      </div>}
       <div className="collection-slider-tools" aria-label={`Navegación de ${collection.title}`}>
         <div className="collection-progress" aria-hidden="true"><i style={{ width: `${((currentSlide + 1) / collection.items.length) * 100}%` }} /></div>
         <span aria-live="polite"><strong>{String(currentSlide + 1).padStart(2, "0")}</strong> / {String(collection.items.length).padStart(2, "0")}</span>
@@ -181,7 +236,7 @@ function Collection({ collection, onOpen }: { collection: ArchiveCollection; onO
           <button onClick={() => goToSlide(currentSlide + 1)} disabled={currentSlide === collection.items.length - 1} aria-label={`Siguiente en ${collection.title}`}>→</button>
         </div>
       </div>
-      <div className="archive-mosaic" ref={trackRef} onScroll={syncCurrentSlide}>
+      <div className={`archive-mosaic${showAll ? " is-expanded" : ""}`} ref={trackRef} onScroll={syncCurrentSlide}>
         {collection.items.map((item, index) => <MediaCard item={item} index={index} onOpen={onOpen} key={item.id} />)}
       </div>
     </section>
